@@ -37,7 +37,9 @@ command to run if program contains helper info
 Contributors names and contact info
 
 Sebastian: sp250224@fi365.ort.edu.uy
+
 Cecilia:
+
 Bernardo: 
 
 
