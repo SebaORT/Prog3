@@ -38,9 +38,9 @@ Contributors names and contact info
 
 Sebastian: sp250224@fi365.ort.edu.uy
 
-Cecilia:
+Cecilia: CB256569@fi365.ort.edu.uy
 
-Bernardo: 
+Bernardo: bs268024@fi365.ort.edu.uy
 
 
 ## Version History
