@@ -1,0 +1,9 @@
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\bin\Debug\Datos.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\bin\Debug\Datos.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\bin\Debug\Dominio.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\bin\Debug\Dominio.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\obj\Debug\Datos.csprojAssemblyReference.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\obj\Debug\Datos.csproj.CopyComplete
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\obj\Debug\Datos.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Datos\obj\Debug\Datos.pdb
