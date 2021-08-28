@@ -1,6 +1,12 @@
 # Prog3
 Repo programacion 3 
 
+- 👋 Hi, we are Groot
+- 👀 I’m interested in Programming
+- 🌱 I’m currently learning Something
+- 💞️ I’m looking to collaborate on Nothing at all
+- 📫 How to reach me On your left
+
 ## Description
 
 Repositorio para manejar todo relacionado a Programacion 3 de ORT carrera analista en tecnologias de la informacion o similar.
