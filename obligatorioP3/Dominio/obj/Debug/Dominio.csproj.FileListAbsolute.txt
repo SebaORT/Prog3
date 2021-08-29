@@ -1,0 +1,12 @@
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\bin\Debug\Dominio.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\bin\Debug\Dominio.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\obj\Debug\Dominio.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Dominio\obj\Debug\Dominio.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\bin\Debug\Dominio.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\bin\Debug\Dominio.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\obj\Debug\Dominio.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Dominio\obj\Debug\Dominio.pdb

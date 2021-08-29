@@ -1,0 +1,22 @@
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Auxiliar.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Auxiliar.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Datos.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Dominio.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Datos.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\bin\Debug\Dominio.pdb
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\obj\Debug\Auxiliar.csprojAssemblyReference.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\obj\Debug\Auxiliar.csproj.CoreCompileInputs.cache
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\obj\Debug\Auxiliar.csproj.CopyComplete
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\obj\Debug\Auxiliar.dll
+E:\Escritorio\P3\AGO 2021\N3B\jueves 19 de agosto\PruebasInterfacesN3BAgo2021\Auxiliar\obj\Debug\Auxiliar.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Auxiliar.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Auxiliar.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Datos.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Dominio.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Datos.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\bin\Debug\Dominio.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\obj\Debug\Auxiliar.csproj.AssemblyReference.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\obj\Debug\Auxiliar.csproj.CoreCompileInputs.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\obj\Debug\Auxiliar.csproj.CopyComplete
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\obj\Debug\Auxiliar.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Auxiliar\obj\Debug\Auxiliar.pdb
