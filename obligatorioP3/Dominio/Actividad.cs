@@ -8,11 +8,13 @@ namespace Dominio
 {
     class Actividad
     {
-        public int Codigo { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; } //Nombre único
-        public int RangoEdad { get; set; }
-        public DateTime Horario { get; set; }
+        public int EdadMax { get; set; }
+        public int EdadMin { get; set; }
         public int Cupos { get; set; } 
+        public static double Costo { get; set; }
+        public List<Horario>  Horarios { get; set; }
 
     }
 }

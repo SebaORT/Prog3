@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Usuario
+    class Horario
     {
-        public int IdUsuario { get; set; }
-        public string Mail { get; set; }
-        public string Password { get; set; }      
+        public int DiaSemana { get; set; } //De 1 a 7
+        public int Hora { get; set; } // de 7 a 23
+
     }
 }

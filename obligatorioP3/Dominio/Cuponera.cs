@@ -9,8 +9,7 @@ namespace Dominio
     class Cuponera:Membresia
     {
         public int CantActividadades { get; set; }
-        public double Descuento { get; set; }
-
         public static int CantActividadesDescuento { get; set; } //Cantidad mínima para realizar descuento 
+        public static double DescuentoCuponera { get; set; }
     }
 }

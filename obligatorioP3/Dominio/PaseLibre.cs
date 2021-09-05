@@ -8,7 +8,8 @@ namespace Dominio
 {
     class PaseLibre:Membresia
     {
-        public double Descuento { get; set; }
-        
+        public static double CostoFijo { get; set; }
+        public static double DescuentoPaseLibre { get; set; }
+        public static int AntiguedadEstablecida { get; set; }
     }
 }

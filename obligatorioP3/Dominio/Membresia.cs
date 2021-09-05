@@ -8,7 +8,9 @@ namespace Dominio
 {
     abstract class Membresia
     {
-        public double Costo { get; set; }
-        //Socio? depende del diseño
+        public DateTime FechaPago { get; set; }
+        public bool Activa { get; set; }
+        public List<Actividad> Actividades { get; set; }
+        
     }
 }
