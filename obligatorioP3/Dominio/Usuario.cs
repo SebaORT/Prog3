@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Producto
+    class Usuario
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public decimal Precio { get; set; }
+        public string Email { get; set; }
+        public string Contraseña { get; set; }
+
+        //Socio? Consultar diseño
     }
 }
