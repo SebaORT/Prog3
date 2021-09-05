@@ -22,6 +22,7 @@ Create Table [dbo].[Usuario]
   (
      [Id]              INT Not Null Primary Key Identity(1, 1),
      [Cedula]          NUMERIC(10, 0) Not Null,
+	 [Nombre]		   VARCHAR(50) Not Null,
      [FechaNacimiento] DATETIME Null,
      [FechaIngreso]    DATETIME Null,
      [Active]          BIT Not Null,
