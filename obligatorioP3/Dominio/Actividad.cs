@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Actividad
+    public class Actividad
     {
         public int Id { get; set; }
         public string Nombre { get; set; } //Nombre único

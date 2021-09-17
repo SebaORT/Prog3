@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Cuponera:Membresia
+    public class Cuponera:Membresia
     {
         public int CantActividadades { get; set; }
         public static int CantActividadesDescuento { get; set; } //Cantidad mínima para realizar descuento 

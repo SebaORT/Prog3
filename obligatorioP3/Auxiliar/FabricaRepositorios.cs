@@ -4,21 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
-using Datos;
+using Repositorios;
 
 namespace Auxiliar
 {
     public class FabricaRepositorios
     {
-        public static IRepositorioProductos ObtenerRepoProductos()
+        public static IRepoActividad ObtenerRepoActividad()
         {
-            return new RepoProductos();
+            return new RepoActividad();
+        }
+        public static IRepoMembresia ObtenerRepoMembresia()
+        {
+            return new RepoMembresia();
         }
 
-        public static IRepositorioClientes ObtenerRepoClientes()
+        public static IRepoSocios ObtenerRepoSocios()
         {
-            IRepositorioClientes repo = new RepoClientes();
-            return repo;
+            return new RepoSocios();
+        }
+
+        public static IRepoUsuario ObtenerRepoUsuarios()
+        {
+            return new RepoUsuario();
         }
     }
 }

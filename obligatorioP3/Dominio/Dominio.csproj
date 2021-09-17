@@ -45,8 +45,10 @@
     <Compile Include="Cuponera.cs" />
     <Compile Include="Horario.cs" />
     <Compile Include="IRepositorio.cs" />
-    <Compile Include="IRepositorioClientes.cs" />
-    <Compile Include="IRepositorioProductos.cs" />
+    <Compile Include="IRepoUsuario.cs" />
+    <Compile Include="IRepoSocios.cs" />
+    <Compile Include="IRepoActividad.cs" />
+    <Compile Include="IRepoMembresia.cs" />
     <Compile Include="Membresia.cs" />
     <Compile Include="PaseLibre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

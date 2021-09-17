@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    abstract class Membresia
+    public abstract class Membresia
     {
         public DateTime FechaPago { get; set; }
         public bool Activa { get; set; }

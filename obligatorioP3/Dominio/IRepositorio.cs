@@ -12,7 +12,7 @@ namespace Dominio
         bool Baja(int id);
         bool Modificacion(T t);
         T Buscar(int id);
-        List<T> TraerTodo();
+        List<T> Listar();
 
     }
 }

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public interface IRepositorioClientes : IRepositorio<Cliente>
+    public interface IRepoActividad : IRepositorio<Actividad>
     {
-        List<Cliente> ClientesConPuntajeMayorA(int puntos);
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public interface IRepositorioProductos : IRepositorio<Producto>
+    public interface IRepoMembresia : IRepositorio<Membresia>
     {
-        List<Producto> ProductosEnRangoDePrecio(decimal desde, decimal hasta);
+       // List<Producto> ProductosEnRangoDePrecio(decimal desde, decimal hasta);
     }
 }

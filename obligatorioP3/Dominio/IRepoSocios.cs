@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Horario
+    public interface IRepoSocios : IRepositorio<Socio>
     {
-        public int DiaSemana { get; set; } //De 1 a 7
-        public int Hora { get; set; } // de 7 a 23
-
     }
 }

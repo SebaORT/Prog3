@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{9699E3B6-0A9F-4080-B35C-E26F190F7E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{130FD1EA-40EB-431B-885A-C26553F9F385}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Datos\Repositorios.csproj", "{130FD1EA-40EB-431B-885A-C26553F9F385}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auxiliar", "Auxiliar\Auxiliar.csproj", "{FF1EB683-8558-4BCF-AD31-E3A4BDBC0DB0}"
 EndProject
