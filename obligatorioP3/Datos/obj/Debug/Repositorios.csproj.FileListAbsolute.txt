@@ -1,0 +1,9 @@
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\Datos.dll
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\Datos.pdb
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\Dominio.dll
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\Dominio.pdb
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.AssemblyReference.cache
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CoreCompileInputs.cache
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CopyComplete
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Datos.dll
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Datos.pdb

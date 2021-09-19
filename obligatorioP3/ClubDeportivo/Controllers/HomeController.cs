@@ -8,6 +8,27 @@ namespace ClubDeportivo.Controllers
 {
     public class HomeController : Controller
     {
+        /**
+         * 
+         * 
+            SQLADOHelper.GetConnectionString("sa","<<psw>>","localhost\\SQLEXPRESS");
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+				{
+                    connection.Close();
+				}
+            }
+         * */
         public ActionResult Index()
         {
             return View();

@@ -68,7 +68,8 @@ Create Table [dbo].[Actividad]
      [Nombre]  VARCHAR(100) Not Null,-- unique constraint
      [Minedad] INT Not Null,
      [Maxedad] INT Not Null,
-     [Active]  BIT Not Null
+     [Active]  BIT Not Null,
+	 [Cupos] INT Not Null
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
