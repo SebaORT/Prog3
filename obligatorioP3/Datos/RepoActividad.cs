@@ -13,9 +13,6 @@ namespace Repositorios
 		private const string TABLE_NAME = "Actividad";
 
 
-
-
-
 		public bool Alta(Actividad t)
 		{
 			throw new NotImplementedException();
@@ -30,7 +27,7 @@ namespace Repositorios
 		{
 			var actividad = new Actividad();
 
-			var connStr=SQLADOHelper.GetConnectionString("sa", "<<psw>>", "localhost\\SQLEXPRESS");
+			var connStr=SQLADOHelper.GetConnectionString();
 			using (var connection = new SqlConnection(connStr))
 			{
 				try
@@ -40,13 +37,13 @@ namespace Repositorios
 					SqlDataReader reader = command.ExecuteReader();
 
 
-					//actividad.Cupos = reader.get
-					
-					actividad.EdadMax = reader.GetInt32(reader.GetOrdinal("Maxedad"));
+					reader.Read();
 
-					///
-					///
-					///
+					actividad.EdadMax = reader.GetInt32(reader.GetOrdinal("Maxedad"));
+					actividad.EdadMin = reader.GetInt32(reader.GetOrdinal("Minedad"));
+					actividad.Cupos = reader.GetInt32(reader.GetOrdinal("Cupos"));
+					actividad.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
+					
 				}
 				catch (Exception ex)
 				{

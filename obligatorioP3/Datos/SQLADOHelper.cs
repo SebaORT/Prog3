@@ -7,26 +7,42 @@ using System.Threading.Tasks;
 
 namespace Repositorios
 {
-	public static class SQLADOHelper
+	public class SQLADOHelper
 	{
-		public static string GetConnectionString(string userid = "sa",
-			string psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ",
-			string server = ".\\SQLEXPRESS", string database = "ObligatorioP3_GestionClub")
+
+		private static string _connStr ="";
+
+		private static readonly string _userid = "sa";
+		private static readonly string _psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ";
+		private static readonly string _server = ".\\SQLEXPRESS";
+		private static readonly string _database = "ObligatorioP3_GestionClub";
+
+
+		public static string GetConnectionString()
 		{
-			SqlConnectionStringBuilder builder =
-			new SqlConnectionStringBuilder();
+			if (String.IsNullOrEmpty(_connStr))
+			{
+				SqlConnectionStringBuilder builder =
+				new SqlConnectionStringBuilder();
 
-			builder.UserID = userid;
-			builder.Password = psw;
+				builder.UserID = _userid;
+				builder.Password = _psw;
 
-			builder.AsynchronousProcessing = true;
+				builder.AsynchronousProcessing = true;
 
 
-			builder["Database"] = database;
-			builder["Server"] = server;
-			builder["Connect Timeout"] = 1000;
-			builder["Trusted_Connection"] = true;
-			return builder.ConnectionString;
+				builder["Database"] = _database;
+				builder["Server"] = _server;
+				builder["Connect Timeout"] = 1000;
+				builder["Trusted_Connection"] = true;
+
+				_connStr = builder.ConnectionString;
+				return _connStr;
+			}
+			else { 
+				return _connStr; 
+			}
+
 		}
 		/// <summary>
 		/// 
@@ -37,7 +53,7 @@ namespace Repositorios
 		/// <returns></returns>
 		public static SqlCommand GetByIdSQLCommand(SqlConnection connection, string table, int id)
 		{
-			var command = new SqlCommand($"select * from {table} where Id = @Id", connection);
+			var command = new SqlCommand($"select * from [{_database}].[dbo].{table} where Id = @Id", connection);
 			command.Parameters.AddWithValue("@Id", id);
 
 			return command;

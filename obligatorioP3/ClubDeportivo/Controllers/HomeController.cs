@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Auxiliar;
+using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,29 +10,13 @@ namespace ClubDeportivo.Controllers
 {
     public class HomeController : Controller
     {
-        /**
-         * 
-         * 
-            SQLADOHelper.GetConnectionString("sa","<<psw>>","localhost\\SQLEXPRESS");
-            using (var connection = new SqlConnection(connStr))
-            {
-                try
-                {
-                    connection.Open();
-
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-				{
-                    connection.Close();
-				}
-            }
-         * */
+      
         public ActionResult Index()
         {
+            IRepoActividad repoActividad = FabricaRepositorios.ObtenerRepoActividad();
+            
+            Actividad act = repoActividad.Buscar(1);
+
             return View();
         }
 
