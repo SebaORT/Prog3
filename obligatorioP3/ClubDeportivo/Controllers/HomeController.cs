@@ -28,7 +28,20 @@ namespace ClubDeportivo.Controllers
 
             //repoActividad.Baja(3);
 
-            var listaActividades = repoActividad.Listar();
+            //var listaActividades = repoActividad.Listar();
+
+            Actividad actividadToUpdate = new Actividad
+            {
+                Id = 5,
+                Nombre = "Crossfit",
+                Active = true,
+                Cupos = 99,
+                EdadMax = 77,
+                EdadMin = 15
+            };
+
+            bool res = repoActividad.Modificacion(actividadToUpdate);
+
 
             return View();
         }

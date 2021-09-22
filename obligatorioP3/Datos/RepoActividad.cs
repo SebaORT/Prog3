@@ -177,7 +177,45 @@ GO";
 
 		public bool Modificacion(Actividad t)
 		{
-			throw new NotImplementedException();
+			string query_update = @"UPDATE [dbo].[Actividad]
+   SET [Nombre] = @nombre
+      ,[Minedad] = @minedad
+      ,[Maxedad] = @maxedad
+      ,[Active] = @active
+      ,[Cupos] = @cupos
+ WHERE Id = @Id";
+
+			var connStr = SQLADOHelper.GetConnectionString();
+			bool result = false;
+
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = new SqlCommand(query_update,connection);
+					command.Parameters.AddWithValue("@nombre", t.Nombre);
+					command.Parameters.AddWithValue("@minedad", t.EdadMin);
+					command.Parameters.AddWithValue("@maxedad", t.EdadMax);
+					command.Parameters.AddWithValue("@active", t.Active);
+					command.Parameters.AddWithValue("@cupos", t.Cupos);
+					command.Parameters.AddWithValue("@Id", t.Id);
+
+					int res = command.ExecuteNonQuery();
+
+					result = res >= 0 ? true : false;
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return result;
 		}
 	}
 }
