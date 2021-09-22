@@ -9,7 +9,7 @@ namespace Repositorios
 {
 	public class RepoSocios : IRepoSocios
 	{
-		public bool Alta(Socio t)
+		public int Alta(Socio t)
 		{
 			throw new NotImplementedException();
 		}

@@ -14,8 +14,21 @@ namespace ClubDeportivo.Controllers
         public ActionResult Index()
         {
             IRepoActividad repoActividad = FabricaRepositorios.ObtenerRepoActividad();
-            
-            Actividad act = repoActividad.Buscar(1);
+
+            //Actividad act = repoActividad.Buscar(1);
+
+            /*var res = repoActividad.Alta(new Actividad
+            {
+                Active = true,
+                Cupos = 600,
+                EdadMax = 90,
+                EdadMin = 10,
+                Nombre = "Natacion Olimpica"
+            });*/
+
+            //repoActividad.Baja(3);
+
+            var listaActividades = repoActividad.Listar();
 
             return View();
         }

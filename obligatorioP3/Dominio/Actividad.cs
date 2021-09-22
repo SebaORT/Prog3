@@ -13,6 +13,7 @@ namespace Dominio
         public int EdadMax { get; set; }
         public int EdadMin { get; set; }
         public int Cupos { get; set; } 
+        public bool Active { get; set; }
         public static double Costo { get; set; }
         public List<Horario>  Horarios { get; set; }
 

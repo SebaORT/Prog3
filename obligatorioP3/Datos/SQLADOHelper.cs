@@ -85,10 +85,11 @@ namespace Repositorios
 		}
 		*/
 
-		public static SqlCommand BajaSQLCommand(SqlConnection connection, string table, bool active)
+		public static SqlCommand BajaSQLCommand(SqlConnection connection, string table, bool active, int id)
 		{
-			var command = new SqlCommand($"update {table} set Active=@active" , connection);
+			var command = new SqlCommand($"update {table} set Active=@active where id = @id" , connection);
 			command.Parameters.AddWithValue("@active", active);
+			command.Parameters.AddWithValue("@id", id);
 			return command;
 		}
 
