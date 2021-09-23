@@ -1,0 +1,9 @@
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\bin\Debug\Datos.dll
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\bin\Debug\Datos.pdb
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\bin\Debug\Dominio.dll
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\bin\Debug\Dominio.pdb
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CopyComplete
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\obj\Debug\Datos.dll
+C:\Users\Usuario\Documents\GitHub\Prog3\obligatorioP3\Datos\obj\Debug\Datos.pdb
