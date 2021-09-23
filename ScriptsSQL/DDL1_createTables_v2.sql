@@ -58,14 +58,6 @@ Create Table [dbo].[Membresia]
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
-WHERE object_id = OBJECT_ID(N'[dbo].[MembresiaActividad]')) 
-Create Table [dbo].[MembresiaActividad]
-  (
-     [IdMembresia] INT Not Null,
-     [IdActividad] INT Not Null
-  )
-
-IF  NOT EXISTS (SELECT * FROM sys.objects 
 WHERE object_id = OBJECT_ID(N'[dbo].[Actividad]')) 
 Create Table [dbo].[Actividad]
   (
@@ -94,4 +86,18 @@ Create Table [dbo].[Horario]
      [Hora] INT Not Null
   )
 
-Commit Transaction 
+
+
+IF  NOT EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[SocioActividad]')) 
+Create Table [dbo].[SocioActividad]
+  (
+     [IdSocio] INT Not Null,
+     [IdActividad] INT Not Null,
+	 [Fecha] Date not null,
+
+	 Primary Key([IdSocio],[IdActividad],[Fecha])
+  ) -- TODO AGREGAR FOREIGN KEYS....
+
+  Commit Transaction 
+
