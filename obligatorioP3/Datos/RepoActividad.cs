@@ -16,17 +16,17 @@ namespace Repositorios
 		public int Alta(Actividad t)
 		{
 			string query = @"INSERT INTO [dbo].[Actividad]
-           ([Nombre]
-           ,[Minedad]
-           ,[Maxedad]
-           ,[Active]
-           ,[Cupos])
-     VALUES
-           (@nombre
-           ,@minedad
-           ,@maxedad
-           ,@active
-           ,@cupos);
+			([Nombre]
+			,[Minedad]
+			,[Maxedad]
+			,[Active]
+			,[Cupos])
+			 VALUES
+				   (@nombre
+				   ,@minedad
+				   ,@maxedad
+				   ,@active
+				   ,@cupos);
 select SCOPE_IDENTITY() from [dbo].[Actividad]
 GO";
 
@@ -98,8 +98,6 @@ GO";
 
 		public Actividad Buscar(int id)
 		{
-			
-
 			var connStr=SQLADOHelper.GetConnectionString();
 			var actividad = new Actividad();
 			using (var connection = new SqlConnection(connStr))
@@ -145,9 +143,6 @@ GO";
 					connection.Open();
 					var command = SQLADOHelper.ListarSQLCommand(connection,TABLE_NAME);
 					SqlDataReader reader = command.ExecuteReader();
-
-
-					;
 
 					while (reader.Read())
 					{
