@@ -118,12 +118,93 @@ namespace Repositorios
 
 		public List<Socio> Listar()
 		{
-			throw new NotImplementedException();
+			var connStr = SQLADOHelper.GetConnectionString();
+
+			var result = new List<Socio>();
+
+			using(var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+					connection.Open();
+
+					var command = SQLADOHelper.ListarSQLCommand(connection, "Socio");
+
+					SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+						var socio = new Socio();
+						//socio.NombreApellido = reader.GetString(reader.GetOrdinal("Nombre")); revisar tabla socio hay que agregar parametro NombreApellido
+						socio.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
+						socio.Cedula = reader.GetString(reader.GetOrdinal("Cedula"));
+						socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
+						socio.FechaIngreso = reader.GetDateTime(reader.GetOrdinal("FechaIngreso"));
+						socio.Activo = reader.GetBoolean(reader.GetOrdinal("Active"));
+
+						result.Add(socio);
+					}
+
+				}
+				catch(Exception ex)
+                {
+					throw ex;
+                }
+                finally
+                {
+					connection.Close();
+                }
+            }
+
+			return result;
+
 		}
 
 		public bool Modificacion(Socio t)
 		{
-			throw new NotImplementedException();
+			var result = false;
+
+			var query = "UPDATE [dbo].[Socio] SET[Cedula] = @ci, [FechaNacimiento] = @fnacimiento, [FechaIngreso] = @fingreso, [Active] = @active WHERE IdSocio = @id";
+
+			var connStr = SQLADOHelper.GetConnectionString();
+
+			using(var connection = new SqlConnection())
+            {
+                try
+                {
+					connection.Open();
+					var command = new SqlCommand(query, connection);
+					//faltaría agregar parametro de nombre en caso que se agregue a la tabla
+					command.Parameters.AddWithValue("@ci", t.Cedula);
+					command.Parameters.AddWithValue("@fnacimiento", t.FechaNacimiento);
+					command.Parameters.AddWithValue("@fingreso", t.FechaIngreso);
+					command.Parameters.AddWithValue("@active", t.Activo);
+					command.Parameters.AddWithValue("@Id", t.IdSocio);
+
+					int res = command.ExecuteNonQuery();
+
+					result = res >= 0 ? true : false;
+
+				}
+				catch (Exception ex)
+                {
+					throw ex;
+                }
+                finally
+                {
+					connection.Close();
+                }
+            }
+
+			return result;
+
 		}
 	}
 }
+
+
+/**UPDATE [dbo].[Socio]
+SET[Cedula] = < Cedula, numeric(10, 0),>
+      ,[FechaNacimiento] = < FechaNacimiento, datetime,>
+      ,[FechaIngreso] = < FechaIngreso, datetime,>
+      ,[Active] = < Active, bit,>
+  WHERE IdSocio = @id**/
