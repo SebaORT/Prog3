@@ -21,6 +21,7 @@ WHERE object_id = OBJECT_ID(N'[dbo].[Socio]'))
   Create Table [dbo].[Socio]
   (
 	 [IdSocio]         INT Not Null Primary Key Identity(1, 1),
+	 [NombreApellido]  VARCHAR(100) Not null,
      [Cedula]          NUMERIC(10, 0) Not Null,
      [FechaNacimiento] DATETIME Null,
      [FechaIngreso]    DATETIME Null,
@@ -32,8 +33,8 @@ WHERE object_id = OBJECT_ID(N'[dbo].[Usuario]'))
   Create Table [dbo].[Usuario]
   (
 	[IdUsuario]		  INT Not Null Primary Key Identity(1, 1),
-	[Mail]            VARCHAR(100) Null,
-    [AdminPassword]   VARCHAR(100) Null
+	[Mail]            VARCHAR(100) Not Null,
+    [AdminPassword]   VARCHAR(100) Not Null
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 

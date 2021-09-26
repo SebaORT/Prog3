@@ -12,7 +12,7 @@ namespace Repositorios
 	{
 		public int Alta(Socio t)
         {
-            string query = "INSERT into [dbo].[Socio] (Cedula, FechaNacimiento, FechaIngreso, Active) VALUES (@ci, @fnacimiento, @fingreso, @active)";
+            string query = "INSERT into [dbo].[Socio] (Cedula, NombreApellido, FechaNacimiento, FechaIngreso, Active) VALUES (@ci, @nomApellido, @fnacimiento, @fingreso, @active)";
 
 			var connStr = SQLADOHelper.GetConnectionString();
 
@@ -25,6 +25,7 @@ namespace Repositorios
 					connection.Open();
 					var command = new SqlCommand(query, connection);
 					command.Parameters.AddWithValue("@ci", t.Cedula);
+					command.Parameters.AddWithValue("@nomApellido", t.NombreApellido);
 					command.Parameters.AddWithValue("@fnacimiento", t.FechaNacimiento);
 					command.Parameters.AddWithValue("@fingreso", t.FechaIngreso);
 					command.Parameters.AddWithValue("@active", t.Activo);

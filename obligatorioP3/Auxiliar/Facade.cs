@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repositorios;
 
 namespace Auxiliar
 {
@@ -40,7 +41,6 @@ namespace Auxiliar
 
         public int AltaMembresia(int cedula, Membresia tipo)
         {
-            Membresia m1 = new Membresia();
             return 0;
         }
 
@@ -109,9 +109,13 @@ namespace Auxiliar
             return 0;
         }
 
-        public int LoginUsuario(string email, string contrasenia)
+        public int LoginUsuario(string mail, string password)
         {
-            return 0;
+            RepoUsuario ru = new RepoUsuario();
+
+            int existe = ru.buscarLogin(mail, password);
+
+            return existe;
         }
 
         public int LogOutUsuario(string email)

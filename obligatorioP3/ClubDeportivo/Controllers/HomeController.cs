@@ -13,6 +13,8 @@ namespace ClubDeportivo.Controllers
       
         public ActionResult Index()
         {
+            ViewBag.logueado = Session["Logueado"];
+            ViewBag.mail = Session["LogueadoMail"];
             return View();
         }
 

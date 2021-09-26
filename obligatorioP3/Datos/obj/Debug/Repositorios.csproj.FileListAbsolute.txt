@@ -16,3 +16,12 @@ C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Repositorios.cspro
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CopyComplete
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Datos.dll
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\obj\Debug\Datos.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.AssemblyReference.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Datos.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Datos.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\Datos.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\Datos.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\Dominio.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\Dominio.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Repositorios.csproj.CopyComplete

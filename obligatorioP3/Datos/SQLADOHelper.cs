@@ -13,8 +13,8 @@ namespace Repositorios
 		private static string _connStr ="";
 
 		private static readonly string _userid = "sa";
-		private static readonly string _psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ";
-		private static readonly string _server = ".\\SQLEXPRESS";
+		private static readonly string _psw = "1234";
+		private static readonly string _server = "localhost";
 		private static readonly string _database = "ObligatorioP3_GestionClub";
 
 

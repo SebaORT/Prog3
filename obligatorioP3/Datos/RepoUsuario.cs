@@ -13,7 +13,7 @@ namespace Repositorios
 	{
 		public int Alta(Usuario t)
 		{
-			string query = "INSERT into[dbo].[Usuario] (IdUsuario, Mail, Password) VALUES(@Id, @Mail, @Password)";
+			string query = "INSERT into[dbo].[Usuario] (Mail, AdminPassword) VALUES(@Mail, @Password); SELECT CAST(SCOPE_IDENTITY() AS INT);";
 			var connStr = SQLADOHelper.GetConnectionString();
 
 			int result = -1;
@@ -24,14 +24,15 @@ namespace Repositorios
 				{
 					connection.Open();
 					var command = new SqlCommand(query, connection);
-					command.Parameters.AddWithValue("@Id", t.IdUsuario);
 					command.Parameters.AddWithValue("@Mail", t.Mail);
 					command.Parameters.AddWithValue("@Password", t.Password);
 
+					int idAux = (int)command.ExecuteScalar();
 
-					object val = command.ExecuteScalar();
-
-					result = val != null ? Convert.ToInt32(val) : -1;
+					if (idAux != 0)
+					{
+						result = idAux;
+					}
 
 				}
 				catch (Exception ex)
@@ -78,6 +79,40 @@ namespace Repositorios
 				}
 			}
 
+			return result;
+		}
+
+		public int buscarLogin(string mail, string password)
+        {
+			var connStr = SQLADOHelper.GetConnectionString();
+			var result = -1;
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+
+					var command = new SqlCommand("select * from [dbo].[Usuario] where Mail = @Mail and AdminPassword = @Password", connection);
+					command.Parameters.AddWithValue("@Mail", mail);
+					command.Parameters.AddWithValue("@Password", password);
+
+					SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+						result = 1;
+                    }
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
 			return result;
 		}
 

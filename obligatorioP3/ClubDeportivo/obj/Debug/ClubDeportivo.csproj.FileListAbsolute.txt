@@ -249,3 +249,7 @@ C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\obj\Debug\ClubDeport
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\obj\Debug\ClubDeportivo.csproj.CopyComplete
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\obj\Debug\ClubDeportivo.dll
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\obj\Debug\ClubDeportivo.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\Auxiliar.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\Datos.dll
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\Auxiliar.pdb
+C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\Datos.pdb
