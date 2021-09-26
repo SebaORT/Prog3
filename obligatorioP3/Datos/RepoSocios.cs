@@ -12,7 +12,7 @@ namespace Repositorios
 	{
 		public int Alta(Socio t)
         {
-            string query = "INSERT into [dbo].[Socio] (Cedula, FechaNacimiento, FechaIngreso, Active) VALUES (@ci, @fnacimiento, @fingreso, @active";
+            string query = "INSERT into [dbo].[Socio] (Cedula, FechaNacimiento, FechaIngreso, Active) VALUES (@ci, @fnacimiento, @fingreso, @active)";
 
 			var connStr = SQLADOHelper.GetConnectionString();
 
