@@ -28,5 +28,11 @@ namespace Auxiliar
         {
             return new RepoUsuario();
         }
+
+
+        public static IRepositorio<Configuration> ObtenerRepoConfig()
+        {
+            return new RepoConfig();
+        }
     }
 }

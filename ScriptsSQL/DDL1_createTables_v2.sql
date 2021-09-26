@@ -99,5 +99,19 @@ Create Table [dbo].[SocioActividad]
 	 Primary Key([IdSocio],[IdActividad],[Fecha])
   ) -- TODO AGREGAR FOREIGN KEYS....
 
+
+IF  NOT EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[Configuration]')) 
+Create Table [dbo].[Configuration]
+  (
+     [Id] INT Not Null Primary Key,
+     [CantActividadesDescuento] varchar(200) Null,
+	 [DescuentoCuponera] varchar(200) null,
+	 [CostoFijo] varchar(200) null,
+	 [DescuentoPaseLibre] varchar(200) null,
+	 [AntiguedadEstablecida] varchar(200) null,
+	 
+  ) 
+
   Commit Transaction 
 
