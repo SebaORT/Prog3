@@ -40,6 +40,7 @@ namespace Auxiliar
 
         public int AltaMembresia(int cedula, Membresia tipo)
         {
+            Membresia m1 = new Membresia();
             return 0;
         }
 
