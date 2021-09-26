@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,11 @@ namespace Repositorios
 				}
 				finally
 				{
-					connection.Close();
+					if (connection != null)
+					{
+						if (connection.State == ConnectionState.Open) connection.Close();
+						connection.Dispose();
+					}
 				}
 
 			}
