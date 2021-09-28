@@ -15,6 +15,11 @@ namespace Dominio
         public bool Active { get; set; }
         public int CantActividades { get; set; }
         public string TipoMembresia { get; set; }
-        
-    }
+
+		internal double calcularPagoFinal(Configuration config)
+		{
+            //TODO
+			throw new NotImplementedException();
+		}
+	}
 }

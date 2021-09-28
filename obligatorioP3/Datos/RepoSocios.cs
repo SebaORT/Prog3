@@ -96,7 +96,7 @@ namespace Repositorios
 					reader.Read();
 
 					socio.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
-					socio.Cedula = reader.GetString(reader.GetOrdinal("Cedula"));
+					socio.Cedula = reader.GetDecimal(reader.GetOrdinal("Cedula"));
 					socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
 					socio.FechaIngreso = reader.GetDateTime(reader.GetOrdinal("Fechaingreso"));
 					socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
@@ -115,6 +115,43 @@ namespace Repositorios
 			}
 			return socio;
 
+		}
+
+		public Socio BuscarPorCedula(int cedulaSocio)
+		{
+			var connStr = SQLADOHelper.GetConnectionString();
+			var socio = new Socio();
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = SQLADOHelper.GetByParamSQLCommand(connection, "Socio", "Cedula",cedulaSocio);
+					SqlDataReader reader = command.ExecuteReader();
+
+
+					reader.Read();
+
+					socio.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
+					socio.NombreApellido = reader.GetString(reader.GetOrdinal("NombreApellido"));
+					socio.Cedula = reader.GetDecimal(reader.GetOrdinal("Cedula"));
+					socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
+					socio.FechaIngreso = reader.GetDateTime(reader.GetOrdinal("Fechaingreso"));
+					socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
+					socio.Activo = reader.GetBoolean(reader.GetOrdinal("Active"));
+
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+			return socio;
 		}
 
 		public List<Socio> Listar()
@@ -137,7 +174,8 @@ namespace Repositorios
 						var socio = new Socio();
 						//socio.NombreApellido = reader.GetString(reader.GetOrdinal("Nombre")); revisar tabla socio hay que agregar parametro NombreApellido
 						socio.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
-						socio.Cedula = reader.GetString(reader.GetOrdinal("Cedula"));
+						socio.NombreApellido = reader.GetString(reader.GetOrdinal("NombreApellido"));
+						socio.Cedula = reader.GetDecimal(reader.GetOrdinal("Cedula"));
 						socio.FechaNacimiento = reader.GetDateTime(reader.GetOrdinal("FechaNacimiento"));
 						socio.FechaIngreso = reader.GetDateTime(reader.GetOrdinal("FechaIngreso"));
 						socio.Activo = reader.GetBoolean(reader.GetOrdinal("Active"));
@@ -164,11 +202,11 @@ namespace Repositorios
 		{
 			var result = false;
 
-			var query = "UPDATE [dbo].[Socio] SET[Cedula] = @ci, [FechaNacimiento] = @fnacimiento, [FechaIngreso] = @fingreso, [Active] = @active WHERE IdSocio = @id";
+			var query = "UPDATE [dbo].[Socio] SET [Cedula] = @ci, NombreApellido = @nombre, [FechaNacimiento] = @fnacimiento, [FechaIngreso] = @fingreso, [Active] = @active WHERE IdSocio = @id";
 
 			var connStr = SQLADOHelper.GetConnectionString();
 
-			using(var connection = new SqlConnection())
+			using(var connection = new SqlConnection(connStr))
             {
                 try
                 {
@@ -176,6 +214,8 @@ namespace Repositorios
 					var command = new SqlCommand(query, connection);
 					//faltaría agregar parametro de nombre en caso que se agregue a la tabla
 					command.Parameters.AddWithValue("@ci", t.Cedula);
+					command.Parameters.AddWithValue("@nombre", t.NombreApellido);
+
 					command.Parameters.AddWithValue("@fnacimiento", t.FechaNacimiento);
 					command.Parameters.AddWithValue("@fingreso", t.FechaIngreso);
 					command.Parameters.AddWithValue("@active", t.Activo);

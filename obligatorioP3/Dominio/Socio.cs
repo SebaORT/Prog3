@@ -10,11 +10,21 @@ namespace Dominio
     {
         public int IdSocio { get; set; }
         public string NombreApellido { get; set; }
-        public string Cedula { get; set; } //Se le agrega número de socio? Ci dato único 
+        public decimal Cedula { get; set; } //Se le agrega número de socio? Ci dato único 
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaIngreso { get; set; }
         public bool Activo { get; set; }
-        public List<Membresia> Membresia { get; set; }
+        public List<Membresia> Membresias { get; set; }
 
-    }
+		public double TotalAPagarMensualidad(Configuration config)
+		{
+            //TODO
+            double result = 0;
+            foreach (Membresia m in Membresias)
+			{
+                result += m.calcularPagoFinal(config);
+			}
+			throw new NotImplementedException();
+		}
+	}
 }

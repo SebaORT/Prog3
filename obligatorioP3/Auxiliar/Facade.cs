@@ -11,9 +11,6 @@ namespace Auxiliar
     public class Facade
     {
         public static Facade _instance = null;
-
-        private FabricaRepositorios _fabricaRepositorios;
-
         public static Facade Instance
         {
             get
@@ -29,15 +26,9 @@ namespace Auxiliar
 
         public Facade()
         {
-            _fabricaRepositorios = new FabricaRepositorios();
         }
 
         #region metodos
-
-        public FabricaRepositorios FabricaRepositorios()
-        {
-            return new FabricaRepositorios();
-        }
 
         public int AltaMembresia(int cedula, Membresia tipo)
         {
@@ -111,7 +102,7 @@ namespace Auxiliar
 
         public int LoginUsuario(string mail, string password)
         {
-            RepoUsuario ru = new RepoUsuario();
+            IRepoUsuario ru = FabricaRepositorios.ObtenerRepoUsuarios();
 
             int existe = ru.buscarLogin(mail, password);
 
@@ -123,9 +114,24 @@ namespace Auxiliar
             return 0;
         }
 
-        public int PagarMensualidadSocio(int cedulaSocio)
-        {
-            return 0;
+        public double PagarMensualidadSocio(int cedulaSocio)
+        {try
+            {
+                IRepoSocios ru = FabricaRepositorios.ObtenerRepoSocios();
+                IRepoConfig repoConfig = FabricaRepositorios.ObtenerRepoConfig();
+                Configuration config = repoConfig.Buscar(1);
+
+
+                Socio socio = ru.BuscarPorCedula(cedulaSocio);
+
+                return socio.TotalAPagarMensualidad(config); ;
+
+            }
+            catch (Exception ex)
+			{
+                return -1;
+
+			}
         }
 
         public bool ExportarInfo()

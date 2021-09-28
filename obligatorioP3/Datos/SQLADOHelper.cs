@@ -13,8 +13,8 @@ namespace Repositorios
 		private static string _connStr ="";
 
 		private static readonly string _userid = "sa";
-		private static readonly string _psw = "1234";
-		private static readonly string _server = "localhost";
+		private static readonly string _psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ"; //"1234";
+		private static readonly string _server = "localhost\\SQLEXPRESS";
 		private static readonly string _database = "ObligatorioP3_GestionClub";
 
 
@@ -59,6 +59,14 @@ namespace Repositorios
 			return command;
 		}
 
+
+		public static SqlCommand GetByParamSQLCommand(SqlConnection connection, string table,string _column, object _val)
+		{
+			var command = new SqlCommand($"select * from [{_database}].[dbo].{table} where {_column} = @{_column}", connection);
+			command.Parameters.AddWithValue($"@{_column}", _val);
+
+			return command;
+		}
 		public static SqlCommand ListarSQLCommand(SqlConnection connection, string table)
 		{
 			var command = new SqlCommand($"select * from {table}", connection);

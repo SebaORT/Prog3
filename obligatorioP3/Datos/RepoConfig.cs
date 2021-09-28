@@ -8,7 +8,7 @@ using Dominio;
 
 namespace Repositorios
 {
-	public class RepoConfig : IRepositorio<Configuration>
+	public class RepoConfig : IRepoConfig
 	{
 		private const string TABLE_NAME = "Configuration";
 
