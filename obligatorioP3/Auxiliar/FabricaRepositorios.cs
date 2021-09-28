@@ -8,7 +8,7 @@ using Repositorios;
 
 namespace Auxiliar
 {
-    public class FabricaRepositorios
+    public static class FabricaRepositorios
     {
         public static IRepoActividad ObtenerRepoActividad()
         {
@@ -30,7 +30,7 @@ namespace Auxiliar
         }
 
 
-        public static IRepositorio<Configuration> ObtenerRepoConfig()
+        public static IRepoConfig ObtenerRepoConfig()
         {
             return new RepoConfig();
         }

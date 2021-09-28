@@ -45,6 +45,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Cuponera.cs" />
     <Compile Include="Horario.cs" />
+    <Compile Include="IRepoConfig.cs" />
     <Compile Include="IRepositorio.cs" />
     <Compile Include="IRepoUsuario.cs" />
     <Compile Include="IRepoSocios.cs" />

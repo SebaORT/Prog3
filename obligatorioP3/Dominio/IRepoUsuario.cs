@@ -8,5 +8,6 @@ namespace Dominio
 {
     public interface IRepoUsuario : IRepositorio<Usuario>
     {
+        int buscarLogin(string mail, string password);
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public interface IRepoSocios : IRepositorio<Socio>
-    {
-    }
+	public interface IRepoSocios : IRepositorio<Socio>
+	{
+		Socio BuscarPorCedula(int cedulaSocio);
+	}
 }
