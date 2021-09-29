@@ -11,6 +11,11 @@
     <p>@ViewBag.Error</p>
 }
 
+@if (ViewBag.Mensaje != null)
+{
+    <p>@ViewBag.Mensaje</p>
+}
+
 <form action="~/Login/InicioSesion" method="post">
 
     <label for="Mail">Email</label><input id="Mail" type="email" name="Mail" /><br />

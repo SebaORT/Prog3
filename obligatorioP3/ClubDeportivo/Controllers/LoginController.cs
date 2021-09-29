@@ -12,7 +12,6 @@ namespace ClubDeportivo.Controllers
     {
         Facade f1 = new Facade();
 
-
         // GET: Login
         public ActionResult Index()
         {
@@ -36,6 +35,15 @@ namespace ClubDeportivo.Controllers
             {
                 ViewBag.Error = "Usuario y/o contraseña incorrectos";
             }
+
+            return View("Index");
+        }
+        public ActionResult Logout()
+        {
+            Session["LogueadoMail"] = null;
+            Session["Logueado"] = false;
+
+            ViewBag.Mensaje = "Ha cerrado sesión exitosamente";
 
             return View("Index");
         }
