@@ -6,11 +6,11 @@ INSERT INTO [dbo].[Configuration]
 ,[DescuentoCuponera]
 ,[CostoFijo]
 ,[DescuentoPaseLibre]
-,[AntiguedadEstablecida])
+,[AntiguedadEstablecida],[MontoUnitarioCupononera])
      VALUES
            (1, '3'
            , '100'
            , '200'
            , '50'
-           , '10')
+           , '10','3')
 GO

@@ -16,6 +16,8 @@ namespace Dominio
 
 		public int AntiguedadEstablecida { get; set; }
 
+		public double MontoUnitarioCuponera { get; set; }
+
 
 	}
 }

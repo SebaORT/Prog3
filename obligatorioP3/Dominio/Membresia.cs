@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Membresia
+    public abstract class Membresia
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -16,10 +16,7 @@ namespace Dominio
         public int CantActividades { get; set; }
         public string TipoMembresia { get; set; }
 
-		internal double calcularPagoFinal(Configuration config)
-		{
-            //TODO
-			throw new NotImplementedException();
-		}
+        public abstract double calcularPagoFinal(Configuration config, int antiguedadSocio = 0);
+
 	}
 }

@@ -18,13 +18,14 @@ namespace Dominio
 
 		public double TotalAPagarMensualidad(Configuration config)
 		{
-            //TODO
             double result = 0;
             foreach (Membresia m in Membresias)
 			{
                 result += m.calcularPagoFinal(config);
 			}
-			throw new NotImplementedException();
+
+            return result;
+			//throw new NotImplementedException();
 		}
 	}
 }
