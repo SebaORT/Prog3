@@ -97,7 +97,16 @@ namespace Auxiliar
 
         public int AltaUsuario(string email, string contrasenia)
         {
-            return 0;
+            IRepoUsuario ru = FabricaRepositorios.ObtenerRepoUsuarios();
+
+            Usuario u = new Usuario()
+            {
+                Mail = email,
+                Password = contrasenia
+            };
+
+            int res = ru.Alta(u);
+            return res;
         }
 
         public int LoginUsuario(string mail, string password)

@@ -30,7 +30,7 @@ namespace ClubDeportivo.Controllers
                 Session["LogueadoMail"] = usuario.Mail;
                 Session["Logueado"] = true;
                 //se logueo
-                return Redirect("Home/about");
+                return RedirectToAction("about", "Home");
             } else
             {
                 ViewBag.Error = "Usuario y/o contraseña incorrectos";

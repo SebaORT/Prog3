@@ -8,14 +8,14 @@ using Dominio;
 
 namespace Repositorios
 {
-	public class RepoMembresia : IRepoMembresia
-	{
-		private const string TABLE_NAME = "Membresia";
+    public class RepoMembresia : IRepoMembresia
+    {
+        private const string TABLE_NAME = "Membresia";
 
 
-		public int Alta(Membresia t)
-		{
-			string query = @"INSERT INTO [dbo].[Membresia]
+        public int Alta(Membresia t)
+        {
+            string query = @"INSERT INTO [dbo].[Membresia]
            ([Nombre]
            ,[Description]
            ,[Fechapago]
@@ -32,150 +32,165 @@ namespace Repositorios
 		select SCOPE_IDENTITY() from [dbo].[Membresia]
 		GO";
 
-			var connStr = SQLADOHelper.GetConnectionString();
+            var connStr = SQLADOHelper.GetConnectionString();
 
-			int result = -1;
+            int result = -1;
 
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = new SqlCommand(query, connection);
-					command.Parameters.AddWithValue("@nombre", t.Nombre);
-					command.Parameters.AddWithValue("@descripcion", t.Descipcion);
-					command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
-					command.Parameters.AddWithValue("@active", t.Active);
-					command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
-					command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
-
-
-					object val = command.ExecuteScalar();
-
-					result = val != null ? Convert.ToInt32(val) : -1;
-
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-
-			}
-
-			return result;
-		}
-
-		public bool Baja(int id)
-		{
-			var connStr = SQLADOHelper.GetConnectionString();
-			bool result = false;
-
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = SQLADOHelper.BajaSQLCommand(connection, TABLE_NAME, false, id);
-					int res = command.ExecuteNonQuery();
-
-					result = res >= 0 ? true : false;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-			}
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@nombre", t.Nombre);
+                    command.Parameters.AddWithValue("@descripcion", t.Descipcion);
+                    command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
+                    command.Parameters.AddWithValue("@active", t.Active);
+                    command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
+                    command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
 
-			return result;
-		}
+                    object val = command.ExecuteScalar();
 
-		public Membresia Buscar(int id)
-		{
-			var connStr = SQLADOHelper.GetConnectionString();
-			var membresia = new Membresia();
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = SQLADOHelper.GetByIdSQLCommand(connection, TABLE_NAME, id);
-					SqlDataReader reader = command.ExecuteReader();
+                    result = val != null ? Convert.ToInt32(val) : -1;
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+
+            return result;
+        }
+
+        public bool Baja(int id)
+        {
+            var connStr = SQLADOHelper.GetConnectionString();
+            bool result = false;
+
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = SQLADOHelper.BajaSQLCommand(connection, TABLE_NAME, false, id);
+                    int res = command.ExecuteNonQuery();
+
+                    result = res >= 0 ? true : false;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
 
 
-					reader.Read();
+            return result;
+        }
 
-					membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
-					membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
-					membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
-					membresia.Nombre = reader.GetString(reader.GetOrdinal("CantActividades"));
-					membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
-					membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+        public Membresia Buscar(int id)
+        {
+            var connStr = SQLADOHelper.GetConnectionString();
+            Membresia membresia = null;
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = SQLADOHelper.GetByIdSQLCommand(connection, TABLE_NAME, id);
+                    SqlDataReader reader = command.ExecuteReader();
 
+                    while (reader.Read())
+                    {
+                        if (reader["Tipomembresia"].ToString() == "paselibre") //ES IMPORTADO
+                        {
+                            membresia = new PaseLibre();
+                        }
+                        else
+                        {
+                            membresia = new Cuponera((int)reader["CantActividades"]);
+                        }
 
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-			}
-			return membresia;
-		}
+                        membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
+                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
+                        membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
+                        membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
+                        membresia.CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
+                        membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+                    }
 
-		public List<Membresia> Listar()
-		{
-			var connStr = SQLADOHelper.GetConnectionString();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return membresia;
+        }
 
-			var result = new List<Membresia>();
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
-					SqlDataReader reader = command.ExecuteReader();
-					while (reader.Read())
-					{
-						var membresia = new Membresia();
-						membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
-						membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
-						membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
-						membresia.Nombre = reader.GetString(reader.GetOrdinal("CantActividades"));
-						membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
-						membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+        public List<Membresia> Listar()
+        {
+            var connStr = SQLADOHelper.GetConnectionString();
+            Membresia membresia = null;
+            var result = new List<Membresia>();
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
+                    SqlDataReader reader = command.ExecuteReader();
 
-						result.Add(membresia);
-					}
+                    while (reader.Read())
+                    {
+                        if (reader["Tipomembresia"].ToString() == "paselibre") //ES IMPORTADO
+                        {
+                            membresia = new PaseLibre();
+                        }
+                        else
+                        {
+                            membresia = new Cuponera((int)reader["CantActividades"]);
+                        }
 
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-			}
+                        membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
+                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
+                        membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
+                        membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
+                        membresia.CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
+                        membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+                    }
 
-			return result;
-		}
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
 
-		public bool Modificacion(Membresia t)
-		{
-			string query_update = @"UPDATE [dbo].[Membresia]
+            return result;
+        }
+
+        public bool Modificacion(Membresia t)
+        {
+            string query_update = @"UPDATE [dbo].[Membresia]
    SET [Nombre] = @nombre
       ,[Description] = @description
       ,[Fechapago] = @fechapago
@@ -184,39 +199,39 @@ namespace Repositorios
       ,[Tipomembresia] = @tipoMembresia
  WHERE Id = @Id";
 
-			var connStr = SQLADOHelper.GetConnectionString();
-			bool result = false;
+            var connStr = SQLADOHelper.GetConnectionString();
+            bool result = false;
 
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = new SqlCommand(query_update, connection);
-					command.Parameters.AddWithValue("@nombre", t.Nombre);
-					command.Parameters.AddWithValue("@description", t.Descipcion);
-					command.Parameters.AddWithValue("@fechapago", t.FechaPago);
-					command.Parameters.AddWithValue("@active", t.Active);
-					command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
-					command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = new SqlCommand(query_update, connection);
+                    command.Parameters.AddWithValue("@nombre", t.Nombre);
+                    command.Parameters.AddWithValue("@description", t.Descipcion);
+                    command.Parameters.AddWithValue("@fechapago", t.FechaPago);
+                    command.Parameters.AddWithValue("@active", t.Active);
+                    command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
+                    command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
-					command.Parameters.AddWithValue("@Id", t.Id);
+                    command.Parameters.AddWithValue("@Id", t.Id);
 
-					int res = command.ExecuteNonQuery();
+                    int res = command.ExecuteNonQuery();
 
-					result = res >= 0 ? true : false;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-			}
+                    result = res >= 0 ? true : false;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
 
-			return result;
-		}
-	}
+            return result;
+        }
+    }
 }
