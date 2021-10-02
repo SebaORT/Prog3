@@ -87,19 +87,18 @@ Create Table [dbo].[Horario]
      [Hora] INT Not Null
   )
 
-
-
 IF  NOT EXISTS (SELECT * FROM sys.objects 
 WHERE object_id = OBJECT_ID(N'[dbo].[SocioActividad]')) 
 Create Table [dbo].[SocioActividad]
   (
      [IdSocio] INT Not Null,
      [IdActividad] INT Not Null,
-	 [Fecha] Date not null,
+	 [Fecha] DateTime not null,
 
-	 Primary Key([IdSocio],[IdActividad],[Fecha])
-  ) -- TODO AGREGAR FOREIGN KEYS....
-
+	 Primary Key([IdSocio],[IdActividad],[Fecha]),
+     foreign key ([IdSocio]) references Socio(IdSocio),
+	 foreign key ([IdActividad]) references Actividad(Id)
+)
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
 WHERE object_id = OBJECT_ID(N'[dbo].[Configuration]')) 

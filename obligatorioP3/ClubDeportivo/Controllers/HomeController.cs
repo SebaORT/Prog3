@@ -23,10 +23,10 @@ namespace ClubDeportivo.Controllers
 
 
             // Create a client object with the given client endpoint configuration.
-            ServiceClubSolisClient clubSolisClient = new ServiceClubSolisClient("BasicHttpBinding_IServiceClubSolis");
+           /* ServiceClubSolisClient clubSolisClient = new ServiceClubSolisClient("BasicHttpBinding_IServiceClubSolis");
 
             string dataStr = clubSolisClient.GetData(9000);
-
+           */
 
 
             return View();
