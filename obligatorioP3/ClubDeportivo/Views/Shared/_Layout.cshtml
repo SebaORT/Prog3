@@ -26,10 +26,14 @@
                     @if (Session["Logueado"] == null)
                     {
                         <li style="color: white; text-align:center;">@Html.ActionLink("Iniciar Sesion", "Index", "Login")</li>
-                    }                    @if (Session["Logueado"] != null)
+                    }
+                    @if (Session["Logueado"] != null)
                     {
                         <li>@Html.ActionLink("Registro de Usuario", "RegistrarUsuario", "Usuario")</li>
-                        <li>@Session["LogueadoMail"]</li>
+                        <li>@Html.ActionLink("Registro de Socio", "Create", "Socio")</li>
+                        <li>@Html.ActionLink("Listar Socios", "Index", "Socio")</li>
+                        <li>@Html.ActionLink("Cerrar Sesion", "Logout", "Login")</li>
+                        <li><a>@Session["LogueadoMail"]</a></li>
                     }
                 </ul>
             </div>
