@@ -1,4 +1,5 @@
 ﻿using Auxiliar;
+using ClubDeportivo.ServiceClubSolis;
 using Dominio;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,17 @@ namespace ClubDeportivo.Controllers
         {
             ViewBag.logueado = Session["Logueado"];
             ViewBag.mail = Session["LogueadoMail"];
-        
-            
+
+
             //TEST
             //double mensualidad =  Facade.Instance.PagarMensualidadSocio(45042994);
+
+
+            // Create a client object with the given client endpoint configuration.
+            ServiceClubSolisClient clubSolisClient = new ServiceClubSolisClient("BasicHttpBinding_IServiceClubSolis");
+
+            string dataStr = clubSolisClient.GetData(9000);
+
 
 
             return View();
