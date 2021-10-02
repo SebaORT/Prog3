@@ -65,9 +65,20 @@ namespace Auxiliar
             return new Actividad();
         }
 
-        public int AltaSocio(int cedula, string nombre, string apellido, DateTime fechaNacimiento)
+        public int AltaSocio(decimal cedula, string nombreApellido, DateTime fechaNacimiento)
         {
-            return 0;
+            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+            Socio s = new Socio()
+            {
+                Cedula = cedula,
+                NombreApellido = nombreApellido,
+                FechaNacimiento = fechaNacimiento,
+                FechaIngreso = DateTime.Now.ToLocalTime()
+            };
+
+            int idSocio = rs.Alta(s);
+
+            return idSocio;
         }
 
         public int BajaSocio(int cedula)
@@ -87,7 +98,10 @@ namespace Auxiliar
 
         public List<Socio> ListarSocios()
         {
-            return new List<Socio>();
+            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+            List<Socio>  lista = rs.Listar();
+
+            return lista;
         }
 
         public int IngresoSocioActividad(int cedulaSocio, int idActividad)

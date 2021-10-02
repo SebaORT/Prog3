@@ -132,6 +132,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MembresiaController.cs" />
+    <Compile Include="Controllers\SocioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +199,9 @@
     <Content Include="Views\Configuration\Details.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Usuario\RegistrarUsuario.cshtml" />
+    <Content Include="Views\Socio\Create.cshtml" />
+    <Content Include="Views\Socio\Details.cshtml" />
+    <Content Include="Views\Socio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
