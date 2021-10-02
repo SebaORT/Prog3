@@ -27,5 +27,27 @@ namespace Dominio
             return result;
 			//throw new NotImplementedException();
 		}
-	}
+
+       public static bool ValidarDatos(decimal ci, string nomApe, DateTime fNacimiento)
+        {
+            int esInt = (int) Math.Floor(ci);
+            bool result = false; 
+            if (esInt == (int)ci && esInt >999999 && esInt > 1000000000) {
+                int largo = nomApe.Length;
+                int comparar = nomApe.Trim().Length;
+                if (largo == comparar && largo >= 6) {
+                    int a = fNacimiento.Year - DateTime.Today.Year;
+                    if(a >= 3)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+
+            return result;
+        }
+
+
+    }
 }

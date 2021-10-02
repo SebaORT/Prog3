@@ -202,6 +202,7 @@
     <Content Include="Views\Socio\Create.cshtml" />
     <Content Include="Views\Socio\Details.cshtml" />
     <Content Include="Views\Socio\Index.cshtml" />
+    <Content Include="Views\Socio\EliminarSocio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

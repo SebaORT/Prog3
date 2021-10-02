@@ -67,16 +67,21 @@ namespace Auxiliar
 
         public int AltaSocio(decimal cedula, string nombreApellido, DateTime fechaNacimiento)
         {
-            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
-            Socio s = new Socio()
-            {
-                Cedula = cedula,
-                NombreApellido = nombreApellido,
-                FechaNacimiento = fechaNacimiento,
-                FechaIngreso = DateTime.Now.ToLocalTime()
-            };
+            int idSocio = 0;
 
-            int idSocio = rs.Alta(s);
+            if(Socio.ValidarDatos(cedula, nombreApellido, fechaNacimiento))
+            {
+                IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+                Socio s = new Socio()
+                {
+                    Cedula = cedula,
+                    NombreApellido = nombreApellido,
+                    FechaNacimiento = fechaNacimiento,
+                    FechaIngreso = DateTime.Now.ToLocalTime()
+                };
+
+                idSocio = rs.Alta(s);
+            }         
 
             return idSocio;
         }

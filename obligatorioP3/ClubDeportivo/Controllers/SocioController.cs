@@ -48,6 +48,7 @@ namespace ClubDeportivo.Controllers
                 ViewBag.Error = "Ha ocurrido un problema";
                 return View(socio);
             }
+            //Si se desea se puede modificar para devolver mensajes de error 
         }
 
         // GET: Socio/Edit/5
@@ -75,7 +76,12 @@ namespace ClubDeportivo.Controllers
         // GET: Socio/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Socio s = new Socio();            
+            if(id > 0)
+            {
+                
+            }
+            return View("EliminarSocio", s);
         }
 
         // POST: Socio/Delete/5

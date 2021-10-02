@@ -1,0 +1,49 @@
+﻿@model Dominio.Socio
+
+@{
+    ViewBag.Title = "Baja de socio";
+}
+
+<h2>Baja de socio</h2>
+
+<h3>Para dar de baja un socio ingrese su cédula</h3>
+<div>
+    <form action="~/Socio/Delete" method="post">
+        <hr />
+        <dl class="dl-horizontal">
+            <label for="ci">Cédula:</label>
+            <imput type="decimal" id="ci" name="id"></imput>
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Detalle"/> 
+        </div>
+    </form>  
+</div>
+
+@if (Model.IdSocio > 0)
+{
+    <h3>Detalle</h3>
+
+    <div>
+        <form>
+            <hr />
+            <dl class="dl-horizontal">
+                <ul>
+                    <li>@Model.IdSocio</li>
+                    <li>@Model.NombreApellido</li>
+                    <li>@Model.FechaIngreso</li>
+                    <li>@Model.FechaNacimiento</li>
+                    <li>@Model.Activo</li>
+                </ul>
+            </dl>
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirmar" /> 
+            </div>
+        </form>
+    </div>
+
+    }
+
+
+MANDAR A OTRO ACCION RESULT 
