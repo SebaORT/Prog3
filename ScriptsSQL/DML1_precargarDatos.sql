@@ -5,3 +5,5 @@ INSERT INTO [dbo].Usuario VALUES
 ('cecilia@mail.com', '1234a'),
 ('bernardo@mail.com', '1234a'),
 ('seba@mail.com', '1234a');
+
+SELECT * FROM [dbo].Usuario;
