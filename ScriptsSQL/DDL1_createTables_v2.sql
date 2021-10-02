@@ -87,8 +87,6 @@ Create Table [dbo].[Horario]
      [Hora] INT Not Null
   )
 
-
-
 IF  NOT EXISTS (SELECT * FROM sys.objects 
 WHERE object_id = OBJECT_ID(N'[dbo].[SocioActividad]')) 
 Create Table [dbo].[SocioActividad]
