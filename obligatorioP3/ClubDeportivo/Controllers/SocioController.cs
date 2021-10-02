@@ -22,7 +22,14 @@ namespace ClubDeportivo.Controllers
         // GET: Socio/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Socio s = Facade.Instance.BuscarSocio(id);
+            return View(s);
+        }
+
+        public ActionResult DetailsCedula(decimal cedula)
+        {
+            Socio s = Facade.Instance.BuscarSocioPorCedula(cedula);
+            return View(s);
         }
 
         // GET: Socio/Create
@@ -74,10 +81,10 @@ namespace ClubDeportivo.Controllers
         }
 
         // GET: Socio/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(decimal cedula)
         {
-            Socio s = new Socio();            
-            if(id > 0)
+            Socio s = Facade.Instance.BuscarSocioPorCedula(cedula);
+            if(s != null)
             {
                 
             }

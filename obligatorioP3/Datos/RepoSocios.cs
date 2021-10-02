@@ -135,7 +135,8 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
                 try
                 {
                     connection.Open();
-                    var command = SQLADOHelper.GetByIdSQLCommand(connection, "Socio", id);
+                    var command = SQLADOHelper.GetByParamSQLCommand(connection, "Socio", "IdSocio", id);
+
                     SqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -166,7 +167,7 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
 
         }
 
-        public Socio BuscarPorCedula(int cedulaSocio)
+        public Socio BuscarPorCedula(decimal cedulaSocio)
         {
             var connStr = SQLADOHelper.GetConnectionString();
             Socio socio = null;

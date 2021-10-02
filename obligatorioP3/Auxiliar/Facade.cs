@@ -96,9 +96,10 @@ namespace Auxiliar
             return 0;
         }
 
-        public Socio BuscarSocio(int cedula)
+        public Socio BuscarSocio(int id)
         {
-            return new Socio();
+            Socio s = FabricaRepositorios.ObtenerRepoSocios().Buscar(id);
+            return s;
         }
 
         public List<Socio> ListarSocios()
@@ -166,6 +167,14 @@ namespace Auxiliar
         {
             return true;
         }
+
+        public Socio BuscarSocioPorCedula(decimal cedula)
+        {
+            Socio s = FabricaRepositorios.ObtenerRepoSocios().BuscarPorCedula(cedula);
+            return s;
+        }
+
+    
 
         #endregion metodos
 

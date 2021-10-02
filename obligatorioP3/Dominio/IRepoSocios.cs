@@ -8,7 +8,7 @@ namespace Dominio
 {
 	public interface IRepoSocios : IRepositorio<Socio>
 	{
-		Socio BuscarPorCedula(int cedulaSocio);
+		Socio BuscarPorCedula(decimal cedulaSocio);
 		int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime);
 
 	}
