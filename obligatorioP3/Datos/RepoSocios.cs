@@ -10,14 +10,60 @@ namespace Repositorios
 {
 	public class RepoSocios : IRepoSocios
 	{
+
+		public int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime)
+		{
+
+			var sql = @"INSERT INTO[dbo].[SocioActividad]
+			([IdSocio]
+		  ,[IdActividad]
+		  ,[Fecha])
+
+	 VALUES
+		   (@idSocio
+		   ,@idActividad
+		   ,@date)";
+
+			int result = -1;
+			using (var connection = new SqlConnection(SQLADOHelper.GetConnectionString()))
+			{
+				try
+				{
+					connection.Open();
+					var command = new SqlCommand(sql, connection);
+					command.Parameters.AddWithValue("@idSocio", idSocio);
+					command.Parameters.AddWithValue("@idActividad", idActividad);
+					command.Parameters.AddWithValue("@date", dateTime);
+
+					object val = command.ExecuteNonQuery();
+
+					result = val != null ? Convert.ToInt32(val) : -1;
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+
+			}
+
+			return result;
+		}
+
+
 		public int Alta(Socio t)
         {
-            string query = "INSERT into [dbo].[Socio] (Cedula, NombreApellido, FechaNacimiento, FechaIngreso, Active) VALUES (@ci, @nomApellido, @fnacimiento, @fingreso, @active)";
+            string query = @"INSERT into [dbo].[Socio] (Cedula, NombreApellido, FechaNacimiento, FechaIngreso, Active) 
+VALUES (@ci, @nomApellido, @fnacimiento, @fingreso, @active);
+select SCOPE_IDENTITY() from [dbo].[Socio]";
 
 			var connStr = SQLADOHelper.GetConnectionString();
 
 			int result = -1;
-
 			using (var connection = new SqlConnection(connStr))
             {
                 try
@@ -239,6 +285,7 @@ namespace Repositorios
 			return result;
 
 		}
+
 	}
 }
 

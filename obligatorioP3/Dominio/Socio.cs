@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
+
+
     public class Socio
     {
         public int IdSocio { get; set; }
@@ -15,7 +17,7 @@ namespace Dominio
         public DateTime FechaIngreso { get; set; }
         public bool Activo { get; set; }
         public List<Membresia> Membresias { get; set; }
-
+        public List<ActividadSocio> ActividadSocios { get; set; }
 		public double TotalAPagarMensualidad(Configuration config)
 		{
             double result = 0;
