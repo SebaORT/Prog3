@@ -86,9 +86,10 @@ namespace Auxiliar
             return idSocio;
         }
 
-        public int BajaSocio(int cedula)
+        public bool BajaSocio(int id)
         {
-            return 0;
+            bool s = FabricaRepositorios.ObtenerRepoSocios().Baja(id);
+            return s;
         }
 
         public int ModificarSocio(int cedula, string nombre, string apellido)

@@ -29,7 +29,7 @@ namespace ClubDeportivo.Controllers
         public ActionResult DetailsCedula(decimal cedula)
         {
             Socio s = Facade.Instance.BuscarSocioPorCedula(cedula);
-            return View(s);
+            return View("Details",s);
         }
 
         // GET: Socio/Create
@@ -81,30 +81,35 @@ namespace ClubDeportivo.Controllers
         }
 
         // GET: Socio/Delete/5
-        public ActionResult Delete(decimal cedula)
+        public ActionResult Delete()
         {
-            Socio s = Facade.Instance.BuscarSocioPorCedula(cedula);
-            if(s != null)
-            {
-                
-            }
-            return View("EliminarSocio", s);
+            ViewBag.error = "";
+            return View();
         }
 
         // POST: Socio/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteDetalle(decimal cedula)
         {
-            try
+            Socio s = Facade.Instance.BuscarSocioPorCedula(cedula);
+            if(s != null)
             {
-                // TODO: Add delete logic here
+                return View("Delete", s);
+            }
+            ViewBag.error = "Socio no encontrado, verifique la cedula ingresada";
+            return View("Delete");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        public ActionResult DeleteDetalleInactivar(int idSocio)
+        {
+            bool baja = Facade.Instance.BajaSocio(idSocio);
+            if (baja)
             {
-                return View();
+                ViewBag.error = "Baja existosa";
+                return View("Delete");
             }
+            ViewBag.error = "Ha ocurrido un error";
+            return View("Delete");            
         }
     }
 }
