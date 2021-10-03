@@ -114,5 +114,18 @@ namespace ClubDeportivo.Controllers
             ViewBag.error = "Ha ocurrido un error";
             return View("Delete");            
         }
+
+        public ActionResult BuscarPorCedula(decimal ? cedula)
+        {
+            
+            if (cedula != null && cedula.HasValue)
+            {
+                Socio s = Facade.Instance.BuscarSocioPorCedula(cedula.Value);
+                return View(s);
+            }
+                     
+            return View();
+        }
+
     }
 }
