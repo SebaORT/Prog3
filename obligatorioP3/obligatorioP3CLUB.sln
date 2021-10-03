@@ -11,29 +11,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auxiliar", "Auxiliar\Auxili
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubDeportivo", "ClubDeportivo\ClubDeportivo.csproj", "{18EDC4DD-5B95-4537-8194-80F7F77B7A37}"
 	ProjectSection(ProjectDependencies) = postProject
-		{FBC8F6C6-D960-45E9-9EE1-961C7997C931} = {FBC8F6C6-D960-45E9-9EE1-961C7997C931}
+		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC} = {ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ServicioClubSolis", "ServicioClubSolis\", "{FBC8F6C6-D960-45E9-9EE1-961C7997C931}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService1", "WCFService1\", "{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
 		ProjectReferences = "{9699e3b6-0a9f-4080-b35c-e26f190f7e6f}|Dominio.dll;{130fd1ea-40eb-431b-885a-c26553f9f385}|Datos.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_1076"
-		Debug.AspNetCompiler.PhysicalPath = "ServicioClubSolis\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1076\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_5296"
+		Debug.AspNetCompiler.PhysicalPath = "WCFService1\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5296\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_1076"
-		Release.AspNetCompiler.PhysicalPath = "ServicioClubSolis\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1076\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_5296"
+		Release.AspNetCompiler.PhysicalPath = "WCFService1\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5296\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1076"
-		SlnRelativePath = "ServicioClubSolis\"
+		VWDPort = "5296"
+		SlnRelativePath = "WCFService1\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
@@ -59,10 +59,10 @@ Global
 		{18EDC4DD-5B95-4537-8194-80F7F77B7A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18EDC4DD-5B95-4537-8194-80F7F77B7A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18EDC4DD-5B95-4537-8194-80F7F77B7A37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBC8F6C6-D960-45E9-9EE1-961C7997C931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBC8F6C6-D960-45E9-9EE1-961C7997C931}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBC8F6C6-D960-45E9-9EE1-961C7997C931}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBC8F6C6-D960-45E9-9EE1-961C7997C931}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

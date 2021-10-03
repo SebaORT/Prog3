@@ -11,6 +11,9 @@ namespace Repositorios
 	public class RepoSocios : IRepoSocios
 	{
 
+        //TODO
+        //public IngresosFechaData
+
 		public int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime)
 		{
 

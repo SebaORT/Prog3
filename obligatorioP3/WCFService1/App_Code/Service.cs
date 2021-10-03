@@ -1,8 +1,15 @@
-﻿using Dominio;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+using Dominio;
 using Repositorios;
-using System;
 
-public class ServiceClubSolis : IServiceClubSolis
+// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
+public class Service : IService
 {
 	IRepoActividad repoActividad = new RepoActividad();
 	IRepoSocios repoSocios = new RepoSocios();
@@ -12,9 +19,21 @@ public class ServiceClubSolis : IServiceClubSolis
 		return string.Format("You entered: {0}", value);
 	}
 
+	public CompositeType GetDataUsingDataContract(CompositeType composite)
+	{
+		if (composite == null)
+		{
+			throw new ArgumentNullException("composite");
+		}
+		if (composite.BoolValue)
+		{
+			composite.StringValue += "Suffix";
+		}
+		return composite;
+	}
+
 	public ActividadSocioDTOResult IngresarSocioActividad(ActividadSocioDTO actividadSocio)
 	{
-
 		if (actividadSocio == null)
 		{
 			return new ActividadSocioDTOResult
@@ -25,7 +44,8 @@ public class ServiceClubSolis : IServiceClubSolis
 		}
 
 
-		if (repoSocios.Buscar(actividadSocio.IdSocio) == null ) {
+		if (repoSocios.Buscar(actividadSocio.IdSocio) == null)
+		{
 			return new ActividadSocioDTOResult
 			{
 				Success = false,
@@ -47,7 +67,7 @@ public class ServiceClubSolis : IServiceClubSolis
 		{
 			int resultIngresoSocioActividad = repoSocios.IngresarActividadSocio(actividadSocio.IdSocio, actividadSocio.IdActividad, DateTime.Now);
 
-			if ( resultIngresoSocioActividad 
+			if (resultIngresoSocioActividad
 				> 0)
 			{
 				return new ActividadSocioDTOResult
@@ -74,5 +94,4 @@ public class ServiceClubSolis : IServiceClubSolis
 			};
 		}
 	}
-
 }

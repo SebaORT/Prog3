@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Dominio;
 using Auxiliar;
+using ClubDeportivo.ServiceClubSolis;
 
 namespace ClubDeportivo.Controllers
 {
@@ -126,6 +127,45 @@ namespace ClubDeportivo.Controllers
                      
             return View();
         }
+
+        /*Si tiene la mensualidad
+corriente acreditada se mostrará un link que permita marcar el ingreso del socio a realizar una
+actividad, y otro que permita ver todos los ingresos que realizó en una fecha dada, por defecto durante
+el mes corriente.*/
+
+        //vinculo 1...
+        public ActionResult IngresoSocioActividad()
+		{
+            // Create a client object with the given client endpoint configuration.
+            ServiceClient clubSolisClient = new ServiceClient("BasicHttpBinding_IService");
+
+            string dataStr = clubSolisClient.GetData(9000);
+
+            //clubSolisClient.IngresarSocioActividad(
+
+            //    new ActividadSocioDTO
+            //    {
+            //        Fecha = DateTime.Now,
+            //        IdActividad = 1,
+            //        IdSocio = 1
+            //    }
+            //    );
+
+            return View();
+		}
+
+        //vinculo2
+        //      public ingresosFechaDada()
+        //{
+
+        //}
+
+        //vinculo3
+        /*
+         Si aun no la pagó, se mostrará un link para navegar al registro de pago para el socio y*/
+        //TODO
+        //public ingresarPagoSocio
+
 
     }
 }

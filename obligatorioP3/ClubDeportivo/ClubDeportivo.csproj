@@ -140,10 +140,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Connected Services\ServiceClubSolis\ClubDeportivo.ServiceClubSolis.ActividadSocioDTOResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\ServiceClubSolis\ClubDeportivo.ServiceClubSolis.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceClubSolis\ServiceClubSolis.disco" />
+    <None Include="Connected Services\ServiceClubSolis\Service.disco" />
     <None Include="Connected Services\ServiceClubSolis\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceClubSolis\configuration.svcinfo" />
     <None Include="Connected Services\ServiceClubSolis\Reference.svcmap">
@@ -161,14 +164,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Connected Services\ServiceClubSolis\ServiceClubSolis.wsdl" />
-    <None Include="Connected Services\ServiceClubSolis\ServiceClubSolis.xsd">
+    <None Include="Connected Services\ServiceClubSolis\Service.wsdl" />
+    <None Include="Connected Services\ServiceClubSolis\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceClubSolis\ServiceClubSolis1.xsd">
+    <None Include="Connected Services\ServiceClubSolis\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceClubSolis\ServiceClubSolis2.xsd">
+    <None Include="Connected Services\ServiceClubSolis\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

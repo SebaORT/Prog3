@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Actividad.cs" />
     <Compile Include="ActividadSocio.cs" />
-    <Compile Include="ActividadSocioDTO.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Cuponera.cs" />
     <Compile Include="Horario.cs" />
