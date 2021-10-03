@@ -33,34 +33,44 @@
     </tr> 
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSocio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreApellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaIngreso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new 
-               { 
-                    id = item.IdSocio
-               }
-       
-       ) 
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdSocio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreApellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cedula)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaNacimiento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaIngreso)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Activo)
+    </td>
+    <td>
+        @Html.ActionLink("Details", "Details", new
+           {
+                id = item.IdSocio
+           }
+
+   )
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new
+           {
+                id = item.IdSocio                
+           }
+
+   )
+    </td>
+
+
+</tr>
 }
 
 </table>

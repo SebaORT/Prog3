@@ -77,7 +77,8 @@ namespace Auxiliar
                     Cedula = cedula,
                     NombreApellido = nombreApellido,
                     FechaNacimiento = fechaNacimiento,
-                    FechaIngreso = DateTime.Now.ToLocalTime()
+                    FechaIngreso = DateTime.Now.ToLocalTime(),
+                    Activo = true
                 };
 
                 idSocio = rs.Alta(s);
@@ -92,9 +93,9 @@ namespace Auxiliar
             return s;
         }
 
-        public int ModificarSocio(int cedula, string nombre, string apellido)
+        public bool ModificarSocio(Socio socio)
         {
-            return 0;
+            return FabricaRepositorios.ObtenerRepoSocios().Modificacion(socio);            
         }
 
         public Socio BuscarSocio(int id)

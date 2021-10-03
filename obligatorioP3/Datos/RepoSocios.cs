@@ -106,7 +106,7 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
                 try
                 {
                     connection.Open();
-                    var command = new SqlCommand("Update Socio set Active=@active where idSocio = @id");
+                    var command = new SqlCommand("Update Socio set Active=@active where idSocio = @id", connection);
                     command.Parameters.AddWithValue("@active", false);
                     command.Parameters.AddWithValue("@id", id);
                     int res = command.ExecuteNonQuery();

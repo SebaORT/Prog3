@@ -61,22 +61,25 @@ namespace ClubDeportivo.Controllers
         // GET: Socio/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Socio s = Facade.Instance.BuscarSocio(id);
+            return View(s);
         }
 
         // POST: Socio/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Socio socio)
         {
+
             try
             {
-                // TODO: Add update logic here
+                socio.IdSocio = id;
+                bool alta = Facade.Instance.ModificarSocio(socio);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(socio);
             }
         }
 
@@ -100,7 +103,7 @@ namespace ClubDeportivo.Controllers
             return View("Delete");
         }
 
-        public ActionResult DeleteDetalleInactivar(int idSocio)
+        public ActionResult DeleteDetalleInactivar(int idSocio) //Revisar mensajes de error 
         {
             bool baja = Facade.Instance.BajaSocio(idSocio);
             if (baja)
