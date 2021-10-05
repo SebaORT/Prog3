@@ -110,7 +110,7 @@ Create Table [dbo].[Configuration]
 	 [CostoFijo] varchar(200) null,
 	 [DescuentoPaseLibre] varchar(200) null,
 	 [AntiguedadEstablecida] varchar(200) null,
-	 
+	 [MontoUnitarioCuponera] varchar(200) null
   ) 
 
   Commit Transaction 

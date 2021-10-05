@@ -26,8 +26,6 @@ namespace ClubDeportivo.Controllers
             ServiceClient clubSolisClient = new ServiceClient("BasicHttpBinding_IService");
 
             string dataStr = clubSolisClient.GetData(9000);
-           
-
 
             return View();
         }

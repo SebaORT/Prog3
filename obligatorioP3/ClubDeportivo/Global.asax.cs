@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Auxiliar;
+using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,9 @@ namespace ClubDeportivo
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
+            var repoConfig = FabricaRepositorios.ObtenerRepoConfig();
+            Configuration configuration =  repoConfig.Buscar(1);
+            Facade.Configuration = configuration;
+		}
     }
 }

@@ -10,6 +10,7 @@ namespace Auxiliar
 {
     public class Facade
     {
+        public static Configuration Configuration { get; set; }
         public static Facade _instance = null;
         public static Facade Instance
         {
@@ -112,11 +113,6 @@ namespace Auxiliar
             return lista;
         }
 
-        public int IngresoSocioActividad(int cedulaSocio, int idActividad)
-        {
-            return 0;
-        }
-
         public int AltaUsuario(string email, string contrasenia)
         {
             IRepoUsuario ru = FabricaRepositorios.ObtenerRepoUsuarios();
@@ -150,12 +146,12 @@ namespace Auxiliar
             {
                 IRepoSocios ru = FabricaRepositorios.ObtenerRepoSocios();
                 IRepoConfig repoConfig = FabricaRepositorios.ObtenerRepoConfig();
-                Configuration config = repoConfig.Buscar(1);
+               // Configuration config = repoConfig.Buscar(1);
 
 
                 Socio socio = ru.BuscarPorCedula(cedulaSocio);
 
-                return socio.TotalAPagarMensualidad(config); ;
+                return socio.TotalAPagarMensualidad(Facade.Configuration);
 
             }
             catch (Exception ex)
@@ -167,6 +163,18 @@ namespace Auxiliar
 
         public bool ExportarInfo()
         {
+            var repoActividad = FabricaRepositorios.ObtenerRepoActividad();
+            var repoConfig = FabricaRepositorios.ObtenerRepoConfig();
+            var repoMembresia = FabricaRepositorios.ObtenerRepoMembresia();
+            var repoSocios = FabricaRepositorios.ObtenerRepoSocios();
+            var repoUsuarios = FabricaRepositorios.ObtenerRepoUsuarios();
+
+            List<Actividad> actividades = repoActividad.Listar();
+            Configuration configuration = Facade.Configuration;
+            List<Membresia> membresias = repoMembresia.Listar();
+            List<Socio> socios = repoSocios.Listar();
+            List<Usuario> usuarios = repoUsuarios.Listar();
+
             return true;
         }
 

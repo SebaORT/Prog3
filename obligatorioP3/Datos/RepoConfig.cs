@@ -64,7 +64,7 @@ namespace Repositorios
 			var descCuponeraStr = reader.GetString(reader.GetOrdinal("DescuentoCuponera"));
 			var costoFijoStr = reader.GetString(reader.GetOrdinal("CostoFijo"));
 			var descPaseLibreStr = reader.GetString(reader.GetOrdinal("DescuentoPaseLibre"));
-			var montoUnitarioCuponera = reader.GetString(reader.GetOrdinal("MontoUnitarioCupononera"));
+			var montoUnitarioCuponera = reader.GetString(reader.GetOrdinal("MontoUnitarioCuponera"));
 
 			int aux;
 			config.AntiguedadEstablecida = !int.TryParse(antigStr, out aux) ? 1 : aux;

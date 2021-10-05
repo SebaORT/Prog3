@@ -19,19 +19,6 @@ public class Service : IService
 		return string.Format("You entered: {0}", value);
 	}
 
-	public CompositeType GetDataUsingDataContract(CompositeType composite)
-	{
-		if (composite == null)
-		{
-			throw new ArgumentNullException("composite");
-		}
-		if (composite.BoolValue)
-		{
-			composite.StringValue += "Suffix";
-		}
-		return composite;
-	}
-
 	public ActividadSocioDTOResult IngresarSocioActividad(ActividadSocioDTO actividadSocio)
 	{
 		if (actividadSocio == null)
@@ -67,8 +54,7 @@ public class Service : IService
 		{
 			int resultIngresoSocioActividad = repoSocios.IngresarActividadSocio(actividadSocio.IdSocio, actividadSocio.IdActividad, DateTime.Now);
 
-			if (resultIngresoSocioActividad
-				> 0)
+			if (resultIngresoSocioActividad	> 0)
 			{
 				return new ActividadSocioDTOResult
 				{

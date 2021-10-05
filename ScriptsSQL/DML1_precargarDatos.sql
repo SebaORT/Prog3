@@ -6,4 +6,16 @@ INSERT INTO [dbo].Usuario VALUES
 ('bernardo@mail.com', '1234a'),
 ('seba@mail.com', '1234a');
 
-SELECT * FROM [dbo].Usuario;
+INSERT INTO [dbo].[Configuration]
+(Id,[CantActividadesDescuento]
+,[DescuentoCuponera]
+,[CostoFijo]
+,[DescuentoPaseLibre]
+,[AntiguedadEstablecida],[MontoUnitarioCuponera])
+     VALUES
+           (1, '3'
+           , '100'
+           , '200'
+           , '50'
+           , '10','3'):
+

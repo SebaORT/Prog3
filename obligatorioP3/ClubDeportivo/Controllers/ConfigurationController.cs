@@ -18,9 +18,7 @@ namespace ClubDeportivo.Controllers
         // GET: Configuration/Details/
         public ActionResult Details()
         {
-            var configRepo = FabricaRepositorios.ObtenerRepoConfig();
-
-            var config = configRepo.Buscar(1);
+            var config = Facade.Configuration;
 
             return View(config);
         }
