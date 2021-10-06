@@ -22,10 +22,11 @@ namespace Repositorios
 			{
 				try
 				{
+
 					connection.Open();
 					var command = new SqlCommand(query, connection);
 					command.Parameters.AddWithValue("@Mail", t.Mail);
-					command.Parameters.AddWithValue("@Password", t.Password);
+					command.Parameters.AddWithValue("@Password", CryptoUtils.Crypto.Encrypt(t.Password));
 
 					int idAux = (int)command.ExecuteScalar();
 
@@ -94,7 +95,8 @@ namespace Repositorios
 
 					var command = new SqlCommand("select * from [dbo].[Usuario] where Mail = @Mail and AdminPassword = @Password", connection);
 					command.Parameters.AddWithValue("@Mail", mail);
-					command.Parameters.AddWithValue("@Password", password);
+					string passcrypto = CryptoUtils.Crypto.Encrypt(password);
+					command.Parameters.AddWithValue("@Password", passcrypto);
 
 					SqlDataReader reader = command.ExecuteReader();
 
@@ -133,7 +135,7 @@ namespace Repositorios
 
 					user.IdUsuario = reader.GetInt32(reader.GetOrdinal("IdSocio"));
 					user.Mail = reader.GetString(reader.GetOrdinal("Mail"));
-					user.Password = reader.GetString(reader.GetOrdinal("Password"));
+					user.Password = CryptoUtils.Crypto.Decrypt(reader.GetString(reader.GetOrdinal("Password")));
 
 
 
@@ -171,7 +173,7 @@ namespace Repositorios
 						
 						user.IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario"));
 						user.Mail = reader.GetString(reader.GetOrdinal("Mail"));
-						user.Password = reader.GetString(reader.GetOrdinal("Password"));
+						user.Password = CryptoUtils.Crypto.Decrypt(reader.GetString(reader.GetOrdinal("Password")));
 
 						result.Add(user);
 					}
@@ -204,7 +206,7 @@ namespace Repositorios
 				{
 					connection.Open();
 					var command = new SqlCommand(query, connection);			
-					command.Parameters.AddWithValue("@Password", t.Password);
+					command.Parameters.AddWithValue("@Password", CryptoUtils.Crypto.Encrypt(t.Password));
 					command.Parameters.AddWithValue("@Mail", t.Mail);
 
 					int res = command.ExecuteNonQuery();

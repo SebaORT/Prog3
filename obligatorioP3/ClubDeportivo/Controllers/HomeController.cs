@@ -17,7 +17,6 @@ namespace ClubDeportivo.Controllers
             ViewBag.logueado = Session["Logueado"];
             ViewBag.mail = Session["LogueadoMail"];
 
-
             //TEST
             //double mensualidad =  Facade.Instance.PagarMensualidadSocio(45042994);
 

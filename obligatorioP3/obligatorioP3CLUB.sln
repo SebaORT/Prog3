@@ -17,7 +17,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService1", "WCFService1\", "{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
-		ProjectReferences = "{9699e3b6-0a9f-4080-b35c-e26f190f7e6f}|Dominio.dll;{130fd1ea-40eb-431b-885a-c26553f9f385}|Datos.dll;"
+		ProjectReferences = "{9699e3b6-0a9f-4080-b35c-e26f190f7e6f}|Dominio.dll;{130fd1ea-40eb-431b-885a-c26553f9f385}|Datos.dll;{7F135640-9E8C-446D-97BB-EADECB1A4C3C}|CryptoUtils.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_5296"
 		Debug.AspNetCompiler.PhysicalPath = "WCFService1\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5296\"
@@ -36,6 +36,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService1", "WCFService1\
 		SlnRelativePath = "WCFService1\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoUtils", "CryptoUtils\CryptoUtils.csproj", "{7F135640-9E8C-446D-97BB-EADECB1A4C3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADF08E6E-E9F7-4C99-B3C1-ABA3243081BC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{7F135640-9E8C-446D-97BB-EADECB1A4C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F135640-9E8C-446D-97BB-EADECB1A4C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F135640-9E8C-446D-97BB-EADECB1A4C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F135640-9E8C-446D-97BB-EADECB1A4C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

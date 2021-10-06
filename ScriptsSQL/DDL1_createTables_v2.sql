@@ -34,7 +34,7 @@ WHERE object_id = OBJECT_ID(N'[dbo].[Usuario]'))
   (
 	[IdUsuario]		  INT Not Null Primary Key Identity(1, 1),
 	[Mail]            VARCHAR(100) Not Null,
-    [AdminPassword]   VARCHAR(100) Not Null
+    [AdminPassword]   VARCHAR(2000) Not Null
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
