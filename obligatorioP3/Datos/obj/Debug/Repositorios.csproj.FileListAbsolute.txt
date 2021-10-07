@@ -27,3 +27,5 @@ C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\obj\Debug\Datos.pdb
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\CryptoUtils.dll
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\Datos\bin\Debug\CryptoUtils.pdb
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\CryptoUtils.dll
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Datos\bin\Debug\CryptoUtils.pdb

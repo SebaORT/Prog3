@@ -18,7 +18,7 @@ namespace CryptoUtils
         // This constant determines the number of iterations for the password bytes generation function.
         private const int DerivationIterations = 1000;
 
-        private static byte[] Salt = Generate256BitsOfRandomEntropy();
+        private static byte[] Salt = Encoding.UTF8.GetBytes("!£$%^&*():@~#'?/><.,|`¬¦12345");
 
         public static string Encrypt(string plainText)
         {
@@ -95,17 +95,6 @@ namespace CryptoUtils
                     }
                 }
             }
-        }
-
-        private static byte[] Generate256BitsOfRandomEntropy()
-        {
-            var randomBytes = new byte[32]; // 32 Bytes will give us 256 bits.
-            using (var rngCsp = new RNGCryptoServiceProvider())
-            {
-                // Fill the array with cryptographically secure random bytes.
-                rngCsp.GetBytes(randomBytes);
-            }
-            return randomBytes;
         }
     }
 }

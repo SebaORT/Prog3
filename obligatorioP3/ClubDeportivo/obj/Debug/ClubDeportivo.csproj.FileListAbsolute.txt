@@ -255,3 +255,5 @@ C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\obj\Debug\ClubDeportivo.pdb
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\CryptoUtils.dll
 C:\Users\cecil\Desktop\carpetas varias\rto\s3\pr3\obl-1\githubOblg\obligatorioP3\ClubDeportivo\bin\CryptoUtils.pdb
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\bin\CryptoUtils.dll
+C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\ClubDeportivo\bin\CryptoUtils.pdb

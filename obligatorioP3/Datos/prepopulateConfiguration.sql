@@ -2,9 +2,9 @@
 GO
 
 INSERT INTO [dbo].Usuario VALUES
-('cecilia@mail.com', 'kTebFGrpXccKXu3LmHeGLVPUbSO+oFxcR/emDGnJkviRN5sUauldxwpe7cuYd4YtU9RtI76gXFxH96YMacmS+IlFMGQ6uU7KVwAeDmVOAkCmYVPSbV8SYvzbgxcGU0Pa'),
-('bernardo@mail.com', 'kTebFGrpXccKXu3LmHeGLVPUbSO+oFxcR/emDGnJkviRN5sUauldxwpe7cuYd4YtU9RtI76gXFxH96YMacmS+IlFMGQ6uU7KVwAeDmVOAkCmYVPSbV8SYvzbgxcGU0Pa'),
-('seba@mail.com', 'kTebFGrpXccKXu3LmHeGLVPUbSO+oFxcR/emDGnJkviRN5sUauldxwpe7cuYd4YtU9RtI76gXFxH96YMacmS+IlFMGQ6uU7KVwAeDmVOAkCmYVPSbV8SYvzbgxcGU0Pa');
+('cecilia@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal'),
+('bernardo@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal'),
+('seba@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal');
 
 INSERT INTO [dbo].[Configuration]
 (Id,[CantActividadesDescuento]
