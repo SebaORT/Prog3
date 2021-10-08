@@ -107,14 +107,30 @@ namespace Auxiliar
 
         public List<Socio> ListarSocios()
         {
+            Dictionary<int, Socio> mapSocio = new Dictionary<int, Socio>();
+
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
             List<Socio>  lista = rs.Listar();
             List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
             List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
 
+            List<Actividad> actividades = FabricaRepositorios.ObtenerRepoActividad().Listar();
+            List<SocioActividad> socioActividades = rs.ListarSocioActividad();
+
+
             foreach(SocioMembresia m in socioMembresia)
             {
-                Socio socio = BuscarSocioEnLista(lista, m.IdSocio);
+                Socio socio = null;
+                if (!mapSocio.ContainsKey(m.IdSocio)) { 
+                    socio = BuscarSocioEnLista(lista, m.IdSocio);
+                    mapSocio.Add(m.IdSocio, socio);
+                }
+                else
+				{
+                    socio = mapSocio[m.IdSocio];
+				}
+				
+
                 Membresia mem = BuscarMembresiaEnLista(membresia, m.IdMembresia);
                 if(socio != null && mem != null)
                 {   
@@ -124,6 +140,14 @@ namespace Auxiliar
                 {
                     throw new Exception("Base de datos inconsisitente");
                 }
+            }
+
+
+            foreach (SocioActividad sa in socioActividades)
+			{
+                Socio socio = mapSocio.ContainsKey(sa.IdSocio) ? mapSocio[sa.IdSocio] : BuscarSocioEnLista(lista, sa.IdSocio);
+
+
             }
 
             return lista;

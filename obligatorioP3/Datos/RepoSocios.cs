@@ -93,10 +93,48 @@ namespace Repositorios
 
             return result;            
         }
-            
+
+        public List<SocioActividad> ListarSocioActividad()
+        {
+
+            var connStr = SQLADOHelper.GetConnectionString();
+
+            var result = new List<SocioActividad>();
+
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var command = SQLADOHelper.ListarSQLCommand(connection, "SocioActividad");
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var socioA = new SocioActividad();
+                        socioA.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
+                        socioA.IdActividad = reader.GetInt32(reader.GetOrdinal("IdActividad"));
+                        socioA.Fecha = reader.GetDateTime(reader.GetOrdinal("Fecha"));
+                        result.Add(socioA);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
 
 
-		public int Alta(Socio t)
+        public int Alta(Socio t)
         {
             string query = @"INSERT into [dbo].[Socio] (Cedula, NombreApellido, FechaNacimiento, FechaIngreso, Active) 
 VALUES (@ci, @nomApellido, @fnacimiento, @fingreso, @active);
