@@ -11,6 +11,8 @@ namespace Repositorios
 {
 	public class RepoUsuario : IRepoUsuario
 	{
+		private const string TABLE_NAME = "Usuario";
+
 		public int Alta(Usuario t)
 		{
 			string query = "INSERT into[dbo].[Usuario] (Mail, AdminPassword) VALUES(@Mail, @Password); SELECT CAST(SCOPE_IDENTITY() AS INT);";
@@ -65,7 +67,7 @@ namespace Repositorios
 				try
 				{
 					connection.Open();
-					var command = SQLADOHelper.BajaSQLCommand(connection, "Usuario", false, id);
+					var command = SQLADOHelper.BajaSQLCommand(connection, TABLE_NAME, false, id);
 					int res = command.ExecuteNonQuery();
 
 					result = res >= 0 ? true : false;
@@ -127,7 +129,7 @@ namespace Repositorios
 				try
 				{
 					connection.Open();
-					var command = SQLADOHelper.GetByIdSQLCommand(connection, "Usuario", id);
+					var command = SQLADOHelper.GetByIdSQLCommand(connection, TABLE_NAME, id);
 					SqlDataReader reader = command.ExecuteReader();
 
 
@@ -164,7 +166,7 @@ namespace Repositorios
 				{
 					connection.Open();
 
-					var command = SQLADOHelper.ListarSQLCommand(connection, "Usuario");
+					var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
 
 					SqlDataReader reader = command.ExecuteReader();
 					while (reader.Read())
@@ -177,6 +179,35 @@ namespace Repositorios
 
 						result.Add(user);
 					}
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return result;
+		}
+
+		public DataTable ListarDataTable()
+		{
+			var connStr = SQLADOHelper.GetConnectionString();
+
+			var result = new DataTable();
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
+					SqlDataReader reader = command.ExecuteReader();
+
+					result.Load(reader);
 
 				}
 				catch (Exception ex)

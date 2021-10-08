@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -192,6 +193,35 @@ namespace Repositorios
                         }
                         result.Add(membresia);
                     }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        public DataTable ListarDataTable()
+        {
+            var connStr = SQLADOHelper.GetConnectionString();
+
+            var result = new DataTable();
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    result.Load(reader);
 
                 }
                 catch (Exception ex)

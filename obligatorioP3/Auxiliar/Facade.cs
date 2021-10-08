@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Repositorios;
+using System.Data;
 
 namespace Auxiliar
 {
@@ -233,14 +234,18 @@ namespace Auxiliar
             var repoSocios = FabricaRepositorios.ObtenerRepoSocios();
             var repoUsuarios = FabricaRepositorios.ObtenerRepoUsuarios();
 
-            List<Actividad> actividades = repoActividad.Listar();
-            Configuration configuration = Facade.Configuration;
-            List<Membresia> membresias = repoMembresia.Listar();
-            List<Socio> socios = repoSocios.Listar();
-            List<Usuario> usuarios = repoUsuarios.Listar();
+            DataTable actividades = repoActividad.ListarDataTable();
+            //Configuration configuration = Facade.Configuration;
+            DataTable membresias = repoMembresia.ListarDataTable();
+            DataTable socios = repoSocios.ListarDataTable();
+            DataTable usuarios = repoUsuarios.ListarDataTable();
+
+            socios.ToCSV("c:\\test\\test.csv");
 
             return true;
         }
+
+      
 
         public Socio BuscarSocioPorCedula(decimal cedula)
         {

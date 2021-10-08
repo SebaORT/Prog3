@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,11 @@ namespace Repositorios
 {
 	public class RepoSocios : IRepoSocios
 	{
-
+        private const string TABLE_NAME = "Socio";
         //TODO
         //public IngresosFechaData
 
-		public int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime)
+        public int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime)
 		{
 
 			var sql = @"INSERT INTO[dbo].[SocioActividad]
@@ -299,7 +300,7 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
                 {
                     connection.Open();
 
-                    var command = SQLADOHelper.ListarSQLCommand(connection, "Socio");
+                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
 
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
@@ -329,6 +330,35 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
 
             return result;
 
+        }
+
+        public DataTable ListarDataTable()
+        {
+            var connStr = SQLADOHelper.GetConnectionString();
+
+            var result = new DataTable();
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    result.Load(reader);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
         }
 
         public bool Modificacion(Socio t)
