@@ -167,7 +167,12 @@ el mes corriente.*/
         //public ingresarPagoSocio
 
 
-        public ActionResult PagoMensualidad(Socio socio)
+        public ActionResult PagoMensualidadCuponera(Socio socio)
+        {
+            return View();
+        }
+
+        public ActionResult PagoMensualidadPaseLibre(Socio socio)
         {
             return View();
         }
