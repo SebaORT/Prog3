@@ -109,8 +109,48 @@ namespace Auxiliar
         {
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
             List<Socio>  lista = rs.Listar();
+            List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
+            List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
+
+            foreach(SocioMembresia m in socioMembresia)
+            {
+                Socio socio = BuscarSocioEnLista(lista, m.IdSocio);
+                Membresia mem = BuscarMembresiaEnLista(membresia, m.IdMembresia);
+                if(socio != null && mem != null)
+                {   
+                    socio.Membresias.Add(mem);
+                }
+                else
+                {
+                    throw new Exception("Base de datos inconsisitente");
+                }
+            }
 
             return lista;
+        }
+
+        private Membresia BuscarMembresiaEnLista(List<Membresia> membresia, int idMembresia)
+        {
+            foreach(var m in membresia)
+            {
+                if(m.Id == idMembresia)
+                {
+                    return m;
+                }
+            }
+            return null;
+        }
+
+        private Socio BuscarSocioEnLista(List<Socio> lista, int idSocio)
+        {
+            foreach (var s in lista)
+            {
+                if (s.IdSocio == idSocio)
+                {
+                    return s;
+                }
+            }
+            return null;
         }
 
         public int AltaUsuario(string email, string contrasenia)

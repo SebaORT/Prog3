@@ -8,10 +8,10 @@ namespace Dominio
 {
     public class PaseLibre:Membresia
     {
-        /*public static double CostoFijo { get; set; }
-        public static double DescuentoPaseLibre { get; set; }
-        public static int AntiguedadEstablecida { get; set; }
-		*/
+		public PaseLibre():base()
+        {
+			TipoMembresia = "paselibre";
+        }
 		public override double calcularPagoFinal(Configuration config, int antiguedadSocio = 0)
 		{
 			double result = config.CostoFijo;

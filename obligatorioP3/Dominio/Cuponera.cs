@@ -9,12 +9,11 @@ namespace Dominio
     public class Cuponera:Membresia
     {
         public int CantActividades { get; set; }
-       /* public static int CantActividadesDescuento { get; set; } //Cantidad mínima para realizar descuento 
-        public static double DescuentoCuponera { get; set; }
-	   */
-		public Cuponera(int cantActividadesMes)
+       
+		public Cuponera(int cantActividadesMes) : base()
 		{
 			CantActividades = cantActividadesMes; // minimo 8 maximo 60
+			TipoMembresia = "cuponera";
 		}
 
 		public override double calcularPagoFinal(Configuration config, int antiguedadSocio = 0)

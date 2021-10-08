@@ -167,5 +167,10 @@ el mes corriente.*/
         //public ingresarPagoSocio
 
 
+        public ActionResult PagoMensualidad(Socio socio)
+        {
+            return View();
+        }
+
     }
 }

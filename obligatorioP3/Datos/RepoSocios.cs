@@ -57,6 +57,44 @@ namespace Repositorios
 			return result;
 		}
 
+        public List<SocioMembresia> ListarSocioMembresia(){
+
+            var connStr = SQLADOHelper.GetConnectionString();
+
+            var result = new List<SocioMembresia>();
+
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var command = SQLADOHelper.ListarSQLCommand(connection, "SocioMembresia");
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var socioM = new SocioMembresia();
+                        socioM.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
+                        socioM.IdMembresia = reader.GetInt32(reader.GetOrdinal("IdMembresia"));
+                        result.Add(socioM);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;            
+        }
+            
+
 
 		public int Alta(Socio t)
         {

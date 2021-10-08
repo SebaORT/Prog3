@@ -57,6 +57,7 @@
     <Compile Include="PaseLibre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Socio.cs" />
+    <Compile Include="SocioMembresia.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

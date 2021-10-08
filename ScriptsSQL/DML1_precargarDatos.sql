@@ -19,3 +19,4 @@ INSERT INTO [dbo].[Configuration]
            , '50'
            , '10','3'):
 
+Select * From Membresia;

@@ -46,7 +46,15 @@ namespace Repositorios
                     command.Parameters.AddWithValue("@descripcion", t.Descipcion);
                     command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
                     command.Parameters.AddWithValue("@active", t.Active);
-                    command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
+                    if(t.TipoMembresia == "cuponera")
+                    {
+                        command.Parameters.AddWithValue("@cantActividades",((Cuponera) t).CantActividades);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@cantActividades", 0);
+                    } 
+                    
                     command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
 
@@ -120,13 +128,17 @@ namespace Repositorios
                         {
                             membresia = new Cuponera((int)reader["CantActividades"]);
                         }
-
+                        membresia.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                         membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
-                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
+                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Description"));
                         membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
                         membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
-                        membresia.CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
                         membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+                        if (membresia.TipoMembresia == "cuponera")
+                        {
+                            ((Cuponera) membresia).CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
+                        }                                            
+                        
                     }
 
                 }
@@ -165,13 +177,20 @@ namespace Repositorios
                         {
                             membresia = new Cuponera((int)reader["CantActividades"]);
                         }
-
+                        membresia.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                         membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
-                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Descripcion"));
-                        membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
+                        membresia.Descipcion = reader.GetString(reader.GetOrdinal("Description"));
+                        var index = reader.GetOrdinal("Fechapago");                        
+                        membresia.FechaPago = reader.IsDBNull(index) ?
+                          (DateTime?)null :
+                          (DateTime?)reader.GetDateTime(index);                        
                         membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
-                        membresia.CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
                         membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
+                        if (membresia.TipoMembresia == "cuponera")
+                        {
+                            ((Cuponera)membresia).CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
+                        }
+                        result.Add(membresia);
                     }
 
                 }
@@ -212,7 +231,14 @@ namespace Repositorios
                     command.Parameters.AddWithValue("@description", t.Descipcion);
                     command.Parameters.AddWithValue("@fechapago", t.FechaPago);
                     command.Parameters.AddWithValue("@active", t.Active);
-                    command.Parameters.AddWithValue("@cantActividades", t.CantActividades);
+                    if (t.TipoMembresia == "cuponera")
+                    {
+                        command.Parameters.AddWithValue("@cantActividades", ((Cuponera)t).CantActividades);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@cantActividades", 0);
+                    }                    
                     command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
                     command.Parameters.AddWithValue("@Id", t.Id);

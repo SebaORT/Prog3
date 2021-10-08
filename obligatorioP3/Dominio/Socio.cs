@@ -18,6 +18,14 @@ namespace Dominio
         public bool Activo { get; set; }
         public List<Membresia> Membresias { get; set; }
         public List<ActividadSocio> ActividadSocios { get; set; }
+
+
+        public Socio() {
+
+            Membresias = new List<Membresia>();
+            ActividadSocios = new List<ActividadSocio>();
+        } 
+
 		public double TotalAPagarMensualidad(Configuration config)
 		{
             double result = 0;
@@ -50,6 +58,22 @@ namespace Dominio
             return result;
         }
 
+        public bool ValidarPagoMembresia()
+        {
+            bool result = false;
+            DateTime mesAnio = DateTime.Now;
+            int mes = mesAnio.Month;
+            int anio = mesAnio.Year;
 
+            foreach(Membresia m in Membresias)
+            {
+                if(m.FechaPago != null && m.FechaPago.HasValue && m.FechaPago.Value.Month == mes && m.FechaPago.Value.Year == anio)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }
