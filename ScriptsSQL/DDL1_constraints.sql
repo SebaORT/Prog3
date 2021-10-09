@@ -16,4 +16,16 @@ ALTER TABLE SocioActividad
 ADD CONSTRAINT FK_SocioActActividad FOREIGN KEY (IdActividad)  REFERENCES Actividad(Id);
 
 
+ALTER TABLE ActividadHorario
+ADD CONSTRAINT FK_ActHorActiidad FOREIGN KEY (IdActividad)  REFERENCES Actividad(Id);   
+
+ALTER TABLE ActividadHorario
+add constraint CK_ActHorarioDia CHECK (Dia >=1 and Dia <=7);
+ALTER TABLE ActividadHorario
+add	 constraint CK_ActHorarioHora CHECK (Hora >=0 and Dia <24);
+
+/*ALTER TABLE ActividadHorario  
+ADD CONSTRAINT FK_ActHorHorario FOREIGN KEY (IdActividad)  REFERENCES Actividad(Id);
+*/
+
 GO 

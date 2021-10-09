@@ -109,15 +109,26 @@ namespace Auxiliar
         public List<Socio> ListarSocios()
         {
             Dictionary<int, Socio> mapSocio = new Dictionary<int, Socio>();
+            Dictionary<int, Actividad> mapActividad = new Dictionary<int, Actividad>();
 
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
             List<Socio>  lista = rs.Listar();
             List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
             List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
 
-            List<Actividad> actividades = FabricaRepositorios.ObtenerRepoActividad().Listar();
+            IRepoActividad ra = FabricaRepositorios.ObtenerRepoActividad();
+
+            List<Actividad> actividades = ra.Listar();
             List<SocioActividad> socioActividades = rs.ListarSocioActividad();
 
+
+            //TODO: mover esto al global asax, guardar lista de actividades en el sistema 
+            foreach (var act in actividades)
+			{
+                act.Horarios = ra.ListarHorariosActividad(act.Id);
+
+                mapActividad.Add(act.Id, act);
+			}
 
             foreach(SocioMembresia m in socioMembresia)
             {
@@ -147,8 +158,25 @@ namespace Auxiliar
             foreach (SocioActividad sa in socioActividades)
 			{
                 Socio socio = mapSocio.ContainsKey(sa.IdSocio) ? mapSocio[sa.IdSocio] : BuscarSocioEnLista(lista, sa.IdSocio);
+                
+                Actividad actividad =
+                    mapActividad.ContainsKey(sa.IdActividad) ? mapActividad[sa.IdActividad] :
+                     actividades.FirstOrDefault(a => a.Id == sa.IdActividad);
 
 
+                if (socio != null && actividad != null)
+                {
+                    socio.ActividadSocios.Add(new ActividadSocio
+                    {
+                        Actividad = actividad,
+                        Socio = socio,
+                        Fecha = sa.Fecha
+                    });
+                }
+                else
+                {
+                    throw new Exception("Base de datos inconsisitente");
+                }
             }
 
             return lista;

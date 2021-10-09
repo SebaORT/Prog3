@@ -74,17 +74,13 @@ IF  NOT EXISTS (SELECT * FROM sys.objects
 WHERE object_id = OBJECT_ID(N'[dbo].[Actividadhorario]')) 
 Create Table [dbo].[Actividadhorario]
   (
-     [Idactividad] INT Not Null,
-     [Idhorario]   INT Not Null
-  )
-
-IF  NOT EXISTS (SELECT * FROM sys.objects 
-WHERE object_id = OBJECT_ID(N'[dbo].[Horario]')) 
-Create Table [dbo].[Horario]
-  (
-     [Id]   INT Not Null Primary Key Identity(1, 1),
+     [IdActividad] INT Not Null,
      [Dia]  INT Not Null,
      [Hora] INT Not Null
+	 primary key (IdActividad, Dia, Hora),
+	 constraint FK_ActHorHorario FOREIGN KEY (IdActividad)  REFERENCES Actividad(Id),
+	 constraint CK_ActHorarioDia CHECK (Dia >=1 and Dia <=7),
+	 constraint CK_ActHorarioHora CHECK (Hora >=0 and Dia <24)
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 

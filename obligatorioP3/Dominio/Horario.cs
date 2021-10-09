@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class Horario
     {
-        public int DiaSemana { get; set; } //De 1 a 7
+        public DayOfWeek DiaSemana { get; set; } //De 1 a 7
         public int Hora { get; set; } // de 7 a 23
 
     }

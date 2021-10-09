@@ -52,7 +52,7 @@ public class Service : IService
 
 		try
 		{
-			int resultIngresoSocioActividad = repoSocios.IngresarActividadSocio(actividadSocio.IdSocio, actividadSocio.IdActividad, DateTime.Now);
+			int resultIngresoSocioActividad = repoSocios.IngresarActividadSocio(actividadSocio.IdSocio, actividadSocio.IdActividad, actividadSocio.Fecha);
 
 			if (resultIngresoSocioActividad	> 0)
 			{

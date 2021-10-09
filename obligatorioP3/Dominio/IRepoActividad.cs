@@ -10,5 +10,7 @@ namespace Dominio
 	public interface IRepoActividad : IRepositorio<Actividad>
 	{
 		DataTable ListarDataTable();
+		List<Horario> ListarHorariosActividad(int idActividad);
+
 	}
 }

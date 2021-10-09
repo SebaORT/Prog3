@@ -18,4 +18,6 @@ INSERT INTO [dbo].[Configuration]
            , '200'
            , '50'
            , '10','3')
+
+
 GO

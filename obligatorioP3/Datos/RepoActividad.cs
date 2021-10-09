@@ -131,7 +131,46 @@ GO";
 			return actividad;
 
 		}
+		public List<Horario> ListarHorariosActividad( int idActividad)
+		{
+			var connStr = SQLADOHelper.GetConnectionString();
 
+			var result = new List<Horario>();
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = SQLADOHelper.GetByParamSQLCommand(connection, 
+						"ActividadHorario","IdActividad",idActividad);
+					SqlDataReader reader = command.ExecuteReader();
+
+					while (reader.Read())
+					{
+						var horario = new Horario();
+
+						int dayAux = reader.GetInt32(reader.GetOrdinal("Dia"));
+						int day = (dayAux == 7) ? 0 : dayAux;
+
+						horario.DiaSemana = (DayOfWeek)day;
+						horario.Hora = reader.GetInt32(reader.GetOrdinal("Hora"));
+
+						result.Add(horario);
+					}
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return result;
+		}
 		public List<Actividad> Listar()
 		{
 			var connStr = SQLADOHelper.GetConnectionString();
@@ -148,6 +187,7 @@ GO";
 					while (reader.Read())
 					{
 						var actividad = new Actividad();
+						actividad.Id = reader.GetInt32(reader.GetOrdinal("Id"));
 						actividad.EdadMax = reader.GetInt32(reader.GetOrdinal("Maxedad"));
 						actividad.EdadMin = reader.GetInt32(reader.GetOrdinal("Minedad"));
 						actividad.Cupos = reader.GetInt32(reader.GetOrdinal("Cupos"));
