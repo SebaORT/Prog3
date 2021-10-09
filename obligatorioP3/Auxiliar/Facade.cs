@@ -12,6 +12,7 @@ namespace Auxiliar
     public class Facade
     {
         public static Configuration Configuration { get; set; }
+        public static Dictionary<int, Actividad> ActividadesClub { get; set; }
         public static Facade _instance = null;
         public static Facade Instance
         {
@@ -116,19 +117,7 @@ namespace Auxiliar
             List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
             List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
 
-            IRepoActividad ra = FabricaRepositorios.ObtenerRepoActividad();
-
-            List<Actividad> actividades = ra.Listar();
             List<SocioActividad> socioActividades = rs.ListarSocioActividad();
-
-
-            //TODO: mover esto al global asax, guardar lista de actividades en el sistema 
-            foreach (var act in actividades)
-			{
-                act.Horarios = ra.ListarHorariosActividad(act.Id);
-
-                mapActividad.Add(act.Id, act);
-			}
 
             foreach(SocioMembresia m in socioMembresia)
             {
@@ -157,11 +146,11 @@ namespace Auxiliar
 
             foreach (SocioActividad sa in socioActividades)
 			{
-                Socio socio = mapSocio.ContainsKey(sa.IdSocio) ? mapSocio[sa.IdSocio] : BuscarSocioEnLista(lista, sa.IdSocio);
+                Socio socio = mapSocio.ContainsKey(sa.IdSocio) ? mapSocio[sa.IdSocio] : null;
                 
                 Actividad actividad =
-                    mapActividad.ContainsKey(sa.IdActividad) ? mapActividad[sa.IdActividad] :
-                     actividades.FirstOrDefault(a => a.Id == sa.IdActividad);
+                    Facade.ActividadesClub.ContainsKey(sa.IdActividad) ? mapActividad[sa.IdActividad] :
+                     null;
 
 
                 if (socio != null && actividad != null)
