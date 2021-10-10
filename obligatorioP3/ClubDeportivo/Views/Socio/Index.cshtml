@@ -30,47 +30,50 @@
             @Html.DisplayNameFor(model => model.Activo)
         </th>
         <th></th>
-    </tr> 
+    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.IdSocio)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NombreApellido)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cedula)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FechaNacimiento)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FechaIngreso)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Activo)
-    </td>
-    <td>
-        @Html.ActionLink("Details", "Details", new
-           {
-                id = item.IdSocio
-           }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @item.FechaNacimiento.ToShortDateString()
+                <!-- @@Html.DisplayFor(modelItem => item.FechaNacimiento) -->
+            </td>
+            <td>
+                @item.FechaNacimiento.ToShortDateString()
+                <!-- @@Html.DisplayFor(modelItem => item.FechaNacimiento) -->
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new
+                   {
+                        id = item.IdSocio
+                   }
 
-   )
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new
-           {
-                id = item.IdSocio                
-           }
+           )
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new
+                   {
+                        id = item.IdSocio
+                }
 
-   )
-    </td>
+           )
+            </td>
 
 
-</tr>
-}
+        </tr>
+    }
 
 </table>
