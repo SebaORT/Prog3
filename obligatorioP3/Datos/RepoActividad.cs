@@ -49,7 +49,7 @@ GO";
 
 					object val = command.ExecuteScalar();
 
-					result = val!= null ? Convert.ToInt32(val) : -1;
+					result = val != null ? Convert.ToInt32(val) : -1;
 
 				}
 				catch (Exception ex)
@@ -77,7 +77,7 @@ GO";
 				try
 				{
 					connection.Open();
-					var command = SQLADOHelper.BajaSQLCommand(connection, TABLE_NAME, false,id);
+					var command = SQLADOHelper.BajaSQLCommand(connection, TABLE_NAME, false, id);
 					int res = command.ExecuteNonQuery();
 
 					result = res >= 0 ? true : false;
@@ -99,7 +99,7 @@ GO";
 
 		public Actividad Buscar(int id)
 		{
-			var connStr=SQLADOHelper.GetConnectionString();
+			var connStr = SQLADOHelper.GetConnectionString();
 			var actividad = new Actividad();
 			using (var connection = new SqlConnection(connStr))
 			{
@@ -112,12 +112,13 @@ GO";
 
 					reader.Read();
 
+					actividad.Id = reader.GetInt32(reader.GetOrdinal("Id"));
 					actividad.EdadMax = reader.GetInt32(reader.GetOrdinal("Maxedad"));
 					actividad.EdadMin = reader.GetInt32(reader.GetOrdinal("Minedad"));
 					actividad.Cupos = reader.GetInt32(reader.GetOrdinal("Cupos"));
 					actividad.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
 					actividad.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
-					
+
 				}
 				catch (Exception ex)
 				{
@@ -131,6 +132,48 @@ GO";
 			return actividad;
 
 		}
+
+		public SocioActividad BuscarSocioActividad(int idSocio, int idActividad)
+		{
+					var connStr = SQLADOHelper.GetConnectionString();
+			SocioActividad socioActividad = null;
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = new SqlCommand(@"SELECT TOP 1 [IdSocio]
+						  ,[IdActividad]
+						  ,[Fecha]
+					  FROM [dbo].[SocioActividad] where IdSocio = @idSocio and IdActividad = @idActividad", connection);
+					command.Parameters.AddWithValue("@idSocio",idSocio);
+					command.Parameters.AddWithValue("@idActividad", idActividad);
+
+
+					SqlDataReader reader = command.ExecuteReader();
+					bool hasValues = reader.Read();
+
+					if (hasValues)
+					{
+						socioActividad = new SocioActividad();
+						socioActividad.IdActividad = reader.GetInt32(reader.GetOrdinal("IdActividad"));
+						socioActividad.IdSocio = reader.GetInt32(reader.GetOrdinal("IdSocio"));
+						socioActividad.Fecha = reader.GetDateTime(reader.GetOrdinal("Fecha"));
+					}
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+			return socioActividad;
+		}
+
 		public List<Horario> ListarHorariosActividad( int idActividad)
 		{
 			var connStr = SQLADOHelper.GetConnectionString();

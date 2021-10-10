@@ -13,6 +13,7 @@ namespace Dominio
 		public Cuponera() : base()
 		{
 			TipoMembresia = "cuponera";
+			Active = true;
 		}
 
 		public Cuponera(int cantActividadesMes) : base()

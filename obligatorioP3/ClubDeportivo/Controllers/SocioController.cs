@@ -23,7 +23,7 @@ namespace ClubDeportivo.Controllers
             }
             else
             {
-                return View(f1.ListarSocios());
+                return View(f1.ListaroActualizarSocios());
             }
 
         }
@@ -39,6 +39,9 @@ namespace ClubDeportivo.Controllers
             {
                 Socio s = Facade.Instance.BuscarSocio(id);
                 s = Facade.Instance.ActualizarSocio(s);
+
+                ViewBag.ActividadesDelDia = Facade.Instance.GetActividadesDia();
+
                 return View(s);
             }
 
@@ -224,7 +227,7 @@ actividad, y otro que permita ver todos los ingresos que realizó en una fecha d
 el mes corriente.*/
 
         //vinculo 1...
-        public ActionResult IngresoSocioActividad()
+        public ActionResult IngresoSocioActividad(int idSocio,int idActividad)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -235,34 +238,29 @@ el mes corriente.*/
                 // Create a client object with the given client endpoint configuration.
                 ServiceClient clubSolisClient = new ServiceClient("BasicHttpBinding_IService");
 
-                string dataStr = clubSolisClient.GetData(9000);
+                ActividadSocioDTOResult resService = clubSolisClient.IngresarSocioActividad(new ActividadSocioDTO
+                {
+                    Fecha = DateTime.Now,
+                    IdActividad = idActividad,
+                    IdSocio = idSocio
+                });
 
-                //clubSolisClient.IngresarSocioActividad(
+                if (resService.Success)
+				{
+                    Facade.ActualizarActividadesClub();
 
-                //    new ActividadSocioDTO
-                //    {
-                //        Fecha = DateTime.Now,
-                //        IdActividad = 1,
-                //        IdSocio = 1
-                //    }
-                //    );
-
-                return View();
+                    ViewBag.Message = "Socio ingresado exitosamente en la actividad";
+                    return View("Success");
+                }
+                else
+				{
+                    ViewBag.Message = resService.Error;
+                    return View("Error");
+                }
+               
             }
 
         }
-
-        //vinculo2
-        //      public ingresosFechaDada()
-        //{
-
-        //}
-
-        //vinculo3
-        /*
-         Si aun no la pagó, se mostrará un link para navegar al registro de pago para el socio y*/
-        //TODO
-        //public ingresarPagoSocio
 
         public ActionResult CreateCuponera(decimal cedula)
         {
@@ -285,18 +283,19 @@ el mes corriente.*/
             }
             else
             {
-                int idCuponera = f1.AltaMembresia(cedula, c);
-                var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
-
-                if (cuponera.CantActividades < 8 || cuponera.CantActividades > 60)
+                
+                if (c.CantActividades < 8 || c.CantActividades > 60)
                 {
                     ViewBag.Message = "La cantidad de actividades es incorrecta, debe ser entre 8 y 60";
                     return View("Error");
                 }
 
+                int idCuponera = f1.AltaMembresia(cedula, c);
+                var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
+               
+
                 if (cuponera.FechaPago == null)
                 {
-                    //return RedirectToAction("RealizarPagoCuponera", new { id = cuponera.Id });
                     return RedirectToAction("RealizarPagoCuponera", new { id = cuponera.Id });
                 }
                 else
@@ -394,7 +393,7 @@ el mes corriente.*/
 
         }
 
-
+        [HttpGet]
         public ActionResult RealizarPagoCuponera(int id)
         {
             Cuponera cuponera = (Cuponera)f1.BuscarMembresia(id);
@@ -404,22 +403,38 @@ el mes corriente.*/
             }
             else
             {
-                if (cuponera.FechaPago == null)
-                {
-                    ViewBag.FechaPago = DateTime.Today;
-                    bool res = f1.ModificacionFechaPagoHoyMembresia(cuponera);
-                    f1.ListarSocios();
-                }
-                else
-                {
-                    ViewBag.Mensaje = "Pago ya ha sido realizado";
-                }
 
                 return View(cuponera);
             }
 
         }
 
+        [HttpPost]
+        public ActionResult RealizarPagoCuponera(Cuponera cuponera)
+        {
+           // Cuponera cuponera = (Cuponera)f1.BuscarMembresia(id);
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                if (cuponera.FechaPago == null)
+                {
+                    ViewBag.Message = "Pago realizado exitosamente";
+                    bool res = f1.ModificacionFechaPagoHoyMembresia(cuponera);
+                    f1.ListaroActualizarSocios();
+                }
+                else
+                {
+                    ViewBag.Message = "Pago ya ha sido realizado";
+                }
+
+                return View("Success");
+            }
+        }
+
+        [HttpGet]
         public ActionResult RealizarPagoLibre(int id)
         {
             PaseLibre paselibre = (PaseLibre)f1.BuscarMembresia(id);
@@ -429,21 +444,36 @@ el mes corriente.*/
             }
             else
             {
+                return View(paselibre);
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult RealizarPagoLibre(PaseLibre paselibre)
+        {
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
                 if (paselibre.FechaPago == null)
                 {
-                    ViewBag.FechaPago = DateTime.Today;
+                    ViewBag.Message = "Pago realizado exitosamente";
                     bool res = f1.ModificacionFechaPagoHoyMembresia(paselibre);
-                    f1.ListarSocios();
+                    f1.ListaroActualizarSocios();
                 }
                 else
-                {
-                    ViewBag.Mensaje = "Pago ya ha sido realizado";
+				{
+                    ViewBag.Message = "Pago ya ha sido realizado";
                 }
 
-                return View(paselibre);
+            return View("Success");
             }
 
         }
+        
 
 
     }

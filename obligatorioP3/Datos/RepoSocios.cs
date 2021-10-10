@@ -15,10 +15,10 @@ namespace Repositorios
         //TODO
         //public IngresosFechaData
 
-        public int IngresarActividadSocio(int idSocio, int idActividad, DateTime dateTime)
+        public int IngresarActividadSocio(int idSocio, Actividad actividad, DateTime dateTime)
 		{
 
-			var sql = @"INSERT INTO[dbo].[SocioActividad]
+			var insertSocioActividadSQL = @"INSERT INTO[dbo].[SocioActividad]
 			([IdSocio]
 		  ,[IdActividad]
 		  ,[Fecha])
@@ -30,22 +30,45 @@ namespace Repositorios
 			int result = -1;
 			using (var connection = new SqlConnection(SQLADOHelper.GetConnectionString()))
 			{
-				try
+                SqlTransaction tran = null;
+
+                try
 				{
 					connection.Open();
-					var command = new SqlCommand(sql, connection);
-					command.Parameters.AddWithValue("@idSocio", idSocio);
-					command.Parameters.AddWithValue("@idActividad", idActividad);
+                    tran = connection.BeginTransaction();
+
+                    var command = new SqlCommand(insertSocioActividadSQL, connection,tran);
+                    command.Transaction = tran;
+
+                    command.Parameters.AddWithValue("@idSocio", idSocio);
+					command.Parameters.AddWithValue("@idActividad", actividad.Id);
 					command.Parameters.AddWithValue("@date", dateTime);
 
-					object val = command.ExecuteNonQuery();
+					object val1 = command.ExecuteNonQuery();
 
-					result = val != null ? Convert.ToInt32(val) : -1;
 
-				}
-				catch (Exception ex)
+                    var updateActividad = @"UPDATE [dbo].[Actividad]
+                                               SET [Cupos] = @cupos
+                                             WHERE Id = @id";
+
+                    var command2 = new SqlCommand(updateActividad, connection, tran);
+                    command2.Transaction = tran;
+                    command2.Parameters.AddWithValue("@cupos", actividad.Cupos-1);
+                    command2.Parameters.AddWithValue("@id", actividad.Id);
+
+                    object val2 = command2.ExecuteNonQuery();
+                    result = val1 != null && val2 != null ? Convert.ToInt32(val2) : -1;
+
+                    tran.Commit();
+
+                }
+                catch (Exception ex)
 				{
-					throw ex;
+                    if (tran != null)
+                    {
+                        tran.Rollback();
+                    }
+                    throw ex;
 				}
 				finally
 				{
@@ -307,11 +330,13 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
 
             using (var connection = new SqlConnection(connStr))
             {
+              
                 try
                 {
                     connection.Open();
+                   
 
-                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
+                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME," ORDER BY NombreApellido asc, Cedula desc");
 
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())

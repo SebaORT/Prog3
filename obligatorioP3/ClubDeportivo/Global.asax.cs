@@ -22,16 +22,9 @@ namespace ClubDeportivo
             Configuration configuration =  repoConfig.Buscar(1);
             Facade.Configuration = configuration;
 
-            Facade.ActividadesClub = new Dictionary<int, Actividad>();
-            IRepoActividad ra = FabricaRepositorios.ObtenerRepoActividad();
 
-            List<Actividad> actividades = ra.Listar();
-            foreach (var act in actividades)
-            {
-                act.Horarios = ra.ListarHorariosActividad(act.Id);
-
-                Facade.ActividadesClub.Add(act.Id, act);
-            }
+            Facade.ActualizarActividadesClub();
+           
         }
     }
 }

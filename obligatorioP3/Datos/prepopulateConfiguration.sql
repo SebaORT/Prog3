@@ -6,6 +6,7 @@ INSERT INTO [dbo].Usuario VALUES
 ('bernardo@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal'),
 ('seba@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal');
 
+--configuracion
 INSERT INTO [dbo].[Configuration]
 (Id,[CantActividadesDescuento]
 ,[DescuentoCuponera]
@@ -14,10 +15,10 @@ INSERT INTO [dbo].[Configuration]
 ,[AntiguedadEstablecida],[MontoUnitarioCuponera])
      VALUES
            (1, '3'
-           , '100'
-           , '200'
            , '50'
-           , '10','3')
+           , '1000'
+           , '30'
+           , '5','30')
 
 
 GO

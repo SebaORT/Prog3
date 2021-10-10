@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actividad.cs" />
+    <Compile Include="ActividadHora.cs" />
     <Compile Include="ActividadSocio.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Cuponera.cs" />

@@ -11,10 +11,14 @@ namespace Dominio
 		public PaseLibre():base()
         {
 			TipoMembresia = "paselibre";
-        }
+			Active = true;
+
+		}
 		public override double calcularPagoFinal(Configuration config, int antiguedadSocio = 0)
 		{
 			double result = config.CostoFijo;
+
+			//TODO calcular antiguedadSocio....
 			if (antiguedadSocio > config.AntiguedadEstablecida )
 			{
 				result-= result * (config.DescuentoPaseLibre / 100);

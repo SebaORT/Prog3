@@ -12,6 +12,6 @@ namespace Dominio
 		DataTable ListarDataTable();
 		List<Horario> ListarHorariosActividad(int idActividad);
 		DataTable ListarActividadHorarioDataTable();
-
+		SocioActividad BuscarSocioActividad(int idSocio, int idActividad);
 	}
 }
