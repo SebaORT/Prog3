@@ -71,4 +71,8 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index", "Socio")
+    @if (Model.FechaPago.ToString() == "1/1/1753 12:00:00")
+    {
+        @Html.ActionLink("PAGAR", "RealizarPagoLibre")
+    }
 </div>

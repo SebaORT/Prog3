@@ -211,14 +211,14 @@
     <Content Include="Views\Membresia\DetalleCuponera.cshtml" />
     <Content Include="Views\Membresia\DetallePaseLibre.cshtml" />
     <Content Include="Views\Membresia\Index.cshtml" />
-    <Content Include="Views\Membresia\RealizarPagoCuponera.cshtml" />
     <Content Include="Views\Socio\CreatePaseLibre.cshtml" />
     <Content Include="Views\Socio\CreateCuponera.cshtml" />
-    <Content Include="Views\Membresia\RealizarPagoLibre.cshtml" />
     <Content Include="Views\Socio\ListarPaseLibrePorSocioId.cshtml" />
     <Content Include="Views\Socio\ListarMCuponeraPorSocioId.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Socio\RealizarPagoCuponera.cshtml" />
+    <Content Include="Views\Socio\RealizarPagoLibre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

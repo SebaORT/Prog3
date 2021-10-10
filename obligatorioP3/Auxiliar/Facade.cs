@@ -74,6 +74,21 @@ namespace Auxiliar
         public List<Membresia> ListarMembresiasPorSocioId(Socio socio)
         {
             //IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            //List<Membresia> lista = rm.ListarPorSocioId(socio.IdSocio);
+            //mapSocio[socio.IdSocio].Membresias.Clear();
+            //List<Membresia> listaSocio = mapSocio[socio.IdSocio].Membresias;
+            //foreach (var item in lista)
+            //{
+            //    if (item.TipoMembresia == "cuponera")
+            //    {
+            //        listaSocio.Add((Cuponera)item);
+            //    }
+
+            //    if (item.TipoMembresia == "paselibre")
+            //    {
+            //        listaSocio.Add((PaseLibre)item);
+            //    }
+            //}
             return mapSocio[socio.IdSocio].Membresias; //socio.Membresias;
         }
 

@@ -1,5 +1,4 @@
 ﻿@model Dominio.Cuponera
-   @using Dominio;
 
 @{
     ViewBag.Title = "RealizarPagoCuponera";
@@ -7,86 +6,74 @@
 
 <h2>RealizarPagoCuponera</h2>
 
-@if (ViewBag.Mensaje != null)
-{
- <p>@ViewBag.Mensaje</p>
-}
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Cuponera</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-<div class="form-horizontal">
-    <h4>Cuponera</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @value = Model.Nombre, @placeholder = Model.Nombre, @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Descipcion, htmlAttributes: new { @class = "control-label col-md-2", @value = Model.Descipcion, @placeholder = Model.Descipcion, @readonly = "readonly" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Descipcion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descipcion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2", @value = Model.Active, @readonly = "readonly"})
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Active)
-                @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CantActividades, htmlAttributes: new { @class = "control-label col-md-2", @value = Model.CantActividades, @placeholder = Model.CantActividades, @readonly = "readonly" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CantActividades, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CantActividades, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descipcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descipcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descipcion, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FechaPago, htmlAttributes: new { @class = "control-label col-md-2", @value = ViewBag.FechaPago, @Placeholder = DateTime.Today.ToShortDateString(), @readonly = "readonly" })
-        <div class="col-md-10">
-            <input class="form-control" type="datetime-local" data-val="true" data-val-required="The DateUploaded field is required."
-                   name="FechaPago" />
-            @Html.ValidationMessageFor(model => model.FechaPago, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaPago, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaPago, new { htmlAttributes = new { @class = "form-control", @value = DateTime.Now.ToLocalTime(), @placeholder = DateTime.Now.ToLocalTime(), @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.FechaPago, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div>
-        <strong>Precio $</strong>@Model.calcularPagoFinal(new Configuration());
-    </div>
-    @if (Model.FechaPago == null)
-    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Active)
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoMembresia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TipoMembresia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TipoMembresia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CantActividades, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CantActividades, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CantActividades, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-    }
-    else
-    {
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" disabled="disabled" />
-            </div>
-        </div>
-    }
-
-</div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", "Socio")
+    @Html.ActionLink("Back to List", "Index")
 </div>

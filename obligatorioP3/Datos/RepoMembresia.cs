@@ -47,7 +47,12 @@ namespace Repositorios
                     var command = new SqlCommand(query, connection, tran);
                     command.Transaction = tran;
                     command.Parameters.AddWithValue("@idSocio", idSocio);
+                    if (t.FechaPago == null)
+                    {
+                        t.FechaPago = DateTime.Parse("1/1/1753 12:00:00");
+                    }
                     command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
+                   
                     command.Parameters.AddWithValue("@nombre", t.Nombre);
                     command.Parameters.AddWithValue("@descripcion", t.Descipcion);
                     command.Parameters.AddWithValue("@active", t.Active);
