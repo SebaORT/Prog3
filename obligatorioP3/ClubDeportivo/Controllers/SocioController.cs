@@ -12,7 +12,7 @@ namespace ClubDeportivo.Controllers
     public class SocioController : Controller
     {
 
-        Facade f1 = new Facade();
+        Facade f1 = Facade.Instance;
 
         // GET: Socio
         public ActionResult Index()
@@ -38,6 +38,7 @@ namespace ClubDeportivo.Controllers
             else
             {
                 Socio s = Facade.Instance.BuscarSocio(id);
+                s = Facade.Instance.ActualizarSocio(s);
                 return View(s);
             }
 
@@ -287,10 +288,16 @@ el mes corriente.*/
                 int idCuponera = f1.AltaMembresia(cedula, c);
                 var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
 
+                if (cuponera.CantActividades < 8 || cuponera.CantActividades > 60)
+                {
+                    ViewBag.Message = "La cantidad de actividades es incorrecta, debe ser entre 8 y 60";
+                    return View("Error");
+                }
+
                 if (cuponera.FechaPago == null)
                 {
-                    cuponera.FechaPago = DateTime.Now;
-                    return View("RealizarPagoCuponera", "Membresia", cuponera);
+                    //return RedirectToAction("RealizarPagoCuponera", new { id = cuponera.Id });
+                    return RedirectToAction("RealizarPagoCuponera", new { id = cuponera.Id });
                 }
                 else
                 {
@@ -328,7 +335,8 @@ el mes corriente.*/
                 if (paselibre.FechaPago == null)
                 {
                     paselibre.FechaPago = DateTime.Now;
-                    return View("RealizarPagoLibre", "Membresia", paselibre);
+                    //return RedirectToAction("RealizarPagoLibre", new { id = paselibre.Id });
+                    return RedirectToAction("RealizarPagoLibre", new { id = paselibre.Id });
                 }
                 else
                 {
@@ -378,7 +386,7 @@ el mes corriente.*/
                 {
                     if (item.TipoMembresia == "cuponera")
                     {
-                        ilista.Add((Cuponera) item);
+                        ilista.Add((Cuponera)item);
                     }
                 }
                 return View(ilista);

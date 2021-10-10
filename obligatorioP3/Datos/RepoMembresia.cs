@@ -47,11 +47,13 @@ namespace Repositorios
                     var command = new SqlCommand(query, connection, tran);
                     command.Transaction = tran;
                     command.Parameters.AddWithValue("@idSocio", idSocio);
-                    if (t.FechaPago == null)
+                    object o = t.FechaPago;
+
+                    if (o == null)
                     {
-                        t.FechaPago = DateTime.Parse("1/1/1753 12:00:00");
+                        o = DBNull.Value;
                     }
-                    command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
+                    command.Parameters.AddWithValue("@fechaPago", o);
                    
                     command.Parameters.AddWithValue("@nombre", t.Nombre);
                     command.Parameters.AddWithValue("@descripcion", t.Descipcion);
@@ -226,7 +228,10 @@ namespace Repositorios
                         membresia.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                         membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
                         membresia.Descipcion = reader.GetString(reader.GetOrdinal("Description"));
-                        membresia.FechaPago = reader.GetDateTime(reader.GetOrdinal("Fechapago"));
+                        var index = reader.GetOrdinal("Fechapago");
+                        membresia.FechaPago = reader.IsDBNull(index) ?
+                          (DateTime?)null :
+                          (DateTime?)reader.GetDateTime(index);
                         membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
                         membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
                         if (membresia.TipoMembresia == "cuponera")

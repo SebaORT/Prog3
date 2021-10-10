@@ -219,6 +219,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Socio\RealizarPagoCuponera.cshtml" />
     <Content Include="Views\Socio\RealizarPagoLibre.cshtml" />
+    <Content Include="Views\Socio\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

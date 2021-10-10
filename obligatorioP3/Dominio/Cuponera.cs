@@ -21,6 +21,16 @@ namespace Dominio
 			TipoMembresia = "cuponera";
 		}
 
+		public bool validarCantACtividades(int cantActividades)
+        {
+			if (cantActividades >= 8 && cantActividades <= 60)
+            {
+				return true;
+            }
+
+			return false;
+        }
+
 		public override double calcularPagoFinal(Configuration config, int antiguedadSocio = 0)
 		{
 			var result = config.MontoUnitarioCuponera * CantActividades;

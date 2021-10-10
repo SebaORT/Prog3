@@ -45,7 +45,10 @@ namespace Auxiliar
             //Aqui se hace el alta de la membresia y al mismo tiempo se le asigna al socio indicado
             int idMembresia = FabricaRepositorios.ObtenerRepoMembresia().Alta(idSocio, m);
             //se agrega la membresia a la lista del socio
-            rs.BuscarPorCedula(cedula).Membresias.Add(rm.Buscar(idMembresia));
+
+            Socio s = rs.BuscarPorCedula(cedula);
+            Membresia mem = rm.Buscar(idMembresia);
+            s.Membresias.Add(mem);
             return idMembresia;
         }
 
@@ -67,7 +70,7 @@ namespace Auxiliar
 
             if (res)
             {
-                
+
             }
 
             return res;
@@ -147,6 +150,65 @@ namespace Auxiliar
         {
             Socio s = FabricaRepositorios.ObtenerRepoSocios().Buscar(id);
             return s;
+        }
+
+        public Socio ActualizarSocio(Socio socio)
+        {
+            if (socio == null)
+            {
+                return null;
+            }
+
+            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+            List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
+            List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
+
+            List<SocioActividad> socioActividades = rs.ListarSocioActividad();
+
+            foreach (SocioMembresia m in socioMembresia)
+            {
+                if (socio.IdSocio == m.IdSocio)
+                {
+                    Membresia mem = BuscarMembresiaEnLista(membresia, m.IdMembresia);
+                    if (mem != null)
+                    {
+                        socio.Membresias.Add(mem);
+                    }
+                    else
+                    {
+                        throw new Exception("Base de datos inconsisitente");
+                    }
+                }
+
+            }
+
+
+            foreach (SocioActividad sa in socioActividades)
+            {
+                if (socio.IdSocio == sa.IdSocio)
+                {
+                    Actividad actividad =
+                                        Facade.ActividadesClub.ContainsKey(sa.IdActividad) ? mapActividad[sa.IdActividad] :
+                                         null;
+
+                    if (actividad != null)
+                    {
+                        socio.ActividadSocios.Add(new ActividadSocio
+                        {
+                            Actividad = actividad,
+                            Socio = socio,
+                            Fecha = sa.Fecha
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception("Base de datos inconsisitente");
+                    }
+                }
+
+            }
+
+            return socio;
         }
 
         public List<Socio> ListarSocios()

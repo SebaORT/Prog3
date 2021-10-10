@@ -1,2 +1,8 @@
 Id|Nombre|Description|Fechapago|Active|CantActividades|Tipomembresia
-1|Cuponera|Cuponera 2021||True|10|cuponera
+1|Cuponera|Cuponera|10/10/2021 0:00:00|True|40|cuponera
+2|Paselibre|Paselibre||True||paselibre
+24|pase libre 2|pase libre 2 ejercicio|14/7/2021 7:21:00|False|0|paselibre
+25|cuponera asdsada|cuponera asdsada|15/7/2021 7:24:00|False|12|cuponera
+26|Cuponera Fit|Fit hasta el fin|10/10/2021 12:46:00|True|25|cuponera
+27|Pase Libre Fit|Para otras actividades|9/10/2021 12:54:00|True|0|paselibre
+28|pase libre fit 3|pase libre fit 3|1/1/1753 12:00:00|True|0|paselibre

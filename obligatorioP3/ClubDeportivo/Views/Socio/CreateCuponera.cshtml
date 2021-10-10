@@ -12,6 +12,12 @@
 
     <div class="form-horizontal">
         <h4>Cuponera</h4>
+        @*<div>
+            @if (Model.FechaPago == null && Model.Id > 0)
+            {
+                @Html.ActionLink("PAGAR", "RealizarPagoCuponera", new { id = Model.Id })
+            }
+        </div>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -60,28 +66,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CantActividades, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CantActividades, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CantActividades, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.CantActividades, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div>
-            <strong>Pago final $</strong>@Model.calcularPagoFinal(new Dominio.Configuration())
-        </div>
-
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-    @if (Model.FechaPago.ToString() == "1/1/1753 12:00:00")
-    {
-        @Html.ActionLink("PAGAR", "RealizarPagoCuponera")
-    }
-</div>
+

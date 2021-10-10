@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.Descipcion)
             </td>
             <td>
-                @if (item.FechaPago.ToString() != "1/1/1753 12:00:00")
+                @if (item.FechaPago != null)
                 {
                     @Html.DisplayFor(modelItem => item.FechaPago)
                 }
@@ -48,9 +48,9 @@
                 @Html.DisplayFor(modelItem => item.TipoMembresia)
             </td>
             <td>
-                @if (item.FechaPago.ToString() == "1/1/1753 12:00:00")
+                @if (item.FechaPago == null)
                 {
-                    @Html.ActionLink("Pagar", "RealizarPagoLibre", new { id = item.Id })
+                    @Html.ActionLink("PAGAR", "RealizarPagoLibre", new { id = item.Id })
                 }
 
             </td>
