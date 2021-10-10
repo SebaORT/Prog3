@@ -301,7 +301,6 @@ namespace Repositorios
 
             return result;
         }
-
         public List<Membresia> ListarPorSocioId(int id)
         {
             var connStr = SQLADOHelper.GetConnectionString();
@@ -317,7 +316,7 @@ namespace Repositorios
 
                     while (reader.Read())
                     {
-                        if (reader["Tipomembresia"].ToString() == "paselibre") //ES IMPORTADO
+                        if (reader["Tipomembresia"].ToString() == "paselibre") //ES pase libre
                         {
                             membresia = new PaseLibre();
                         }

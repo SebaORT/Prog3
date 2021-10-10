@@ -400,6 +400,7 @@ el mes corriente.*/
                 {
                     ViewBag.FechaPago = DateTime.Today;
                     bool res = f1.ModificacionFechaPagoHoyMembresia(cuponera);
+                    f1.ListarSocios();
                 }
                 else
                 {
@@ -424,6 +425,7 @@ el mes corriente.*/
                 {
                     ViewBag.FechaPago = DateTime.Today;
                     bool res = f1.ModificacionFechaPagoHoyMembresia(paselibre);
+                    f1.ListarSocios();
                 }
                 else
                 {

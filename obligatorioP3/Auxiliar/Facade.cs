@@ -52,7 +52,7 @@ namespace Auxiliar
         public bool BajaMembresia(int id)
         {
             IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
-            return rm.Baja(id); 
+            return rm.Baja(id);
         }
 
         public bool ModificacionMembresia(Membresia m)
@@ -62,7 +62,15 @@ namespace Auxiliar
 
         public bool ModificacionFechaPagoHoyMembresia(Membresia m)
         {
-            return FabricaRepositorios.ObtenerRepoMembresia().ModificarFechaPagoHoy(m);
+            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            bool res = rm.ModificarFechaPagoHoy(m);
+
+            if (res)
+            {
+                
+            }
+
+            return res;
         }
 
         public List<Membresia> ListarMembresias()
@@ -106,7 +114,7 @@ namespace Auxiliar
         {
             int idSocio = 0;
 
-            if(Socio.ValidarDatos(cedula, nombreApellido, fechaNacimiento))
+            if (Socio.ValidarDatos(cedula, nombreApellido, fechaNacimiento))
             {
                 IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
                 Socio s = new Socio()
@@ -119,7 +127,7 @@ namespace Auxiliar
                 };
 
                 idSocio = rs.Alta(s);
-            }         
+            }
 
             return idSocio;
         }
@@ -132,7 +140,7 @@ namespace Auxiliar
 
         public bool ModificarSocio(Socio socio)
         {
-            return FabricaRepositorios.ObtenerRepoSocios().Modificacion(socio);            
+            return FabricaRepositorios.ObtenerRepoSocios().Modificacion(socio);
         }
 
         public Socio BuscarSocio(int id)
@@ -147,28 +155,29 @@ namespace Auxiliar
             mapActividad = new Dictionary<int, Actividad>();
 
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
-            List<Socio>  lista = rs.Listar();
+            List<Socio> lista = rs.Listar();
             List<Membresia> membresia = FabricaRepositorios.ObtenerRepoMembresia().Listar();
             List<SocioMembresia> socioMembresia = rs.ListarSocioMembresia();
 
             List<SocioActividad> socioActividades = rs.ListarSocioActividad();
 
-            foreach(SocioMembresia m in socioMembresia)
+            foreach (SocioMembresia m in socioMembresia)
             {
                 Socio socio = null;
-                if (!mapSocio.ContainsKey(m.IdSocio)) { 
+                if (!mapSocio.ContainsKey(m.IdSocio))
+                {
                     socio = BuscarSocioEnLista(lista, m.IdSocio);
                     mapSocio.Add(m.IdSocio, socio);
                 }
                 else
-				{
+                {
                     socio = mapSocio[m.IdSocio];
-				}
-				
+                }
+
 
                 Membresia mem = BuscarMembresiaEnLista(membresia, m.IdMembresia);
-                if(socio != null && mem != null)
-                {   
+                if (socio != null && mem != null)
+                {
                     socio.Membresias.Add(mem);
                 }
                 else
@@ -179,9 +188,9 @@ namespace Auxiliar
 
 
             foreach (SocioActividad sa in socioActividades)
-			{
+            {
                 Socio socio = mapSocio.ContainsKey(sa.IdSocio) ? mapSocio[sa.IdSocio] : null;
-                
+
                 Actividad actividad =
                     Facade.ActividadesClub.ContainsKey(sa.IdActividad) ? mapActividad[sa.IdActividad] :
                      null;
@@ -207,9 +216,9 @@ namespace Auxiliar
 
         private Membresia BuscarMembresiaEnLista(List<Membresia> membresia, int idMembresia)
         {
-            foreach(var m in membresia)
+            foreach (var m in membresia)
             {
-                if(m.Id == idMembresia)
+                if (m.Id == idMembresia)
                 {
                     return m;
                 }
@@ -270,11 +279,12 @@ namespace Auxiliar
         }
 
         public double PagarMensualidadSocio(int cedulaSocio)
-        {try
+        {
+            try
             {
                 IRepoSocios ru = FabricaRepositorios.ObtenerRepoSocios();
                 IRepoConfig repoConfig = FabricaRepositorios.ObtenerRepoConfig();
-               // Configuration config = repoConfig.Buscar(1);
+                // Configuration config = repoConfig.Buscar(1);
 
 
                 Socio socio = ru.BuscarPorCedula(cedulaSocio);
@@ -283,10 +293,10 @@ namespace Auxiliar
 
             }
             catch (Exception ex)
-			{
+            {
                 return -1;
 
-			}
+            }
         }
 
         public bool ExportarInfo(string dir)
@@ -310,19 +320,19 @@ namespace Auxiliar
             DataTable socioMembresia = repoSocios.ListarSocioMembresiaDataTable();
 
 
-            socios.ToCSV($"{dir}socios.csv","|");
+            socios.ToCSV($"{dir}socios.csv", "|");
             socioActividad.ToCSV($"{dir}socioActividad.csv", "|");
             socioMembresia.ToCSV($"{dir}socioMembresia.csv", "|");
             actividades.ToCSV($"{dir}actividades.csv", "|");
             actividadHorarios.ToCSV($"{dir}actividadHorarios.csv", "|");
             membresias.ToCSV($"{dir}membresias.csv", "|");
             usuarios.ToCSV($"{dir}usuarios.csv", "|");
-     
+
 
             return true;
         }
 
-      
+
 
         public Socio BuscarSocioPorCedula(decimal cedula)
         {
@@ -330,7 +340,7 @@ namespace Auxiliar
             return s;
         }
 
-    
+
 
         #endregion metodos
 
