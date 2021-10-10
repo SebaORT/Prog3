@@ -36,7 +36,7 @@ namespace Repositorios
             var connStr = SQLADOHelper.GetConnectionString();
 
             int result = -1;
-
+            //SqlCommand cmd = new SqlCommand(sql, con, trans)
             using (var connection = new SqlConnection(connStr))
             {
                 SqlTransaction tran = null;
@@ -44,7 +44,7 @@ namespace Repositorios
                 {
                     connection.Open();
                     tran = connection.BeginTransaction();                  
-                    var command = new SqlCommand(query, connection);
+                    var command = new SqlCommand(query, connection, tran);
                     command.Transaction = tran;
                     command.Parameters.AddWithValue("@idSocio", idSocio);
                     command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
@@ -69,15 +69,16 @@ namespace Repositorios
 
                     if (val != null)
                     {
-                        string query2 = "INSERT INTO [dbo].[SocioMembresia] ([IdSocio], [IdMembresia]) VALUES(@idSocio, @idMembresia); select SCOPE_IDENTITY() from [dbo].[SocioMembresia] GO";
-                        var command2 = new SqlCommand(query2, connection);
+                        string query2 = "INSERT INTO [dbo].[SocioMembresia] ([IdSocio], [IdMembresia]) VALUES(@idSocio, @idMembresia); select SCOPE_IDENTITY() from [dbo].[SocioMembresia] GO;";
+                        var command2 = new SqlCommand(query2, connection, tran);
+                        //SqlCommand cmd = new SqlCommand(sql, con, trans)
                         command2.Parameters.AddWithValue("@idSocio", idSocio);
                         command2.Parameters.AddWithValue("@idMembresia", val);
                         object val2 = command2.ExecuteScalar();
 
                         if (val != null && val2 != null)
                         {
-                            result = val2 != null ? Convert.ToInt32(val2) : -1;
+                            result = val != null ? Convert.ToInt32(val) : -1;
                         }
 
                     }

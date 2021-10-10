@@ -70,7 +70,7 @@ namespace Auxiliar
         public List<Membresia> ListarMembresiasPorSocioId(Socio socio)
         {
             IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
-            return rm.ListarPorSocioId(socio.IdSocio);
+            return socio.Membresias;
         }
 
         public List<Actividad> ListarActividades()

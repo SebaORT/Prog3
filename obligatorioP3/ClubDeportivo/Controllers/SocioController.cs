@@ -289,6 +289,7 @@ el mes corriente.*/
 
                 if (cuponera.FechaPago == null)
                 {
+                    cuponera.FechaPago = DateTime.Now;
                     return View("RealizarPagoCuponera", "Membresia", cuponera);
                 }
                 else
@@ -326,6 +327,7 @@ el mes corriente.*/
 
                 if (paselibre.FechaPago == null)
                 {
+                    paselibre.FechaPago = DateTime.Now;
                     return View("RealizarPagoLibre", "Membresia", paselibre);
                 }
                 else
@@ -348,7 +350,15 @@ el mes corriente.*/
             else
             {
                 List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
-                return View(lista);
+                List<PaseLibre> ilista = null;
+                foreach (var item in lista)
+                {
+                    if (item.TipoMembresia == "paselibre")
+                    {
+                        ilista.Add((PaseLibre)item);
+                    }
+                }
+                return View(ilista);
             }
 
         }
@@ -363,7 +373,15 @@ el mes corriente.*/
             else
             {
                 List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
-                return View(lista);
+                List<Cuponera> ilista = null;
+                foreach (var item in lista)
+                {
+                    if (item.TipoMembresia == "cuponera")
+                    {
+                        ilista.Add((Cuponera) item);
+                    }
+                }
+                return View(ilista);
             }
 
         }
