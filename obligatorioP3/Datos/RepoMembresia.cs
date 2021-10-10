@@ -352,31 +352,7 @@ namespace Repositorios
 
         public DataTable ListarDataTable()
         {
-            var connStr = SQLADOHelper.GetConnectionString();
-
-            var result = new DataTable();
-            using (var connection = new SqlConnection(connStr))
-            {
-                try
-                {
-                    connection.Open();
-                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    result.Load(reader);
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-
-            return result;
+            return SQLADOHelper.GetDataTableUtil(TABLE_NAME);
         }
 
         public bool Modificacion(Membresia t)

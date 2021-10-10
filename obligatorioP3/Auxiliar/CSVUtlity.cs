@@ -10,7 +10,7 @@ namespace Auxiliar
 {
 	public static class CSVUtlity
 	{
-        public static void ToCSV(this DataTable dtDataTable, string strFilePath)
+        public static void ToCSV(this DataTable dtDataTable, string strFilePath, string separator=",")
         {
             StreamWriter sw = new StreamWriter(strFilePath, false);
             //headers    
@@ -19,7 +19,7 @@ namespace Auxiliar
                 sw.Write(dtDataTable.Columns[i]);
                 if (i < dtDataTable.Columns.Count - 1)
                 {
-                    sw.Write(",");
+                    sw.Write(separator);
                 }
             }
             sw.Write(sw.NewLine);
@@ -42,7 +42,7 @@ namespace Auxiliar
                     }
                     if (i < dtDataTable.Columns.Count - 1)
                     {
-                        sw.Write(",");
+                        sw.Write(separator);
                     }
                 }
                 sw.Write(sw.NewLine);

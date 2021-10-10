@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -12,27 +13,27 @@ namespace Repositorios
 
 		private static string _connStr ="";
 
-        //SEBASTIAN
-        //private static readonly string _userid = "sa";
-        //private static readonly string _psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ";
-        //private static readonly string _server = "localhost\\SQLEXPRESS";
-        //private static readonly string _database = "ObligatorioP3_GestionClub";
+		//SEBASTIAN
+		private static readonly string _userid = "sa";
+		private static readonly string _psw = "ah!9(xNbonq-hLk4Gm;Ez(dEe-RvB.tJ";
+		private static readonly string _server = "localhost\\SQLEXPRESS";
+		private static readonly string _database = "ObligatorioP3_GestionClub";
 
-        //BERNARDO
-        //private static readonly string _userid = "sa";
-        //private static readonly string _psw = "1234";
-        //private static readonly string _server = "LAPTOP-H8N5UBOT";
-        //private static readonly string _database = "ObligatorioP3_GestionClub";
+		//BERNARDO
+		//private static readonly string _userid = "sa";
+		//private static readonly string _psw = "1234";
+		//private static readonly string _server = "LAPTOP-H8N5UBOT";
+		//private static readonly string _database = "ObligatorioP3_GestionClub";
 
-        //CECILIA
-        private static readonly string _userid = "sa";
-        private static readonly string _psw = "1234";
-        private static readonly string _server = "localhost";
-        private static readonly string _database = "ObligatorioP3_GestionClub";
+		//CECILIA
+		//private static readonly string _userid = "sa";
+		//private static readonly string _psw = "1234";
+		//private static readonly string _server = "localhost";
+		//private static readonly string _database = "ObligatorioP3_GestionClub";
 
 
 
-        public static string GetConnectionString()
+		public static string GetConnectionString()
 		{
 			if (String.IsNullOrEmpty(_connStr))
 			{
@@ -88,30 +89,42 @@ namespace Repositorios
 			return command;
 		}
 
-		/* GOOD TO HAVE, BUT NO ES NECESARIO
-		public static SqlCommand ModificacionSQLCommand(SqlConnection connection, string table, List<Tuple<string,object>> values )
-		{
-
-			var command = new SqlCommand($"update {table} set column = <<object>> from {table}", connection);
-
-			return command;
-		}
-
-
-		public static SqlCommand AltaSQLCommand(SqlConnection connection, string table)
-		{
-			var command = new SqlCommand($"insert into {table} values ....  from {table}", connection);
-
-			return command;
-		}
-		*/
-
 		public static SqlCommand BajaSQLCommand(SqlConnection connection, string table, bool active, int id)
 		{
 			var command = new SqlCommand($"update {table} set Active=@active where id = @id" , connection);
 			command.Parameters.AddWithValue("@active", active);
 			command.Parameters.AddWithValue("@id", id);
 			return command;
+		}
+
+
+		public static DataTable GetDataTableUtil(string table)
+		{
+			var connStr = GetConnectionString();
+
+			var result = new DataTable();
+			using (var connection = new SqlConnection(connStr))
+			{
+				try
+				{
+					connection.Open();
+					var command = ListarSQLCommand(connection, table);
+					SqlDataReader reader = command.ExecuteReader();
+
+					result.Load(reader);
+
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return result;
 		}
 
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repositorios;
 using System.Data;
+using System.Web;
 
 namespace Auxiliar
 {
@@ -270,7 +271,7 @@ namespace Auxiliar
 			}
         }
 
-        public bool ExportarInfo()
+        public bool ExportarInfo(string dir)
         {
             var repoActividad = FabricaRepositorios.ObtenerRepoActividad();
             var repoConfig = FabricaRepositorios.ObtenerRepoConfig();
@@ -279,12 +280,26 @@ namespace Auxiliar
             var repoUsuarios = FabricaRepositorios.ObtenerRepoUsuarios();
 
             DataTable actividades = repoActividad.ListarDataTable();
-            //Configuration configuration = Facade.Configuration;
+            DataTable actividadHorarios = repoActividad.ListarActividadHorarioDataTable();
+
+
+            DataTable configuration = repoConfig.ListarDataTable();
             DataTable membresias = repoMembresia.ListarDataTable();
             DataTable socios = repoSocios.ListarDataTable();
             DataTable usuarios = repoUsuarios.ListarDataTable();
 
-            socios.ToCSV("c:\\test\\test.csv");
+            DataTable socioActividad = repoSocios.ListarSocioActividadDataTable();
+            DataTable socioMembresia = repoSocios.ListarSocioMembresiaDataTable();
+
+
+            socios.ToCSV($"{dir}socios.csv","|");
+            socioActividad.ToCSV($"{dir}socioActividad.csv", "|");
+            socioMembresia.ToCSV($"{dir}socioMembresia.csv", "|");
+            actividades.ToCSV($"{dir}actividades.csv", "|");
+            actividadHorarios.ToCSV($"{dir}actividadHorarios.csv", "|");
+            membresias.ToCSV($"{dir}membresias.csv", "|");
+            usuarios.ToCSV($"{dir}usuarios.csv", "|");
+     
 
             return true;
         }

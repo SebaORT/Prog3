@@ -22,8 +22,7 @@ namespace Repositorios
 			([IdSocio]
 		  ,[IdActividad]
 		  ,[Fecha])
-
-	 VALUES
+	       VALUES
 		   (@idSocio
 		   ,@idActividad
 		   ,@date)";
@@ -95,6 +94,13 @@ namespace Repositorios
             return result;            
         }
 
+
+        public DataTable ListarSocioMembresiaDataTable()
+        {
+            return SQLADOHelper.GetDataTableUtil("SocioMembresia");
+        }
+
+
         public List<SocioActividad> ListarSocioActividad()
         {
 
@@ -134,6 +140,11 @@ namespace Repositorios
             return result;
         }
 
+
+        public DataTable ListarSocioActividadDataTable()
+        {
+            return SQLADOHelper.GetDataTableUtil("SocioActividad");
+        }
 
         public int Alta(Socio t)
         {
@@ -334,31 +345,7 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
 
         public DataTable ListarDataTable()
         {
-            var connStr = SQLADOHelper.GetConnectionString();
-
-            var result = new DataTable();
-            using (var connection = new SqlConnection(connStr))
-            {
-                try
-                {
-                    connection.Open();
-                    var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    result.Load(reader);
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-
-            return result;
+            return SQLADOHelper.GetDataTableUtil(TABLE_NAME);
         }
 
         public bool Modificacion(Socio t)
@@ -405,11 +392,3 @@ select SCOPE_IDENTITY() from [dbo].[Socio]";
 
 	}
 }
-
-
-/**UPDATE [dbo].[Socio]
-SET[Cedula] = < Cedula, numeric(10, 0),>
-      ,[FechaNacimiento] = < FechaNacimiento, datetime,>
-      ,[FechaIngreso] = < FechaIngreso, datetime,>
-      ,[Active] = < Active, bit,>
-  WHERE IdSocio = @id**/

@@ -213,31 +213,12 @@ GO";
 
 		public DataTable ListarDataTable()
 		{
-			var connStr = SQLADOHelper.GetConnectionString();
+			return SQLADOHelper.GetDataTableUtil(TABLE_NAME);
+		}
 
-			var result = new DataTable();
-			using (var connection = new SqlConnection(connStr))
-			{
-				try
-				{
-					connection.Open();
-					var command = SQLADOHelper.ListarSQLCommand(connection, TABLE_NAME);
-					SqlDataReader reader = command.ExecuteReader();
-
-					result.Load(reader);
-
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					connection.Close();
-				}
-			}
-
-			return result;
+		public DataTable ListarActividadHorarioDataTable()
+		{
+			return SQLADOHelper.GetDataTableUtil("Actividadhorario");
 		}
 
 		public bool Modificacion(Actividad t)

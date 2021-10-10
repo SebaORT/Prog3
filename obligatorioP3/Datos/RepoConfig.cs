@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -78,6 +79,11 @@ namespace Repositorios
 			config.MontoUnitarioCuponera = !double.TryParse(montoUnitarioCuponera, out auxD) ? 0 : auxD;
 
 			return config;
+		}
+
+		public DataTable ListarDataTable()
+		{
+			return SQLADOHelper.GetDataTableUtil(TABLE_NAME);
 		}
 
 		public List<Configuration> Listar()

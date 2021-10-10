@@ -33,6 +33,22 @@ namespace ClubDeportivo.Controllers
             return View();
         }
 
+        public ActionResult Export()
+		{
+            string dir = ControllerContext.HttpContext.Server.MapPath("../Export/");
+            try
+            {
+                Facade.Instance.ExportarInfo(dir);
+                ViewBag.Message = "Informacion Exportada Exitosamente";
+                return View("Success");
+            }
+            catch (Exception ex)
+			{
+                ViewBag.Message = ex.Message;
+                return View("Error");
+			}
+                
+		}
         public ActionResult About()
         {
             ViewBag.Message = "Gestion Club Solis";
