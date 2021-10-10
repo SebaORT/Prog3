@@ -1,4 +1,5 @@
 ﻿@model Dominio.Socio
+@using Dominio
 
 @{
     ViewBag.Title = "Details";
@@ -61,10 +62,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Crear Cuponera", "PagoMensualidadCuponera") |
-    @Html.ActionLink("Crear Pase Libre", "PagoMensualidadPaseLibre") |
-    @Html.ActionLink("Listar Membresias", "ListarPorSocioId", "Membresia", Model) 
+    @Html.ActionLink("Crear Cuponera", "CreateCuponera", "Membresia") |
+    @Html.Action("Crear Cuponera", "CreateCuponera") |
+    @Html.ActionLink("Crear Pase Libre", "CreatePaseLibre")
+
+    @Html.ActionLink("Listar Membresias", "ListarMembresiaPorSocioId")
 
 </p>

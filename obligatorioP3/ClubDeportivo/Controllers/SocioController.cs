@@ -263,8 +263,7 @@ el mes corriente.*/
         //TODO
         //public ingresarPagoSocio
 
-
-        public ActionResult PagoMensualidadCuponera(Socio socio)
+        public ActionResult CreateCuponera(Socio socio)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -272,13 +271,12 @@ el mes corriente.*/
             }
             else
             {
-                return View();
+                return View(new Cuponera());
             }
 
         }
-
         [HttpPost]
-        public ActionResult PagoMensualidadCuponera(Socio socio, Cuponera c)
+        public ActionResult CreateCuponera(Socio socio, Cuponera c)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -287,24 +285,14 @@ el mes corriente.*/
             else
             {
                 int idCuponera = f1.AltaMembresia(socio.Cedula, c);
-
-                if (idCuponera != 0)
-                {
-                    Cuponera cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
-                    return RedirectToAction("RealizarPagoCuponera", "Membresia", cuponera);
-                }
-                else
-                {
-                    ViewBag.Error = "Hubo un error al crear la cuponera";
-                    return View(c);
-                }
-
+                var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
+                return View(cuponera);
             }
 
         }
 
 
-        public ActionResult PagoMensualidadPaseLibre(Socio socio)
+        public ActionResult CreatePaseLibre(Socio socio)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -312,13 +300,12 @@ el mes corriente.*/
             }
             else
             {
-                return View();
+                return View(new PaseLibre());
             }
 
         }
-
         [HttpPost]
-        public ActionResult PagoMensualidadPaseLibre(Socio socio, PaseLibre p)
+        public ActionResult CreatePaseLibre(Socio socio, PaseLibre p)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -326,20 +313,28 @@ el mes corriente.*/
             }
             else
             {
-                int idPaselibre = f1.AltaMembresia(socio.Cedula, p);
-                if (idPaselibre != 0)
-                {
-                    PaseLibre paselibre = (PaseLibre)f1.BuscarMembresia(idPaselibre);
-                    return RedirectToAction("RealizarPagoLibre", "Membresia", paselibre);
-                } else
-                {
-                    ViewBag.Error = "Hubo un error al crear el pase libre";
-                    return View(p);
-                }
-
+                int idPaseLibre = f1.AltaMembresia(socio.Cedula, p);
+                var paselibre = (PaseLibre)f1.BuscarMembresia(idPaseLibre);
+                return View(paselibre);
             }
 
         }
+
+
+        public ActionResult ListarMembresiaPorSocioId(Socio socio)
+        {
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
+                return View(lista);
+            }
+
+        }
+
 
     }
 }

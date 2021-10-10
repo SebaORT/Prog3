@@ -42,18 +42,20 @@ namespace Repositorios
                 try
                 {
                     connection.Open();
-                    var command = new SqlCommand(query, connection);
+                    var command = new SqlCommand(query, connection);                   
+                    command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
                     command.Parameters.AddWithValue("@nombre", t.Nombre);
                     command.Parameters.AddWithValue("@descripcion", t.Descipcion);
-                    command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
                     command.Parameters.AddWithValue("@active", t.Active);
                     if(t.TipoMembresia == "cuponera")
                     {
                         command.Parameters.AddWithValue("@cantActividades",((Cuponera) t).CantActividades);
+
                     }
                     else
                     {
                         command.Parameters.AddWithValue("@cantActividades", 0);
+
                     } 
                     
                     command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
