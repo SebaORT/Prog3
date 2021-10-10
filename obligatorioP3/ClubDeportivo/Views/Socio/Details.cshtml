@@ -63,10 +63,9 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Crear Cuponera", "CreateCuponera", "Membresia") |
-    @Html.Action("Crear Cuponera", "CreateCuponera") |
-    @Html.ActionLink("Crear Pase Libre", "CreatePaseLibre")
+    @Html.ActionLink("Crear Cuponera", "CreateCuponera", new { cedula = Model.Cedula}) |
+    @Html.ActionLink("Crear Pase Libre", "CreatePaseLibre", new { cedula = Model.Cedula })
 
-    @Html.ActionLink("Listar Membresias", "ListarMembresiaPorSocioId")
+    @Html.ActionLink("Listar Membresias", "ListarMembresiaPorSocioId", new { cedula = Model.Cedula })
 
 </p>

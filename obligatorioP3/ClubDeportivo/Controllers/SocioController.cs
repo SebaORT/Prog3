@@ -263,7 +263,7 @@ el mes corriente.*/
         //TODO
         //public ingresarPagoSocio
 
-        public ActionResult CreateCuponera(Socio socio)
+        public ActionResult CreateCuponera(decimal cedula)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -276,7 +276,7 @@ el mes corriente.*/
 
         }
         [HttpPost]
-        public ActionResult CreateCuponera(Socio socio, Cuponera c)
+        public ActionResult CreateCuponera(decimal cedula, Cuponera c)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -284,7 +284,7 @@ el mes corriente.*/
             }
             else
             {
-                int idCuponera = f1.AltaMembresia(socio.Cedula, c);
+                int idCuponera = f1.AltaMembresia(cedula, c);
                 var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
                 return View(cuponera);
             }
@@ -292,7 +292,7 @@ el mes corriente.*/
         }
 
 
-        public ActionResult CreatePaseLibre(Socio socio)
+        public ActionResult CreatePaseLibre(decimal cedula)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -305,7 +305,7 @@ el mes corriente.*/
 
         }
         [HttpPost]
-        public ActionResult CreatePaseLibre(Socio socio, PaseLibre p)
+        public ActionResult CreatePaseLibre(decimal cedula, PaseLibre p)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -313,7 +313,7 @@ el mes corriente.*/
             }
             else
             {
-                int idPaseLibre = f1.AltaMembresia(socio.Cedula, p);
+                int idPaseLibre = f1.AltaMembresia(cedula, p);
                 var paselibre = (PaseLibre)f1.BuscarMembresia(idPaseLibre);
                 return View(paselibre);
             }

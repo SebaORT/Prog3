@@ -10,6 +10,8 @@ namespace Dominio
 	public interface IRepoMembresia : IRepositorio<Membresia>
 	{
 		// List<Producto> ProductosEnRangoDePrecio(decimal desde, decimal hasta);
+
+		int Alta(int idSocio, Membresia t);
 		DataTable ListarDataTable();
         List<Membresia> ListarPorSocioId(int idSocio);
         bool ModificarFechaPagoHoy(Membresia m);

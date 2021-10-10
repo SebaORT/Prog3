@@ -37,7 +37,10 @@ namespace Auxiliar
         {
             IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
-            int idMembresia = FabricaRepositorios.ObtenerRepoMembresia().Alta(m);
+            int idSocio = rs.BuscarPorCedula(cedula).IdSocio;
+            //Aqui se hace el alta de la membresia y al mismo tiempo se le asigna al socio indicado
+            int idMembresia = FabricaRepositorios.ObtenerRepoMembresia().Alta(idSocio, m);
+            //se agrega la membresia a la lista del socio
             rs.BuscarPorCedula(cedula).Membresias.Add(rm.Buscar(idMembresia));
             return idMembresia;
         }

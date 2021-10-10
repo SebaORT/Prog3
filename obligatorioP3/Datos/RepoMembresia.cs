@@ -14,6 +14,79 @@ namespace Repositorios
         private const string TABLE_NAME = "Membresia";
 
 
+        public int Alta(int idSocio, Membresia t)
+        {
+            string query = @"INSERT INTO [dbo].[Membresia]
+           ([Nombre]
+           ,[Description]
+           ,[Fechapago]
+           ,[Active]
+           ,[CantActividades]
+           ,[Tipomembresia])
+			 VALUES
+				   (@nombre
+				   ,@descripcion
+				   ,@fechaPago
+				   ,@active
+				   ,@cantActividades
+				   ,@tipoMembresia);
+
+            INSERT INTO [dbo].[SocioMembresia]
+            ([IdSocio]
+            , [IdMembresia]
+            VALUES
+            (@idSocio);
+		select SCOPE_IDENTITY() from [dbo].[Membresia]
+		GO";
+
+            var connStr = SQLADOHelper.GetConnectionString();
+
+            int result = -1;
+
+            using (var connection = new SqlConnection(connStr))
+            {
+                try
+                {
+                    connection.Open();
+                    var command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@idSocio", idSocio);
+                    command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
+                    command.Parameters.AddWithValue("@nombre", t.Nombre);
+                    command.Parameters.AddWithValue("@descripcion", t.Descipcion);
+                    command.Parameters.AddWithValue("@active", t.Active);
+                    if (t.TipoMembresia == "cuponera")
+                    {
+                        command.Parameters.AddWithValue("@cantActividades", ((Cuponera)t).CantActividades);
+
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@cantActividades", 0);
+
+                    }
+
+                    command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
+
+
+                    object val = command.ExecuteScalar();
+
+                    result = val != null ? Convert.ToInt32(val) : -1;
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+
+            return result;
+        }
+
         public int Alta(Membresia t)
         {
             string query = @"INSERT INTO [dbo].[Membresia]
@@ -42,22 +115,22 @@ namespace Repositorios
                 try
                 {
                     connection.Open();
-                    var command = new SqlCommand(query, connection);                   
+                    var command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
                     command.Parameters.AddWithValue("@nombre", t.Nombre);
                     command.Parameters.AddWithValue("@descripcion", t.Descipcion);
                     command.Parameters.AddWithValue("@active", t.Active);
-                    if(t.TipoMembresia == "cuponera")
+                    if (t.TipoMembresia == "cuponera")
                     {
-                        command.Parameters.AddWithValue("@cantActividades",((Cuponera) t).CantActividades);
+                        command.Parameters.AddWithValue("@cantActividades", ((Cuponera)t).CantActividades);
 
                     }
                     else
                     {
                         command.Parameters.AddWithValue("@cantActividades", 0);
 
-                    } 
-                    
+                    }
+
                     command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
 
@@ -139,9 +212,9 @@ namespace Repositorios
                         membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
                         if (membresia.TipoMembresia == "cuponera")
                         {
-                            ((Cuponera) membresia).CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
-                        }                                            
-                        
+                            ((Cuponera)membresia).CantActividades = reader.GetInt32(reader.GetOrdinal("CantActividades"));
+                        }
+
                     }
 
                 }
@@ -236,10 +309,10 @@ namespace Repositorios
                         membresia.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                         membresia.Nombre = reader.GetString(reader.GetOrdinal("Nombre"));
                         membresia.Descipcion = reader.GetString(reader.GetOrdinal("Description"));
-                        var index = reader.GetOrdinal("Fechapago");                        
+                        var index = reader.GetOrdinal("Fechapago");
                         membresia.FechaPago = reader.IsDBNull(index) ?
                           (DateTime?)null :
-                          (DateTime?)reader.GetDateTime(index);                        
+                          (DateTime?)reader.GetDateTime(index);
                         membresia.Active = reader.GetBoolean(reader.GetOrdinal("Active"));
                         membresia.TipoMembresia = reader.GetString(reader.GetOrdinal("Tipomembresia"));
                         if (membresia.TipoMembresia == "cuponera")
@@ -323,7 +396,7 @@ namespace Repositorios
                     else
                     {
                         command.Parameters.AddWithValue("@cantActividades", 0);
-                    }                    
+                    }
                     command.Parameters.AddWithValue("@tipoMembresia", t.TipoMembresia);
 
                     command.Parameters.AddWithValue("@Id", t.Id);
@@ -397,5 +470,6 @@ namespace Repositorios
 
             return result;
         }
+
     }
 }
