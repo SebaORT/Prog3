@@ -39,11 +39,13 @@ namespace Repositorios
 
             using (var connection = new SqlConnection(connStr))
             {
-
+                SqlTransaction tran = null;
                 try
                 {
                     connection.Open();
+                    tran = connection.BeginTransaction();                  
                     var command = new SqlCommand(query, connection);
+                    command.Transaction = tran;
                     command.Parameters.AddWithValue("@idSocio", idSocio);
                     command.Parameters.AddWithValue("@fechaPago", t.FechaPago);
                     command.Parameters.AddWithValue("@nombre", t.Nombre);
@@ -65,18 +67,27 @@ namespace Repositorios
 
                     object val = command.ExecuteScalar();
 
-                        string query2 = "INSERT INTO [dbo].[SocioMembresia] ([IdSocio], [IdMembresia]) VALUES(@idSocio, @idMembresia);";
+                    if (val != null)
+                    {
+                        string query2 = "INSERT INTO [dbo].[SocioMembresia] ([IdSocio], [IdMembresia]) VALUES(@idSocio, @idMembresia); select SCOPE_IDENTITY() from [dbo].[SocioMembresia] GO";
                         var command2 = new SqlCommand(query2, connection);
                         command2.Parameters.AddWithValue("@idSocio", idSocio);
                         command2.Parameters.AddWithValue("@idMembresia", val);
-                        object val2 = command.ExecuteScalar();
+                        object val2 = command2.ExecuteScalar();
 
+                        if (val != null && val2 != null)
+                        {
+                            result = val2 != null ? Convert.ToInt32(val2) : -1;
+                        }
 
-                    result = val != null ? Convert.ToInt32(val) : -1;
+                    }
+
+                    tran.Commit();
 
                 }
                 catch (Exception ex)
                 {
+                    if (tran != null) tran.Rollback();
                     throw ex;
                 }
                 finally
