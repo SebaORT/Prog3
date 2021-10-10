@@ -350,7 +350,7 @@ el mes corriente.*/
             else
             {
                 List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
-                List<PaseLibre> ilista = null;
+                List<PaseLibre> ilista = new List<PaseLibre>();
                 foreach (var item in lista)
                 {
                     if (item.TipoMembresia == "paselibre")
@@ -373,7 +373,7 @@ el mes corriente.*/
             else
             {
                 List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
-                List<Cuponera> ilista = null;
+                List<Cuponera> ilista = new List<Cuponera>();
                 foreach (var item in lista)
                 {
                     if (item.TipoMembresia == "cuponera")

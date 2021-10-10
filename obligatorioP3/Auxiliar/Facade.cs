@@ -14,6 +14,9 @@ namespace Auxiliar
     {
         public static Configuration Configuration { get; set; }
         public static Dictionary<int, Actividad> ActividadesClub { get; set; }
+        private static Dictionary<int, Socio> mapSocio;// = new Dictionary<int, Socio>();
+        private static Dictionary<int, Actividad> mapActividad;// = new Dictionary<int, Actividad>();
+
         public static Facade _instance = null;
         public static Facade Instance
         {
@@ -70,8 +73,8 @@ namespace Auxiliar
 
         public List<Membresia> ListarMembresiasPorSocioId(Socio socio)
         {
-            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
-            return socio.Membresias;
+            //IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            return mapSocio[socio.IdSocio].Membresias; //socio.Membresias;
         }
 
         public List<Actividad> ListarActividades()
@@ -125,8 +128,8 @@ namespace Auxiliar
 
         public List<Socio> ListarSocios()
         {
-            Dictionary<int, Socio> mapSocio = new Dictionary<int, Socio>();
-            Dictionary<int, Actividad> mapActividad = new Dictionary<int, Actividad>();
+            mapSocio = new Dictionary<int, Socio>();
+            mapActividad = new Dictionary<int, Actividad>();
 
             IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
             List<Socio>  lista = rs.Listar();

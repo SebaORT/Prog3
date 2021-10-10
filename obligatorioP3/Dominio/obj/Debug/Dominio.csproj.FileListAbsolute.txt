@@ -20,4 +20,3 @@ C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Dominio\bin\Debug\Dominio.pdb
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Dominio\obj\Debug\Dominio.dll
 C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Dominio\obj\Debug\Dominio.pdb
-C:\Repos\ORT\Prog 3\OBLIGATORIO\obligatorioP3\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
