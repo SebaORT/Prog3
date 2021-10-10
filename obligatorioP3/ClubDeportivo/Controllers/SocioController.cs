@@ -278,7 +278,7 @@ el mes corriente.*/
         }
 
         [HttpPost]
-        public ActionResult PagoMensualidadCuponera(Socio socio, Cuponera cuponera)
+        public ActionResult PagoMensualidadCuponera(Socio socio, Cuponera c)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -286,8 +286,19 @@ el mes corriente.*/
             }
             else
             {
-                int m = f1.AltaMembresia((int)socio.Cedula, cuponera);
-                return RedirectToAction("RealizarPagoCuponera", "Membresia", m);
+                int idCuponera = f1.AltaMembresia(socio.Cedula, c);
+
+                if (idCuponera != 0)
+                {
+                    Cuponera cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
+                    return RedirectToAction("RealizarPagoCuponera", "Membresia", cuponera);
+                }
+                else
+                {
+                    ViewBag.Error = "Hubo un error al crear la cuponera";
+                    return View(c);
+                }
+
             }
 
         }
@@ -307,7 +318,7 @@ el mes corriente.*/
         }
 
         [HttpPost]
-        public ActionResult PagoMensualidadPaseLibre(Socio socio, PaseLibre paselibre)
+        public ActionResult PagoMensualidadPaseLibre(Socio socio, PaseLibre p)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -315,8 +326,17 @@ el mes corriente.*/
             }
             else
             {
-                int m = f1.AltaMembresia((int)socio.Cedula, paselibre);
-                return RedirectToAction("RealizarPagoPaseLibre", "Membresia", m);
+                int idPaselibre = f1.AltaMembresia(socio.Cedula, p);
+                if (idPaselibre != 0)
+                {
+                    PaseLibre paselibre = (PaseLibre)f1.BuscarMembresia(idPaselibre);
+                    return RedirectToAction("RealizarPagoLibre", "Membresia", paselibre);
+                } else
+                {
+                    ViewBag.Error = "Hubo un error al crear el pase libre";
+                    return View(p);
+                }
+
             }
 
         }

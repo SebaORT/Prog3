@@ -33,14 +33,19 @@ namespace Auxiliar
 
         #region metodos
 
-        public int AltaMembresia(int cedula, Membresia tipo)
+        public int AltaMembresia(decimal cedula, Membresia m)
         {
-            return 0;
+            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+            int idMembresia = FabricaRepositorios.ObtenerRepoMembresia().Alta(m);
+            rs.BuscarPorCedula(cedula).Membresias.Add(rm.Buscar(idMembresia));
+            return idMembresia;
         }
 
-        public int BajaMembresia(int id)
+        public bool BajaMembresia(int id)
         {
-            return 0;
+            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            return rm.Baja(id); 
         }
 
         public bool ModificacionMembresia(Membresia m)
@@ -51,11 +56,6 @@ namespace Auxiliar
         public bool ModificacionFechaPagoHoyMembresia(Membresia m)
         {
             return FabricaRepositorios.ObtenerRepoMembresia().ModificarFechaPagoHoy(m);
-        }
-
-        public int BuscarMembresia(int cedula)
-        {
-            return 0;
         }
 
         public List<Membresia> ListarMembresias()
@@ -188,6 +188,18 @@ namespace Auxiliar
             foreach(var m in membresia)
             {
                 if(m.Id == idMembresia)
+                {
+                    return m;
+                }
+            }
+            return null;
+        }
+
+        public Membresia BuscarMembresia(int idMembresia)
+        {
+            foreach (var m in ListarMembresias())
+            {
+                if (m.Id == idMembresia)
                 {
                     return m;
                 }
