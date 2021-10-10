@@ -43,9 +43,14 @@ namespace Auxiliar
             return 0;
         }
 
-        public int ModificacionMembresia(int id)
+        public bool ModificacionMembresia(Membresia m)
         {
-            return 0;
+            return FabricaRepositorios.ObtenerRepoMembresia().Modificacion(m);
+        }
+
+        public bool ModificacionFechaPagoHoyMembresia(Membresia m)
+        {
+            return FabricaRepositorios.ObtenerRepoMembresia().ModificarFechaPagoHoy(m);
         }
 
         public int BuscarMembresia(int cedula)
@@ -55,7 +60,14 @@ namespace Auxiliar
 
         public List<Membresia> ListarMembresias()
         {
-            return new List<Membresia>();
+            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            return rm.Listar();
+        }
+
+        public List<Membresia> ListarMembresiasPorSocioId(Socio socio)
+        {
+            IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
+            return rm.ListarPorSocioId(socio.IdSocio);
         }
 
         public List<Actividad> ListarActividades()

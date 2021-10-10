@@ -3,87 +3,116 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Dominio;
+using Auxiliar;
+using ClubDeportivo.ServiceClubSolis;
 
 namespace ClubDeportivo.Controllers
 {
     public class MembresiaController : Controller
     {
-        // GET: Membresia
+        Facade f1 = new Facade();
+        //Session["LogueadoMail"] = usuario.Mail;
+        //Session["Logueado"] = true;
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: Membresia/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Membresia/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Membresia/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Login");
             }
-            catch
+            else
             {
-                return View();
+                List<Membresia> lista = f1.ListarMembresias();
+                return View(lista);
             }
+
         }
 
-        // GET: Membresia/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ListarPorSocioId(Socio socio)
         {
-            return View();
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
+                return View(lista);
+            }
+
         }
 
-        // POST: Membresia/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult DetalleCuponera(Cuponera cuponera)
         {
-            try
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Login");
             }
-            catch
+            else
             {
                 return View();
             }
+
         }
 
-        // GET: Membresia/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DetallePaseLibre(PaseLibre paselibre)
         {
-            return View();
-        }
-
-        // POST: Membresia/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Login");
             }
-            catch
+            else
             {
                 return View();
             }
+
         }
+
+        public ActionResult RealizarPagoCuponera(Cuponera cuponera)
+        {
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                if (cuponera.FechaPago == null)
+                {
+                    ViewBag.FechaPago = DateTime.Today;
+                    bool res = f1.ModificacionFechaPagoHoyMembresia(cuponera);
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Pago ya ha sido realizado";
+                }
+
+                return View(cuponera);
+            }
+
+        }
+
+        public ActionResult RealizarPagoLibre(PaseLibre paselibre)
+        {
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                if (paselibre.FechaPago == null)
+                {
+                    ViewBag.FechaPago = DateTime.Today;
+                    bool res = f1.ModificacionFechaPagoHoyMembresia(paselibre);
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Pago ya ha sido realizado";
+                }
+
+                return View(paselibre);
+            }
+
+        }
+
     }
 }

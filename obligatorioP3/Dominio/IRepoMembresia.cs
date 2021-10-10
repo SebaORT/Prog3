@@ -11,5 +11,7 @@ namespace Dominio
 	{
 		// List<Producto> ProductosEnRangoDePrecio(decimal desde, decimal hasta);
 		DataTable ListarDataTable();
-	}
+        List<Membresia> ListarPorSocioId(int idSocio);
+        bool ModificarFechaPagoHoy(Membresia m);
+    }
 }

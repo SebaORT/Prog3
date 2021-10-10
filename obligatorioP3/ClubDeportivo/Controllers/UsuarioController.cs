@@ -15,25 +15,41 @@ namespace ClubDeportivo.Controllers
         // GET: Usuario/Create
         public ActionResult RegistrarUsuario()
         {
-            return View();
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         // POST: Usuario/Create
         [HttpPost]
         public ActionResult RegistrarUsuario(Usuario usuario)
         {
-            // TODO: Add insert logic here
-            int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);
-            if (alta != 0)
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
-                ViewBag.Mensaje = "Usuario creado exitosamente";
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("Index", "Login");
             }
             else
             {
-                ViewBag.Error = "Hubo un error al acrear el usuario"; //implementar codigo de error en usuario dominio
-                return View(usuario);
+                // TODO: Add insert logic here
+                int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);
+                if (alta != 0)
+                {
+                    ViewBag.Mensaje = "Usuario creado exitosamente";
+                    return RedirectToAction("About", "Home");
+                }
+                else
+                {
+                    ViewBag.Error = "Hubo un error al acrear el usuario"; //implementar codigo de error en usuario dominio
+                    return View(usuario);
+                }
             }
+
 
         }
 

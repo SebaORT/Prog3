@@ -9,7 +9,12 @@ namespace Dominio
     public class Cuponera:Membresia
     {
         public int CantActividades { get; set; }
-       
+
+		public Cuponera() : base()
+		{
+			TipoMembresia = "cuponera";
+		}
+
 		public Cuponera(int cantActividadesMes) : base()
 		{
 			CantActividades = cantActividadesMes; // minimo 8 maximo 60
