@@ -124,8 +124,9 @@ namespace ClubDeportivo.Controllers
 
         }
 
-        public ActionResult RealizarPagoCuponera(Cuponera cuponera)
+        public ActionResult RealizarPagoCuponera(int id)
         {
+            Cuponera cuponera = (Cuponera)f1.BuscarMembresia(id);
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -147,8 +148,9 @@ namespace ClubDeportivo.Controllers
 
         }
 
-        public ActionResult RealizarPagoLibre(PaseLibre paselibre)
+        public ActionResult RealizarPagoLibre(int id)
         {
+            PaseLibre paselibre = (PaseLibre)f1.BuscarMembresia(id);
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
                 return RedirectToAction("Index", "Login");

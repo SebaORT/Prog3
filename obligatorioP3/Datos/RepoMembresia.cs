@@ -30,12 +30,6 @@ namespace Repositorios
 				   ,@active
 				   ,@cantActividades
 				   ,@tipoMembresia);
-
-            INSERT INTO [dbo].[SocioMembresia]
-            ([IdSocio]
-            , [IdMembresia]
-            VALUES
-            (@idSocio);
 		select SCOPE_IDENTITY() from [dbo].[Membresia]
 		GO";
 
@@ -45,6 +39,7 @@ namespace Repositorios
 
             using (var connection = new SqlConnection(connStr))
             {
+
                 try
                 {
                     connection.Open();
@@ -69,6 +64,13 @@ namespace Repositorios
 
 
                     object val = command.ExecuteScalar();
+
+                        string query2 = "INSERT INTO [dbo].[SocioMembresia] ([IdSocio], [IdMembresia]) VALUES(@idSocio, @idMembresia);";
+                        var command2 = new SqlCommand(query2, connection);
+                        command2.Parameters.AddWithValue("@idSocio", idSocio);
+                        command2.Parameters.AddWithValue("@idMembresia", val);
+                        object val2 = command.ExecuteScalar();
+
 
                     result = val != null ? Convert.ToInt32(val) : -1;
 

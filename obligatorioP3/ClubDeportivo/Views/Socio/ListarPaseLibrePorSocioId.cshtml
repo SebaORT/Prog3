@@ -1,11 +1,10 @@
-﻿@model IEnumerable<Dominio.Membresia>
-
+﻿@model IEnumerable<Dominio.PaseLibre>
 
 @{
-    ViewBag.Title = "ListarMembresiaPorSocioId";
+    ViewBag.Title = "ListarPaseLibrePorSocioId";
 }
 
-<h2>ListarPorSocioId</h2>
+<h2>ListarPaseLibrePorSocioId</h2>
 
 <table class="table">
     <tr>
@@ -44,6 +43,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoMembresia)
+            </td>
+            <td>
+                @if (item.FechaPago == null)
+                {
+                    @Html.ActionLink("Pagar", "RealizarPagoLibre", "Membresia", new { id = item.Id })
+                }
+
             </td>
         </tr>
     }

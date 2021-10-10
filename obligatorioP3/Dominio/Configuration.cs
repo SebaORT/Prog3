@@ -18,6 +18,15 @@ namespace Dominio
 
 		public double MontoUnitarioCuponera { get; set; }
 
+		public Configuration()
+        {
+			CantActividadesDescuento = 15;
+			DescuentoCuponera = 25;
+			CostoFijo = 50;
+			DescuentoPaseLibre = 25;
+			AntiguedadEstablecida = 120;
+			MontoUnitarioCuponera = 20;
+        }
 
 	}
 }

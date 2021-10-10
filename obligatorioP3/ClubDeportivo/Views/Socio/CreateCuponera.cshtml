@@ -64,6 +64,13 @@
                 @Html.ValidationMessageFor(model => model.CantActividades, "", new { @class = "text-danger" })
             </div>
         </div>
+        @if (Model.CantActividades > 0)
+        {
+            <div>
+                <strong>Pago final $</strong>@Model.calcularPagoFinal(new Dominio.Configuration())
+            </div>
+        }
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

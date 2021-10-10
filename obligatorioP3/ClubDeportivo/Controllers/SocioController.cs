@@ -286,7 +286,15 @@ el mes corriente.*/
             {
                 int idCuponera = f1.AltaMembresia(cedula, c);
                 var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
-                return View(cuponera);
+
+                if (cuponera.FechaPago == null)
+                {
+                    return View("RealizarPagoCuponera", "Membresia", cuponera);
+                }
+                else
+                {
+                    return View(cuponera);
+                }
             }
 
         }
@@ -315,14 +323,39 @@ el mes corriente.*/
             {
                 int idPaseLibre = f1.AltaMembresia(cedula, p);
                 var paselibre = (PaseLibre)f1.BuscarMembresia(idPaseLibre);
-                return View(paselibre);
+
+                if (paselibre.FechaPago == null)
+                {
+                    return View("RealizarPagoLibre", "Membresia", paselibre);
+                }
+                else
+                {
+                    return View(paselibre);
+                }
+
             }
 
         }
 
 
-        public ActionResult ListarMembresiaPorSocioId(Socio socio)
+        public ActionResult ListarPaseLibrePorSocioId(int id)
         {
+            Socio socio = f1.BuscarSocio(id);
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                List<Membresia> lista = f1.ListarMembresiasPorSocioId(socio);
+                return View(lista);
+            }
+
+        }
+
+        public ActionResult ListarMCuponeraPorSocioId(int id)
+        {
+            Socio socio = f1.BuscarSocio(id);
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
                 return RedirectToAction("Index", "Login");
