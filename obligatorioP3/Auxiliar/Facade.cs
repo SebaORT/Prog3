@@ -31,8 +31,8 @@ namespace Auxiliar
             }
         }
 
-		public static void ActualizarActividadesClub()
-		{
+        public static void ActualizarActividadesClub()
+        {
             Facade.ActividadesClub = new Dictionary<int, Actividad>();
             IRepoActividad ra = FabricaRepositorios.ObtenerRepoActividad();
 
@@ -45,7 +45,7 @@ namespace Auxiliar
             }
         }
 
-		public Facade()
+        public Facade()
         {
         }
 
@@ -66,16 +66,16 @@ namespace Auxiliar
             return idMembresia;
         }
 
-		public List<ActividadHora> GetActividadesDia()
-		{
+        public List<ActividadHora> GetActividadesDia()
+        {
             List<ActividadHora> result = new List<ActividadHora>();
             DateTime _now = DateTime.Now;
 
             foreach (Actividad actividad in ActividadesClub.Values)
-			{
+            {
 
                 if (actividad.Cupos > 0 /*&& TieneHorarioDiaActividad(actividad.Horarios)*/)
-				{
+                {
                     //foreach (var hor in actividad.Horarios) {
                     //    if (DateTime.Now.Hour < hor.Hora )
                     //    result.Add(new ActividadHora
@@ -99,34 +99,34 @@ namespace Auxiliar
                         }
                     }
                 }
-			}
+            }
 
             return result.OrderByDescending(e => e.Hora).ToList();
 
         }
 
-       
 
-		private bool TieneHorarioDiaActividad(List<Horario> horariosActividad)
-		{
+
+        private bool TieneHorarioDiaActividad(List<Horario> horariosActividad)
+        {
             DateTime _now = DateTime.Now;
 
             foreach (var h in horariosActividad)
-			{
+            {
                 if (h.DiaSemana == _now.DayOfWeek && h.Hora > _now.Hour) //verificar si puede entrar a la actividad
-				{
+                {
                     return true;
-				}
-			}
+                }
+            }
             return false;
-		}
+        }
 
-		/*private DayOfWeek GetDiaSemana(DayOfWeek diaSemana)
+        /*private DayOfWeek GetDiaSemana(DayOfWeek diaSemana)
 		{
 			throw new NotImplementedException();
 		}*/
 
-		public bool BajaMembresia(int id)
+        public bool BajaMembresia(int id)
         {
             IRepoMembresia rm = FabricaRepositorios.ObtenerRepoMembresia();
             return rm.Baja(id);
@@ -384,14 +384,25 @@ namespace Auxiliar
         {
             IRepoUsuario ru = FabricaRepositorios.ObtenerRepoUsuarios();
 
-            Usuario u = new Usuario()
-            {
-                Mail = email,
-                Password = contrasenia
-            };
+            int existe = ru.buscarLogin(email, contrasenia);
 
-            int res = ru.Alta(u);
-            return res;
+            if (existe == -1)
+            {
+                //en caso de que no exista
+                Usuario u = new Usuario()
+                {
+                    Mail = email,
+                    Password = contrasenia
+                };
+
+                int res = ru.Alta(u);
+                return res;
+            }
+            else
+            {
+                //en caso de que ya exista
+                return 0;
+            }
         }
 
         public int LoginUsuario(string mail, string password)

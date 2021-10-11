@@ -24,6 +24,10 @@ add constraint CK_ActHorarioDia CHECK (Dia >=1 and Dia <=7);
 ALTER TABLE ActividadHorario
 add	 constraint CK_ActHorarioHora CHECK (Hora >=0 and Dia <24);
 
+--agregar constraint unique a usuario
+ALTER TABLE Usuario
+add constraint UK_Usuario_mail_password unique(Mail,AdminPassword)
+
 /*ALTER TABLE ActividadHorario  
 ADD CONSTRAINT FK_ActHorHorario FOREIGN KEY (IdActividad)  REFERENCES Actividad(Id);
 */
