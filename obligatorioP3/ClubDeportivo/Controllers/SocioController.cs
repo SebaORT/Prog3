@@ -222,13 +222,7 @@ namespace ClubDeportivo.Controllers
 
         }
 
-        /*Si tiene la mensualidad
-corriente acreditada se mostrará un link que permita marcar el ingreso del socio a realizar una
-actividad, y otro que permita ver todos los ingresos que realizó en una fecha dada, por defecto durante
-el mes corriente.*/
-
-        //vinculo 1...
-        public ActionResult IngresoSocioActividad(int idSocio, int idActividad)
+        public ActionResult IngresoSocioActividad(int idSocio, int idActividad, int hora)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -241,7 +235,7 @@ el mes corriente.*/
 
                 ActividadSocioDTOResult resService = clubSolisClient.IngresarSocioActividad(new ActividadSocioDTO
                 {
-                    Fecha = DateTime.Now,
+                    Fecha = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,hora,0,0),
                     IdActividad = idActividad,
                     IdSocio = idSocio
                 });

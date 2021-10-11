@@ -72,13 +72,13 @@
                 <option>Seleccionar actividad</option>
                 @foreach (Dominio.ActividadHora actividad in ViewBag.ActividadesDelDia)
                 {
-                    <option value="@actividad.Id">@actividad.Id | @actividad.Nombre | @actividad.Hora</option>
+                    <option value="@actividad.Id|@actividad.Hora">@actividad.Id | @actividad.Nombre | @actividad.Hora</option>
                 }
 
             </select>
             <br />
 
-            <a id="linkIngActividad" href="~/Socio/IngresoSocioActividad?idSocio=@Model.IdSocio&idActividad=-999" style="display:none">Ingresar Actividad</a>
+            <a id="linkIngActividad" href="~/Socio/IngresoSocioActividad?idSocio=@Model.IdSocio&idActividad=-999&hora=-888" style="display:none">Ingresar Actividad</a>
 
             @*@Html.ActionLink("Ingresar Actividad", "IngresoSocioActividad", new
                {
@@ -111,6 +111,11 @@
         var link = document.getElementById('linkIngActividad');
         link.style.display = "inline";
         var _href = link.href;
-        link.href = _href.replace("-999", dropdown.value);
+        var vals = dropdown.value.split('|');
+
+        var id = vals[0];
+        var hora = vals[1];
+
+        link.href = _href.replace("-999", id).replace("-888",hora);
     }
 </script>

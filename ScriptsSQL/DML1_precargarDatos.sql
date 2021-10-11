@@ -1,11 +1,10 @@
 use [ObligatorioP3_GestionClub];
 GO
-/*
 INSERT INTO [dbo].Usuario VALUES
-('cecilia@mail.com', '1234a'),
-('bernardo@mail.com', '1234a'),
-('seba@mail.com', '1234a');
-*/
+('cecilia@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal'),
+('bernardo@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal'),
+('seba@mail.com', 'IcKjJCVeJiooKTpAfiMnPy8+PC4sfGDCrMKmMTIzNDUhwqMkJV4mKigpOkB+Iyc/Lz48Lix8YMKswqYxMjM0NaOmVRur3yiBeDG4MdzXa67hjtqj8+pUjdJYgKiSYUal');
+
 --configuracion
 INSERT INTO [dbo].[Configuration]
 (Id,[CantActividadesDescuento]
