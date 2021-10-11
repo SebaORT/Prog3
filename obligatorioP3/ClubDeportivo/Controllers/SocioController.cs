@@ -87,18 +87,19 @@ namespace ClubDeportivo.Controllers
             else
             {
                 // TODO: Add insert logic here
-                int idSocio = f1.AltaSocio(socio.Cedula, socio.NombreApellido, socio.FechaNacimiento);
+                if (Socio.ValidarDatos(socio))
+                {
+                    int idSocio = f1.AltaSocio(socio);
+                    if (idSocio > 0)
+                    {
+                        ViewBag.Message = "El socio se ha creado exitosamente";
+                        return View("Success");
+                    }
+                }
 
-                if (idSocio > 0)
-                {
-                    ViewBag.Mensaje = "El socio se ha creado exitosamente";
-                    return View();
-                }
-                else
-                {
-                    ViewBag.Error = "Ha ocurrido un problema";
-                    return View(socio);
-                }
+                ViewBag.Message = "Ha habido un error al registro del socio";
+                return View("Error");
+
                 //Si se desea se puede modificar para devolver mensajes de error 
             }
 
@@ -227,7 +228,7 @@ actividad, y otro que permita ver todos los ingresos que realizó en una fecha d
 el mes corriente.*/
 
         //vinculo 1...
-        public ActionResult IngresoSocioActividad(int idSocio,int idActividad)
+        public ActionResult IngresoSocioActividad(int idSocio, int idActividad)
         {
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
@@ -246,18 +247,18 @@ el mes corriente.*/
                 });
 
                 if (resService.Success)
-				{
+                {
                     Facade.ActualizarActividadesClub();
 
                     ViewBag.Message = "Socio ingresado exitosamente en la actividad";
                     return View("Success");
                 }
                 else
-				{
+                {
                     ViewBag.Message = resService.Error;
                     return View("Error");
                 }
-               
+
             }
 
         }
@@ -283,7 +284,7 @@ el mes corriente.*/
             }
             else
             {
-                
+
                 if (c.CantActividades < 8 || c.CantActividades > 60)
                 {
                     ViewBag.Message = "La cantidad de actividades es incorrecta, debe ser entre 8 y 60";
@@ -292,7 +293,7 @@ el mes corriente.*/
 
                 int idCuponera = f1.AltaMembresia(cedula, c);
                 var cuponera = (Cuponera)f1.BuscarMembresia(idCuponera);
-               
+
 
                 if (cuponera.FechaPago == null)
                 {
@@ -412,7 +413,7 @@ el mes corriente.*/
         [HttpPost]
         public ActionResult RealizarPagoCuponera(Cuponera cuponera)
         {
-           // Cuponera cuponera = (Cuponera)f1.BuscarMembresia(id);
+            // Cuponera cuponera = (Cuponera)f1.BuscarMembresia(id);
             if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -465,15 +466,15 @@ el mes corriente.*/
                     f1.ListaroActualizarSocios();
                 }
                 else
-				{
+                {
                     ViewBag.Message = "Pago ya ha sido realizado";
                 }
 
-            return View("Success");
+                return View("Success");
             }
 
         }
-        
+
 
 
     }

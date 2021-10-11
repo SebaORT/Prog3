@@ -36,7 +36,7 @@ namespace ClubDeportivo.Controllers
             }
             else
             {
-                if (usuario.validarDatosUsuario())
+                if (Usuario.validarDatosUsuario(usuario))
                 {
                     // TODO: Add insert logic here
                     int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);

@@ -20,42 +20,52 @@ namespace Dominio
         public List<ActividadSocio> ActividadSocios { get; set; }
 
 
-        public Socio() {
+        public Socio()
+        {
 
             Membresias = new List<Membresia>();
             ActividadSocios = new List<ActividadSocio>();
-        } 
+        }
 
-		public double TotalAPagarMensualidad(Configuration config)
-		{
+        public double TotalAPagarMensualidad(Configuration config)
+        {
             double result = 0;
             foreach (Membresia m in Membresias)
-			{
+            {
                 result += m.calcularPagoFinal(config);
-			}
+            }
 
             return result;
-			//throw new NotImplementedException();
-		}
+            //throw new NotImplementedException();
+        }
 
-       public static bool ValidarDatos(decimal ci, string nomApe, DateTime fNacimiento)
+        public static bool ValidarDatos(Socio socio)
         {
-            int esInt = (int) Math.Floor(ci);
-            bool result = false; 
-            if (esInt == (int)ci && esInt >999999 && esInt < 1000000000) {
+            string nomApe = socio.NombreApellido;
+            DateTime fNacimiento = socio.FechaNacimiento;
+            int esInt = (int)Math.Floor(socio.Cedula);
+            string textoCI = esInt.ToString();
+
+            if (textoCI.Length >= 7 && textoCI.Length <= 9)
+            {
                 int largo = nomApe.Length;
                 int comparar = nomApe.Trim().Length;
-                if (largo == comparar && largo >= 6) {
+                //si el primer o ultimo caracter son espacios
+                if (nomApe[0].Equals(' ') || nomApe[largo - 1].Equals(' '))
+                {
+                    return false;
+                }
+
+                if (largo == comparar && largo >= 6 && nomApe.Contains(" "))
+                {
                     int a = Math.Abs(fNacimiento.Year - DateTime.Today.Year);
-                    if(a >= 3)
+                    if (a >= 3)
                     {
-                        result = true;
+                        return true;
                     }
                 }
             }
-
-
-            return result;
+            return false;
         }
 
         public bool ValidarPagoMembresia()
@@ -65,9 +75,9 @@ namespace Dominio
             int mes = mesAnio.Month;
             int anio = mesAnio.Year;
 
-            foreach(Membresia m in Membresias)
+            foreach (Membresia m in Membresias)
             {
-                if(m.FechaPago != null && m.FechaPago.HasValue && m.FechaPago.Value.Month == mes && m.FechaPago.Value.Year == anio)
+                if (m.FechaPago != null && m.FechaPago.HasValue && m.FechaPago.Value.Month == mes && m.FechaPago.Value.Year == anio)
                 {
                     result = true;
                     break;
