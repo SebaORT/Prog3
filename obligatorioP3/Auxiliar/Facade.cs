@@ -168,7 +168,15 @@ namespace Auxiliar
             //        listaSocio.Add((PaseLibre)item);
             //    }
             //}
-            return mapSocio[socio.IdSocio].Membresias; //socio.Membresias;
+
+            try
+            {
+                return mapSocio[socio.IdSocio].Membresias;
+            } catch(Exception err)
+            {
+                return new List<Membresia>();
+            }
+            //return mapSocio[socio.IdSocio].Membresias; //socio.Membresias;
         }
 
         public List<Actividad> ListarActividades()
