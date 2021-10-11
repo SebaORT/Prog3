@@ -91,30 +91,9 @@ namespace Auxiliar
                 }
             }
 
-            return result.OrderByDescending(e => e.Hora).ToList();
+            return result.OrderBy(e => e.Hora).ToList();
 
         }
-
-
-
-        private bool TieneHorarioDiaActividad(List<Horario> horariosActividad)
-        {
-            DateTime _now = DateTime.Now;
-
-            foreach (var h in horariosActividad)
-            {
-                if (h.DiaSemana == _now.DayOfWeek && h.Hora > _now.Hour) //verificar si puede entrar a la actividad
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /*private DayOfWeek GetDiaSemana(DayOfWeek diaSemana)
-		{
-			throw new NotImplementedException();
-		}*/
 
         public bool BajaMembresia(int id)
         {
