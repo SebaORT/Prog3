@@ -130,20 +130,17 @@ namespace ClubDeportivo.Controllers
             }
             else
             {
-                try
+                if (Socio.ValidarDatos(socio))
                 {
                     socio.IdSocio = id;
                     bool alta = Facade.Instance.ModificarSocio(socio);
 
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    return View(socio);
-                }
             }
 
-
+            ViewBag.Message = "Hubo un error al modificar los datos del usuario";
+            return View("Error");
         }
 
         // GET: Socio/Delete/5
@@ -236,7 +233,7 @@ namespace ClubDeportivo.Controllers
 
                 ActividadSocioDTOResult resService = clubSolisClient.IngresarSocioActividad(new ActividadSocioDTO
                 {
-                    Fecha = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,hora,0,0),
+                    Fecha = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hora, 0, 0),
                     IdActividad = idActividad,
                     IdSocio = idSocio
                 });
