@@ -66,6 +66,14 @@ namespace Auxiliar
             return idMembresia;
         }
 
+        public List<ActividadSocio> GetActividadSocioRango(decimal cedula, DateTime start, DateTime end)
+		{
+            IRepoSocios rs = FabricaRepositorios.ObtenerRepoSocios();
+            Socio s = rs.BuscarPorCedula(cedula);
+            s = ActualizarSocio(s);
+            return s.ActividadSocios.Where(e => e.Fecha >= start && e.Fecha < end).ToList();
+
+        }
         public List<ActividadHora> GetActividadesDia(int edadSocio)
         {
             List<ActividadHora> result = new List<ActividadHora>();

@@ -470,6 +470,36 @@ namespace ClubDeportivo.Controllers
 
         }
 
+        public ActionResult MostrarIngresosSocio(decimal cedula, DateTime? start, DateTime? end)
+		{
+
+            if (Session["LogueadoMail"] == null && Session["Logueado"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Cedula = cedula;
+                if (start == null || !start.HasValue || end == null || !end.HasValue)
+				{
+                    var _now = DateTime.Now;
+                    var _nowNextMonth = _now.AddMonths(1);
+                    ViewBag.Datos = Facade.Instance.GetActividadSocioRango(cedula, new DateTime(_now.Year, _now.Month, 1),
+                         new DateTime(_nowNextMonth.Year, _nowNextMonth.Month, 1)
+                        );
+
+                }
+                else
+				{
+                    ViewBag.Datos = Facade.Instance.GetActividadSocioRango(cedula, start.Value,end.Value
+                       );
+                }
+                
+                
+                return View();
+            }
+       }
+
 
 
     }

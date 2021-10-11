@@ -105,5 +105,7 @@
         </form>
         @*@if(Model.ValidarPagoMembresia())*@
 
+        @Html.ActionLink("Mostrar Ingresos Socio", "MostrarIngresosSocio", new { cedula = Model.Cedula})
+
     </div>
 }
