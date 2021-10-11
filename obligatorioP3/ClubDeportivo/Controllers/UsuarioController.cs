@@ -10,7 +10,7 @@ namespace ClubDeportivo.Controllers
 {
     public class UsuarioController : Controller
     {
-        Facade f1 = new Facade();
+        Facade f1 = Facade.Instance;
 
         // GET: Usuario/Create
         public ActionResult RegistrarUsuario()
@@ -36,18 +36,19 @@ namespace ClubDeportivo.Controllers
             }
             else
             {
-                // TODO: Add insert logic here
-                int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);
-                if (alta != 0)
+                if (usuario.validarDatosUsuario())
                 {
-                    ViewBag.Mensaje = "Usuario creado exitosamente";
-                    return RedirectToAction("About", "Home");
+                    // TODO: Add insert logic here
+                    int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);
+                    if (alta != 0)
+                    {
+                        ViewBag.Mensaje = "Usuario creado exitosamente";
+                        return RedirectToAction("About", "Home");
+                    }
                 }
-                else
-                {
-                    ViewBag.Error = "Hubo un error al acrear el usuario"; //implementar codigo de error en usuario dominio
-                    return View(usuario);
-                }
+
+                ViewBag.Error = "Hubo un error al crear el usuario"; //implementar codigo de error en usuario dominio
+                return View(usuario);
             }
 
 
