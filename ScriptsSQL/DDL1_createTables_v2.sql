@@ -25,7 +25,8 @@ WHERE object_id = OBJECT_ID(N'[dbo].[Socio]'))
      [Cedula]          NUMERIC(10, 0) Not Null,
      [FechaNacimiento] DATETIME Null,
      [FechaIngreso]    DATETIME Null,
-     [Active]          BIT Not Null
+     [Active]          BIT Not Null,
+	 CONSTRAINT UK_Cedulda UNIQUE (Cedula)
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
@@ -34,17 +35,9 @@ WHERE object_id = OBJECT_ID(N'[dbo].[Usuario]'))
   (
 	[IdUsuario]		  INT Not Null Primary Key Identity(1, 1),
 	[Mail]            VARCHAR(100) Not Null,
-    [AdminPassword]   VARCHAR(2000) Not Null
+    [AdminPassword]   VARCHAR(500) Not Null,
+	constraint UK_Usuario_mail_password unique(Mail,AdminPassword)
   )
-
-IF  NOT EXISTS (SELECT * FROM sys.objects 
-WHERE object_id = OBJECT_ID(N'[dbo].[SocioMembresia]')) 
-Create Table [dbo].[SocioMembresia]
-  (
-     [IdSocio]   INT Not Null,
-     [IdMembresia] INT Not Null,
-  )
-
 IF  NOT EXISTS (SELECT * FROM sys.objects 
 WHERE object_id = OBJECT_ID(N'[dbo].[Membresia]')) 
 Create Table [dbo].[Membresia]
@@ -56,6 +49,16 @@ Create Table [dbo].[Membresia]
      [Active]        BIT Not Null,
      CantActividades INT Null,-- mínimo de 8 y un máximo de 60
      Tipomembresia   VARCHAR(50) Not Null -- ("cuponera","paselibre")
+  )
+
+IF  NOT EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[SocioMembresia]')) 
+Create Table [dbo].[SocioMembresia]
+  (
+     [IdSocio]   INT Not Null,
+     [IdMembresia] INT Not Null,
+	 CONSTRAINT FK_SocioMemSocio FOREIGN KEY (IdSocio)  REFERENCES Socio(IdSocio),
+	 CONSTRAINT FK_SocioMemMembresia FOREIGN KEY (IdMembresia)  REFERENCES Membresia(Id)   
   )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
@@ -92,8 +95,8 @@ Create Table [dbo].[SocioActividad]
 	 [Fecha] DateTime not null,
 
 	 Primary Key([IdSocio],[IdActividad],[Fecha]),
-     foreign key ([IdSocio]) references Socio(IdSocio),
-	 foreign key ([IdActividad]) references Actividad(Id)
+     constraint FK_SocioActSocio foreign key ([IdSocio]) references Socio(IdSocio),
+	 constraint FK_SocioActActividad foreign key ([IdActividad]) references Actividad(Id)
 )
 
 IF  NOT EXISTS (SELECT * FROM sys.objects 
@@ -109,7 +112,8 @@ Create Table [dbo].[Configuration]
 	 [MontoUnitarioCuponera] varchar(200) null
   ) 
 
-GO
-
 Commit Transaction 
+
+
+
 
