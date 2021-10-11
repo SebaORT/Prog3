@@ -176,8 +176,9 @@ namespace ClubDeportivo.Controllers
                 {
                     return View("Delete", s);
                 }
-                ViewBag.error = "Socio no encontrado, verifique la cedula ingresada";
-                return View("Delete");
+
+                ViewBag.Message = "Socio no encontrado, verifique la cedula ingresada";
+                return View("Error");
             }
 
         }
