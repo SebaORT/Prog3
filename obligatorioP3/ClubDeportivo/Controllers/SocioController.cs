@@ -39,8 +39,8 @@ namespace ClubDeportivo.Controllers
             {
                 Socio s = Facade.Instance.BuscarSocio(id);
                 s = Facade.Instance.ActualizarSocio(s);
-
-                ViewBag.ActividadesDelDia = Facade.Instance.GetActividadesDia();
+                int edadSocio = DateTime.Now.Year - s.FechaNacimiento.Year;
+                ViewBag.ActividadesDelDia = Facade.Instance.GetActividadesDia(edadSocio);
 
                 return View(s);
             }

@@ -66,7 +66,7 @@ namespace Auxiliar
             return idMembresia;
         }
 
-        public List<ActividadHora> GetActividadesDia()
+        public List<ActividadHora> GetActividadesDia(int edadSocio)
         {
             List<ActividadHora> result = new List<ActividadHora>();
             DateTime _now = DateTime.Now;
@@ -74,18 +74,8 @@ namespace Auxiliar
             foreach (Actividad actividad in ActividadesClub.Values)
             {
 
-                if (actividad.Cupos > 0 /*&& TieneHorarioDiaActividad(actividad.Horarios)*/)
+                if (actividad.Cupos > 0 && edadSocio >= actividad.EdadMin && edadSocio <=actividad.EdadMax)
                 {
-                    //foreach (var hor in actividad.Horarios) {
-                    //    if (DateTime.Now.Hour < hor.Hora )
-                    //    result.Add(new ActividadHora
-                    //    {
-                    //        Id = actividad.Id,
-                    //        Hora = actividad.Horarios.
-                    //    });
-                    //}
-
-
                     foreach (var h in actividad.Horarios)
                     {
                         if (h.DiaSemana == _now.DayOfWeek && h.Hora > _now.Hour) //verificar si puede entrar a la actividad
