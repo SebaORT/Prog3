@@ -1,0 +1,7 @@
+socios VALIDOS
+
+julio@mail.com - 1234Aa
+maria@mail.com - 1234Aa
+lola@mail.com - 1234Aa
+mariela@mail.com - 1234Aa
+carlos@mail.com - 1234Aa

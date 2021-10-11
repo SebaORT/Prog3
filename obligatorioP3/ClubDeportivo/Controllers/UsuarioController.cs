@@ -42,13 +42,13 @@ namespace ClubDeportivo.Controllers
                     int alta = f1.AltaUsuario(usuario.Mail, usuario.Password);
                     if (alta != 0)
                     {
-                        ViewBag.Mensaje = "Usuario creado exitosamente";
-                        return RedirectToAction("About", "Home");
+                        ViewBag.Message = "Usuario creado exitosamente";
+                        return View("Success");
                     }
                 }
 
-                ViewBag.Error = "Hubo un error al crear el usuario"; //implementar codigo de error en usuario dominio
-                return View(usuario);
+                ViewBag.Message = "Hubo un error al crear el usuario"; //implementar codigo de error en usuario dominio
+                return View("Error");
             }
 
 
