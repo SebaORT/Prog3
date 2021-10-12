@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="prepopulateActivities.sql" />
-    <Content Include="prepopulateConfiguration.sql" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepoConfig.cs" />
     <Compile Include="RepoSocios.cs" />

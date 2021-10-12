@@ -20,18 +20,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!--
 
-                    <li>//Html.ActionLink("About", "About", "Home")</li>
-                    <li>//Html.ActionLink("Contact", "Contact", "Home")</li>
-                        -->
-
-
-                    @if (Session["Logueado"] == null)
+                    @if (Session["Logueado"] == null || (bool)Session["Logueado"] == false)
                     {
                         <li style="color: white; text-align:center;">@Html.ActionLink("Iniciar Sesion", "Index", "Login")</li>
                     }
-                    @if (Session["Logueado"] != null)
+                    @if (Session["Logueado"] != null && (bool)Session["Logueado"] == true) 
                     {
                         <li>@Html.ActionLink("Registro de Usuario", "RegistrarUsuario", "Usuario")</li>
                         <li>@Html.ActionLink("Registro de Socio", "Create", "Socio")</li>
